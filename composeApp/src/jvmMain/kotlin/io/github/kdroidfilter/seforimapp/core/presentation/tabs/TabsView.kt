@@ -26,7 +26,6 @@ import kotlin.math.max
 fun TabsView() {
     val viewModel: TabsViewModel = koinViewModel()
     val state = rememberTabsState(viewModel)
-
     DefaultTabShowcase(state = state, onEvents = viewModel::onEvent)
 }
 

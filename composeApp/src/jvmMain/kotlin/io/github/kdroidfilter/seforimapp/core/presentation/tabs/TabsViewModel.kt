@@ -1,9 +1,12 @@
+// tabs/TabsViewModel.kt
 package io.github.kdroidfilter.seforimapp.core.presentation.tabs
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.github.kdroidfilter.seforimapp.core.presentation.navigation.Navigator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import kotlin.math.max
 
 data class TabItem(
@@ -12,30 +15,37 @@ data class TabItem(
     val destination: TabsDestination = TabsDestination.Home
 )
 
-
 class TabsViewModel(
     private val navigator: Navigator,
 ) : ViewModel() {
 
-    private var _nextTabId = 1
-    private var _currentTabId = MutableStateFlow(1)
-    private val _tabs = MutableStateFlow(listOf(TabItem(id = 1, title = "Default Tab 1")))
+    private var _nextTabId = 2 // Commence à 2 car on a déjà un onglet par défaut
+    private val _tabs = MutableStateFlow(listOf(
+        TabItem(
+            id = 1,
+            title = getTabTitle(navigator.startDestination),
+            destination = navigator.startDestination
+        )
+    ))
     val tabs = _tabs.asStateFlow()
 
     private val _selectedTabIndex = MutableStateFlow(0)
     val selectedTabIndex = _selectedTabIndex.asStateFlow()
 
+    init {
+        // Écouter les requêtes de navigation
+        viewModelScope.launch {
+            navigator.navigationRequests.collect { destination ->
+                addTabWithDestination(destination)
+            }
+        }
+    }
+
     fun onEvent(event: TabsEvents) {
         when (event) {
-            is TabsEvents.onClose -> {
-                closeTab(event.index)
-            }
-            is TabsEvents.onSelected -> {
-                selectTab(event.index)
-            }
-            TabsEvents.onAdd -> {
-                addTab()
-            }
+            is TabsEvents.onClose -> closeTab(event.index)
+            is TabsEvents.onSelected -> selectTab(event.index)
+            TabsEvents.onAdd -> addTab()
         }
     }
 
@@ -81,9 +91,28 @@ class TabsViewModel(
     private fun addTab() {
         val newTab = TabItem(
             id = _nextTabId++,
-            title = "Default Tab $_nextTabId"
+            title = "New Tab",
+            destination = TabsDestination.Home
         )
         _tabs.value = _tabs.value + newTab
         _selectedTabIndex.value = _tabs.value.lastIndex
+    }
+
+    private fun addTabWithDestination(destination: TabsDestination) {
+        val newTab = TabItem(
+            id = _nextTabId++,
+            title = getTabTitle(destination),
+            destination = destination
+        )
+        _tabs.value = _tabs.value + newTab
+        _selectedTabIndex.value = _tabs.value.lastIndex
+    }
+
+    private fun getTabTitle(destination: TabsDestination): String {
+        return when (destination) {
+            is TabsDestination.Home -> "Home"
+            is TabsDestination.Search -> "Search: ${destination.searchQuery}"
+            is TabsDestination.BookContent -> "Book ${destination.bookId}"
+        }
     }
 }
