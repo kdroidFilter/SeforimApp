@@ -1,5 +1,6 @@
 package io.github.kdroidfilter.seforimapp.framework.di
 
+import androidx.lifecycle.SavedStateHandle
 import io.github.kdroidfilter.seforimapp.core.presentation.navigation.DefaultNavigator
 import io.github.kdroidfilter.seforimapp.core.presentation.navigation.Navigator
 import io.github.kdroidfilter.seforimapp.core.presentation.tabs.TabsDestination
@@ -12,6 +13,6 @@ val desktopModule = module {
         DefaultNavigator(startDestination = TabsDestination.Home)
     }
     viewModel {
-        TabsViewModel(navigator = get())
+        TabsViewModel(navigator = get(), )
     }
 }

@@ -2,6 +2,8 @@ package io.github.kdroidfilter.seforimapp.core.presentation.tabs
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,11 +13,16 @@ import io.github.kdroidfilter.seforimapp.core.presentation.navigation.Navigator
 import io.github.kdroidfilter.seforimapp.core.presentation.utils.ObserveAsEvents
 import org.jetbrains.jewel.ui.component.Text
 import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun TabsNavHost(){
     val navigator = koinInject<Navigator>()
+    val tabsViewModel: TabsViewModel = koinViewModel()
     val navController = rememberNavController()
+
+    val tabs by tabsViewModel.tabs.collectAsState()
+    val selectedTabIndex by tabsViewModel.selectedTabIndex.collectAsState()
 
     ObserveAsEvents(flow = navigator.navigationActions) { action ->
         when(action) {
@@ -40,7 +47,8 @@ fun TabsNavHost(){
         modifier = Modifier
     ) {
         composable<TabsDestination.Home> {
-            Text("Home")
+            val currentTab =  tabs[selectedTabIndex]
+            Text("Tab ID: ${currentTab.id }")
         }
 
     }

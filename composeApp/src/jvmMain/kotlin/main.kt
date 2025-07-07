@@ -12,6 +12,7 @@ import com.kdroid.composetray.utils.SingleInstanceManager
 import io.github.kdroidfilter.platformtools.OperatingSystem
 import io.github.kdroidfilter.platformtools.darkmodedetector.isSystemInDarkMode
 import io.github.kdroidfilter.platformtools.getOperatingSystem
+import io.github.kdroidfilter.seforimapp.core.presentation.tabs.TabsNavHost
 import io.github.kdroidfilter.seforimapp.core.presentation.tabs.TabsView
 import io.github.kdroidfilter.seforimapp.core.presentation.utils.getCenteredWindowState
 import io.github.kdroidfilter.seforimapp.core.presentation.utils.processKeyShortcuts
@@ -103,6 +104,7 @@ fun main() {
                             Modifier.trackActivation().fillMaxSize()
                                 .background(JewelTheme.globalColors.panelBackground),
                     ) {
+                        TabsNavHost()
                     }
                 }
             }

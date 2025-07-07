@@ -17,8 +17,8 @@ class TabsViewModel(
     private val navigator: Navigator,
 ) : ViewModel() {
 
-    private var nextTabId = 1
-
+    private var _nextTabId = 1
+    private var _currentTabId = MutableStateFlow(1)
     private val _tabs = MutableStateFlow(listOf(TabItem(id = 1, title = "Default Tab 1")))
     val tabs = _tabs.asStateFlow()
 
@@ -80,8 +80,8 @@ class TabsViewModel(
 
     private fun addTab() {
         val newTab = TabItem(
-            id = nextTabId++,
-            title = "Default Tab $nextTabId"
+            id = _nextTabId++,
+            title = "Default Tab $_nextTabId"
         )
         _tabs.value = _tabs.value + newTab
         _selectedTabIndex.value = _tabs.value.lastIndex

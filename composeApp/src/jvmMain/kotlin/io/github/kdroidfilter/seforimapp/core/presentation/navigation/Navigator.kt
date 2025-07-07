@@ -29,19 +29,19 @@ interface Navigator {
 class DefaultNavigator(
     override val startDestination: TabsDestination
 ): Navigator {
-    private val _navigationActions =
+    private val _Tabs_navigationActions =
         MutableSharedFlow<NavigationAction>(extraBufferCapacity = 1)
-    override val navigationActions = _navigationActions.asSharedFlow()
+    override val navigationActions = _Tabs_navigationActions.asSharedFlow()
 
     override suspend fun navigate(
         destination: TabsDestination,
         navOptions: NavOptionsBuilder.() -> Unit
-    ) = _navigationActions.emit(
+    ) = _Tabs_navigationActions.emit(
         NavigationAction.Navigate(destination, navOptions)
     )
 
     override suspend fun navigateUp() =
-        _navigationActions.emit(NavigationAction.NavigateUp)
+        _Tabs_navigationActions.emit(NavigationAction.NavigateUp)
 
     private val _canGoBack = MutableStateFlow(false)
     override val canGoBack: StateFlow<Boolean> = _canGoBack.asStateFlow()
