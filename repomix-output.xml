@@ -1,0 +1,3678 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+4. Repository files, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+<additional_info>
+
+</additional_info>
+
+</file_summary>
+
+<directory_structure>
+composeApp/
+  desktopAppIcons/
+    MacosIcon.icns
+  src/
+    androidMain/
+      kotlin/
+        io/
+          github/
+            kdroidfilter/
+              seforimapp/
+                theme/
+                  Theme.android.kt
+                App.android.kt
+      res/
+        mipmap-anydpi-v26/
+          ic_launcher.xml
+      AndroidManifest.xml
+    commonMain/
+      composeResources/
+        drawable/
+          ic_cyclone.xml
+          ic_dark_mode.xml
+          ic_light_mode.xml
+          ic_rotate_right.xml
+        values/
+          strings.xml
+      kotlin/
+        io/
+          github/
+            kdroidfilter/
+              seforimapp/
+                theme/
+                  Color.kt
+                  Theme.kt
+                App.kt
+    commonTest/
+      kotlin/
+        io/
+          github/
+            kdroidfilter/
+              seforimapp/
+                ComposeTest.kt
+    jvmMain/
+      kotlin/
+        io/
+          github/
+            kdroidfilter/
+              seforimapp/
+                theme/
+                  Theme.jvm.kt
+                  utils.kt
+        main.kt
+  build.gradle.kts
+gradle/
+  wrapper/
+    gradle-wrapper.properties
+  libs.versions.toml
+jewel/
+  src/
+    jvmMain/
+      java/
+        com/
+          jetbrains/
+            DesktopActions.java
+            JBR.java
+            RoundedCornersManager.java
+            WindowDecorations.java
+            WindowMove.java
+      kotlin/
+        org/
+          jetbrains/
+            jewel/
+              window/
+                styling/
+                  DecoratedWindowStyling.kt
+                  TitleBarStyling.kt
+                utils/
+                  macos/
+                    Foundation.kt
+                    FoundationLibrary.kt
+                    ID.kt
+                    MacUtil.kt
+                  DesktopPlatform.kt
+                  JnaLoader.kt
+                  UnsafeAccessing.kt
+                  WindowControlArea.kt
+                DecoratedWindow.kt
+                Theme.kt
+                TitleBar.kt
+                TitleBar.Linux.kt
+                TitleBar.MacOS.kt
+                TitleBar.Windows.kt
+  build.gradle.kts
+.gitignore
+build.gradle.kts
+gradle.properties
+gradlew
+gradlew.bat
+README.MD
+settings.gradle.kts
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="composeApp/desktopAppIcons/MacosIcon.icns">
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="//netfree.link/img/block-favicon.png"/>
+    </head>
+    <body>
+        <iframe id="netfree_block_iframe" name="netfree-block-iframe" src="https://netfree.link/block/#%7B%22block%22%3A%22error%22%2C%22sourceStatusCode%22%3A200%2C%22blockTechnicalInfo%22%3A%22Q1JZUFQyCIZUx7WKUdIxS7kOFSDf7QRqaCc%2F2sy5owdzFy6M2Og%2B4ts8lbeTlaUYSYx6rcP0hQlPMQ5DS6RepQNzlUvXsgJUPGS9BuNsvKpNvEzosjCFzRYp1QwQn65HdTwA1%2BPpNJaEvwuy%2Fhgymcl743PIDEkMlIhGulAsFOjeDMeX4MJpBXVjqq3Tl9OdxKB1WXTfn8d0B0yCERw1uK58%2FvruV%2Bn3NAGR9TMVJIcZQMX32F9cMpAh%2FUCjlPa1g8xSm9KaMY%2FsSJ6k1WZdLgMWP6iRpDQ5T7ZBvcwzELZM%2BJv2v1IR4QawLwXyUiK6kskezp3H3E2gALK835In2zCh0K5nvnpKMioslO3Gj%2BAWw8oqq6CnLWFyo1cy4xyuKQVVepeTL8Th0kdGhhQcuOS6skbOKFiIfQYVjlThN3vlzDiG1e5DrhPobgTHal9CNDlwXnW5DwyS60CcbdadH%2FiKs9UQWhgc4QiBTjdEW%2BNeYuXfnJ0Cg%2FUBRM%2F2%2Fk%2B9cgoQFuNXISFH%2FDwHBF9Aw53btFzLn8EBxJvpJpOjju99FZfH85X6NwZ0vBrtcvxgQGljG%2B6SHCgsBmaezarBMEg9IxvfiS2U7OgHZr%2BedekfMVO81LF6Ucg52RG2qHfMXG4ophADJ4RyxkcGIF1hoYhUn3n5CXYtDF8ldoAVu2IHaLkHorOYBmQ%2Biyhv9PUWzM%2BxN6l%2BdZqYFBFpjas1cDKWMsiG%2FyRBYqDGdx5j56%2BnzF8ucZwIORkBqt2yZ0mAZEYISk3hJCC4Xd5EQoj9MMGLyr%2Fw7PkFvShW%22%2C%22page_info%22%3A%7B%22url%22%3A%22https%3A%2F%2Fterrakok.github.io%2FCompose-Multiplatform-Wizard%2Fbinaries%2Fdesktop-app-icons%2FMacosIcon.icns%22%2C%22referer%22%3A%22https%3A%2F%2Fterrakok.github.io%2FCompose-Multiplatform-Wizard%2F%22%7D%7D" style=" position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none; "></iframe>
+    </body>
+</html>
+</file>
+
+<file path="composeApp/src/androidMain/kotlin/io/github/kdroidfilter/seforimapp/theme/Theme.android.kt">
+package io.github.kdroidfilter.seforimapp.theme
+
+import android.app.Activity
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowInsetsControllerCompat
+
+@Composable
+internal actual fun SystemAppearance(isDark: Boolean) {
+    val view = LocalView.current
+    LaunchedEffect(isDark) {
+        val window = (view.context as Activity).window
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            isAppearanceLightStatusBars = isDark
+            isAppearanceLightNavigationBars = isDark
+        }
+    }
+}
+</file>
+
+<file path="composeApp/src/androidMain/kotlin/io/github/kdroidfilter/seforimapp/App.android.kt">
+package io.github.kdroidfilter.seforimapp
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+
+class AppActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent { App() }
+    }
+}
+</file>
+
+<file path="composeApp/src/androidMain/res/mipmap-anydpi-v26/ic_launcher.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+  <background android:drawable="@mipmap/ic_launcher_background"/>
+  <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
+  <monochrome android:drawable="@mipmap/ic_launcher_monochrome"/>
+</adaptive-icon>
+</file>
+
+<file path="composeApp/src/androidMain/AndroidManifest.xml">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="SeforimApp"
+        android:theme="@android:style/Theme.Material.NoActionBar">
+        <activity
+            android:name=".AppActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+</file>
+
+<file path="composeApp/src/commonMain/composeResources/drawable/ic_cyclone.xml">
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#000000"
+        android:pathData="M12,8c-2.21,0 -4,1.79 -4,4c0,2.21 1.79,4 4,4c2.21,0 4,-1.79 4,-4C16,9.79 14.21,8 12,8zM12,14c-1.1,0 -2,-0.9 -2,-2c0,-1.1 0.9,-2 2,-2s2,0.9 2,2C14,13.1 13.1,14 12,14z" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M22,7.47V5.35C20.05,4.77 16.56,4 12,4C9.85,4 7.89,4.86 6.46,6.24C6.59,5.39 6.86,3.84 7.47,2H5.35C4.77,3.95 4,7.44 4,12c0,2.15 0.86,4.11 2.24,5.54c-0.85,-0.14 -2.4,-0.4 -4.24,-1.01v2.12C3.95,19.23 7.44,20 12,20c2.15,0 4.11,-0.86 5.54,-2.24c-0.14,0.85 -0.4,2.4 -1.01,4.24h2.12C19.23,20.05 20,16.56 20,12c0,-2.15 -0.86,-4.11 -2.24,-5.54C18.61,6.59 20.16,6.86 22,7.47zM12,18c-3.31,0 -6,-2.69 -6,-6s2.69,-6 6,-6s6,2.69 6,6S15.31,18 12,18z" />
+</vector>
+</file>
+
+<file path="composeApp/src/commonMain/composeResources/drawable/ic_dark_mode.xml">
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#000000"
+        android:pathData="M12,3c-4.97,0 -9,4.03 -9,9s4.03,9 9,9s9,-4.03 9,-9c0,-0.46 -0.04,-0.92 -0.1,-1.36c-0.98,1.37 -2.58,2.26 -4.4,2.26c-2.98,0 -5.4,-2.42 -5.4,-5.4c0,-1.81 0.89,-3.42 2.26,-4.4C12.92,3.04 12.46,3 12,3L12,3z" />
+</vector>
+</file>
+
+<file path="composeApp/src/commonMain/composeResources/drawable/ic_light_mode.xml">
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#000000"
+        android:pathData="M12,7c-2.76,0 -5,2.24 -5,5s2.24,5 5,5s5,-2.24 5,-5S14.76,7 12,7L12,7zM2,13l2,0c0.55,0 1,-0.45 1,-1s-0.45,-1 -1,-1l-2,0c-0.55,0 -1,0.45 -1,1S1.45,13 2,13zM20,13l2,0c0.55,0 1,-0.45 1,-1s-0.45,-1 -1,-1l-2,0c-0.55,0 -1,0.45 -1,1S19.45,13 20,13zM11,2v2c0,0.55 0.45,1 1,1s1,-0.45 1,-1V2c0,-0.55 -0.45,-1 -1,-1S11,1.45 11,2zM11,20v2c0,0.55 0.45,1 1,1s1,-0.45 1,-1v-2c0,-0.55 -0.45,-1 -1,-1C11.45,19 11,19.45 11,20zM5.99,4.58c-0.39,-0.39 -1.03,-0.39 -1.41,0c-0.39,0.39 -0.39,1.03 0,1.41l1.06,1.06c0.39,0.39 1.03,0.39 1.41,0s0.39,-1.03 0,-1.41L5.99,4.58zM18.36,16.95c-0.39,-0.39 -1.03,-0.39 -1.41,0c-0.39,0.39 -0.39,1.03 0,1.41l1.06,1.06c0.39,0.39 1.03,0.39 1.41,0c0.39,-0.39 0.39,-1.03 0,-1.41L18.36,16.95zM19.42,5.99c0.39,-0.39 0.39,-1.03 0,-1.41c-0.39,-0.39 -1.03,-0.39 -1.41,0l-1.06,1.06c-0.39,0.39 -0.39,1.03 0,1.41s1.03,0.39 1.41,0L19.42,5.99zM7.05,18.36c0.39,-0.39 0.39,-1.03 0,-1.41c-0.39,-0.39 -1.03,-0.39 -1.41,0l-1.06,1.06c-0.39,0.39 -0.39,1.03 0,1.41s1.03,0.39 1.41,0L7.05,18.36z" />
+</vector>
+</file>
+
+<file path="composeApp/src/commonMain/composeResources/drawable/ic_rotate_right.xml">
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:autoMirrored="true"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#000000"
+        android:pathData="M15.55,5.55L11,1v3.07C7.06,4.56 4,7.92 4,12s3.05,7.44 7,7.93v-2.02c-2.84,-0.48 -5,-2.94 -5,-5.91s2.16,-5.43 5,-5.91L11,10l4.55,-4.45zM19.93,11c-0.17,-1.39 -0.72,-2.73 -1.62,-3.89l-1.42,1.42c0.54,0.75 0.88,1.6 1.02,2.47h2.02zM13,17.9v2.02c1.39,-0.17 2.74,-0.71 3.9,-1.61l-1.44,-1.44c-0.75,0.54 -1.59,0.89 -2.46,1.03zM16.89,15.48l1.42,1.41c0.9,-1.16 1.45,-2.5 1.62,-3.89h-2.02c-0.14,0.87 -0.48,1.72 -1.02,2.48z" />
+</vector>
+</file>
+
+<file path="composeApp/src/commonMain/composeResources/values/strings.xml">
+<resources>
+    <string name="cyclone">Cyclone</string>
+    <string name="open_github">Open github</string>
+    <string name="run">Run</string>
+    <string name="stop">Stop</string>
+    <string name="theme">Theme</string>
+</resources>
+</file>
+
+<file path="composeApp/src/commonMain/kotlin/io/github/kdroidfilter/seforimapp/theme/Color.kt">
+package io.github.kdroidfilter.seforimapp.theme
+
+import androidx.compose.ui.graphics.Color
+
+//generated by https://materialkolor.com
+//Color palette was taken here: https://coolors.co/palette/e63946-f1faee-a8dadc-457b9d-1d3557
+
+internal val Seed = Color(0xFF1D3557)
+
+internal val PrimaryLight = Color(0xFF485F84)
+internal val OnPrimaryLight = Color(0xFFFFFFFF)
+internal val PrimaryContainerLight = Color(0xFFD5E3FF)
+internal val OnPrimaryContainerLight = Color(0xFF30476A)
+internal val SecondaryLight = Color(0xFF2B6485)
+internal val OnSecondaryLight = Color(0xFFFFFFFF)
+internal val SecondaryContainerLight = Color(0xFFC7E7FF)
+internal val OnSecondaryContainerLight = Color(0xFF064C6B)
+internal val TertiaryLight = Color(0xFF356668)
+internal val OnTertiaryLight = Color(0xFFFFFFFF)
+internal val TertiaryContainerLight = Color(0xFFB9ECEE)
+internal val OnTertiaryContainerLight = Color(0xFF1A4E50)
+internal val ErrorLight = Color(0xFFBB152C)
+internal val OnErrorLight = Color(0xFFFFFFFF)
+internal val ErrorContainerLight = Color(0xFFFFDAD8)
+internal val OnErrorContainerLight = Color(0xFF410007)
+internal val BackgroundLight = Color(0xFFF9F9F9)
+internal val OnBackgroundLight = Color(0xFF1A1C1C)
+internal val SurfaceLight = Color(0xFFF9F9F9)
+internal val OnSurfaceLight = Color(0xFF1A1C1C)
+internal val SurfaceVariantLight = Color(0xFFDCE5D9)
+internal val OnSurfaceVariantLight = Color(0xFF404941)
+internal val OutlineLight = Color(0xFF717970)
+internal val OutlineVariantLight = Color(0xFFC0C9BE)
+internal val ScrimLight = Color(0xFF000000)
+internal val InverseSurfaceLight = Color(0xFF2F3131)
+internal val InverseOnSurfaceLight = Color(0xFFF0F1F1)
+internal val InversePrimaryLight = Color(0xFFB0C7F1)
+internal val SurfaceDimLight = Color(0xFFDADADA)
+internal val SurfaceBrightLight = Color(0xFFF9F9F9)
+internal val SurfaceContainerLowestLight = Color(0xFFFFFFFF)
+internal val SurfaceContainerLowLight = Color(0xFFF3F3F4)
+internal val SurfaceContainerLight = Color(0xFFEEEEEE)
+internal val SurfaceContainerHighLight = Color(0xFFE8E8E8)
+internal val SurfaceContainerHighestLight = Color(0xFFE2E2E2)
+
+internal val PrimaryDark = Color(0xFFB0C7F1)
+internal val OnPrimaryDark = Color(0xFF183153)
+internal val PrimaryContainerDark = Color(0xFF30476A)
+internal val OnPrimaryContainerDark = Color(0xFFD5E3FF)
+internal val SecondaryDark = Color(0xFF98CDF2)
+internal val OnSecondaryDark = Color(0xFF00344C)
+internal val SecondaryContainerDark = Color(0xFF064C6B)
+internal val OnSecondaryContainerDark = Color(0xFFC7E7FF)
+internal val TertiaryDark = Color(0xFF9ECFD1)
+internal val OnTertiaryDark = Color(0xFF003739)
+internal val TertiaryContainerDark = Color(0xFF1A4E50)
+internal val OnTertiaryContainerDark = Color(0xFFB9ECEE)
+internal val ErrorDark = Color(0xFFFFB3B1)
+internal val OnErrorDark = Color(0xFF680011)
+internal val ErrorContainerDark = Color(0xFF92001C)
+internal val OnErrorContainerDark = Color(0xFFFFDAD8)
+internal val BackgroundDark = Color(0xFF121414)
+internal val OnBackgroundDark = Color(0xFFE2E2E2)
+internal val SurfaceDark = Color(0xFF121414)
+internal val OnSurfaceDark = Color(0xFFE2E2E2)
+internal val SurfaceVariantDark = Color(0xFF404941)
+internal val OnSurfaceVariantDark = Color(0xFFC0C9BE)
+internal val OutlineDark = Color(0xFF8A9389)
+internal val OutlineVariantDark = Color(0xFF404941)
+internal val ScrimDark = Color(0xFF000000)
+internal val InverseSurfaceDark = Color(0xFFE2E2E2)
+internal val InverseOnSurfaceDark = Color(0xFF2F3131)
+internal val InversePrimaryDark = Color(0xFF485F84)
+internal val SurfaceDimDark = Color(0xFF121414)
+internal val SurfaceBrightDark = Color(0xFF37393A)
+internal val SurfaceContainerLowestDark = Color(0xFF0C0F0F)
+internal val SurfaceContainerLowDark = Color(0xFF1A1C1C)
+internal val SurfaceContainerDark = Color(0xFF1E2020)
+internal val SurfaceContainerHighDark = Color(0xFF282A2B)
+internal val SurfaceContainerHighestDark = Color(0xFF333535)
+</file>
+
+<file path="composeApp/src/commonMain/kotlin/io/github/kdroidfilter/seforimapp/theme/Theme.kt">
+package io.github.kdroidfilter.seforimapp.theme
+
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.*
+
+private val LightColorScheme = lightColorScheme(
+    primary = PrimaryLight,
+    onPrimary = OnPrimaryLight,
+    primaryContainer = PrimaryContainerLight,
+    onPrimaryContainer = OnPrimaryContainerLight,
+    secondary = SecondaryLight,
+    onSecondary = OnSecondaryLight,
+    secondaryContainer = SecondaryContainerLight,
+    onSecondaryContainer = OnSecondaryContainerLight,
+    tertiary = TertiaryLight,
+    onTertiary = OnTertiaryLight,
+    tertiaryContainer = TertiaryContainerLight,
+    onTertiaryContainer = OnTertiaryContainerLight,
+    error = ErrorLight,
+    onError = OnErrorLight,
+    errorContainer = ErrorContainerLight,
+    onErrorContainer = OnErrorContainerLight,
+    background = BackgroundLight,
+    onBackground = OnBackgroundLight,
+    surface = SurfaceLight,
+    onSurface = OnSurfaceLight,
+    surfaceVariant = SurfaceVariantLight,
+    onSurfaceVariant = OnSurfaceVariantLight,
+    outline = OutlineLight,
+    outlineVariant = OutlineVariantLight,
+    scrim = ScrimLight,
+    inverseSurface = InverseSurfaceLight,
+    inverseOnSurface = InverseOnSurfaceLight,
+    inversePrimary = InversePrimaryLight,
+    surfaceDim = SurfaceDimLight,
+    surfaceBright = SurfaceBrightLight,
+    surfaceContainerLowest = SurfaceContainerLowestLight,
+    surfaceContainerLow = SurfaceContainerLowLight,
+    surfaceContainer = SurfaceContainerLight,
+    surfaceContainerHigh = SurfaceContainerHighLight,
+    surfaceContainerHighest = SurfaceContainerHighestLight,
+)
+
+private val DarkColorScheme = darkColorScheme(
+    primary = PrimaryDark,
+    onPrimary = OnPrimaryDark,
+    primaryContainer = PrimaryContainerDark,
+    onPrimaryContainer = OnPrimaryContainerDark,
+    secondary = SecondaryDark,
+    onSecondary = OnSecondaryDark,
+    secondaryContainer = SecondaryContainerDark,
+    onSecondaryContainer = OnSecondaryContainerDark,
+    tertiary = TertiaryDark,
+    onTertiary = OnTertiaryDark,
+    tertiaryContainer = TertiaryContainerDark,
+    onTertiaryContainer = OnTertiaryContainerDark,
+    error = ErrorDark,
+    onError = OnErrorDark,
+    errorContainer = ErrorContainerDark,
+    onErrorContainer = OnErrorContainerDark,
+    background = BackgroundDark,
+    onBackground = OnBackgroundDark,
+    surface = SurfaceDark,
+    onSurface = OnSurfaceDark,
+    surfaceVariant = SurfaceVariantDark,
+    onSurfaceVariant = OnSurfaceVariantDark,
+    outline = OutlineDark,
+    outlineVariant = OutlineVariantDark,
+    scrim = ScrimDark,
+    inverseSurface = InverseSurfaceDark,
+    inverseOnSurface = InverseOnSurfaceDark,
+    inversePrimary = InversePrimaryDark,
+    surfaceDim = SurfaceDimDark,
+    surfaceBright = SurfaceBrightDark,
+    surfaceContainerLowest = SurfaceContainerLowestDark,
+    surfaceContainerLow = SurfaceContainerLowDark,
+    surfaceContainer = SurfaceContainerDark,
+    surfaceContainerHigh = SurfaceContainerHighDark,
+    surfaceContainerHighest = SurfaceContainerHighestDark,
+)
+
+internal val LocalThemeIsDark = compositionLocalOf { mutableStateOf(true) }
+
+@Composable
+internal fun AppTheme(
+    content: @Composable () -> Unit
+) {
+    val systemIsDark = isSystemInDarkTheme()
+    val isDarkState = remember(systemIsDark) { mutableStateOf(systemIsDark) }
+    CompositionLocalProvider(
+        LocalThemeIsDark provides isDarkState
+    ) {
+        val isDark by isDarkState
+        SystemAppearance(!isDark)
+        MaterialTheme(
+            colorScheme = if (isDark) DarkColorScheme else LightColorScheme,
+            content = { Surface(content = content) }
+        )
+    }
+}
+
+@Composable
+internal expect fun SystemAppearance(isDark: Boolean)
+</file>
+
+<file path="composeApp/src/commonMain/kotlin/io/github/kdroidfilter/seforimapp/App.kt">
+package io.github.kdroidfilter.seforimapp
+
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.unit.dp
+import seforimapp.composeapp.generated.resources.*
+import io.github.kdroidfilter.seforimapp.theme.AppTheme
+import io.github.kdroidfilter.seforimapp.theme.LocalThemeIsDark
+import kotlinx.coroutines.isActive
+import org.jetbrains.compose.resources.Font
+import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.compose.resources.vectorResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
+
+@Preview
+@Composable
+internal fun App() = AppTheme {
+
+}
+</file>
+
+<file path="composeApp/src/commonTest/kotlin/io/github/kdroidfilter/seforimapp/ComposeTest.kt">
+package io.github.kdroidfilter.seforimapp
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.runComposeUiTest
+import kotlin.test.Test
+
+@OptIn(ExperimentalTestApi::class)
+class ComposeTest {
+
+    @Test
+    fun simpleCheck() = runComposeUiTest {
+        setContent {
+            var txt by remember { mutableStateOf("Go") }
+            Column {
+                Text(
+                    text = txt,
+                    modifier = Modifier.testTag("t_text")
+                )
+                Button(
+                    onClick = { txt += "." },
+                    modifier = Modifier.testTag("t_button")
+                ) {
+                    Text("click me")
+                }
+            }
+        }
+
+        onNodeWithTag("t_button").apply {
+            repeat(3) { performClick() }
+        }
+        onNodeWithTag("t_text").assertTextEquals("Go...")
+    }
+}
+</file>
+
+<file path="composeApp/src/jvmMain/kotlin/io/github/kdroidfilter/seforimapp/theme/Theme.jvm.kt">
+package io.github.kdroidfilter.seforimapp.theme
+
+import androidx.compose.runtime.Composable
+
+@Composable
+internal actual fun SystemAppearance(isDark: Boolean) {
+}
+</file>
+
+<file path="composeApp/src/jvmMain/kotlin/io/github/kdroidfilter/seforimapp/theme/utils.kt">
+package io.github.kdroidfilter.seforimapp.theme
+
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.WindowPosition
+import androidx.compose.ui.window.WindowState
+import java.awt.Toolkit
+
+fun getCenteredWindowState(width: Int, height: Int): WindowState {
+    val screenSize = Toolkit.getDefaultToolkit().screenSize
+    val windowX = (screenSize.width - width) / 2
+    val windowY = (screenSize.height - height) / 2
+
+    return WindowState(
+        size = DpSize(width.dp, height.dp),
+        position = WindowPosition(windowX.dp, windowY.dp)
+    )
+}
+</file>
+
+<file path="composeApp/src/jvmMain/kotlin/main.kt">
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.window.application
+import com.kdroid.composetray.utils.SingleInstanceManager
+import io.github.kdroidfilter.platformtools.darkmodedetector.isSystemInDarkMode
+import io.github.kdroidfilter.seforimapp.App
+import io.github.kdroidfilter.seforimapp.theme.getCenteredWindowState
+import org.jetbrains.jewel.foundation.theme.JewelTheme
+import org.jetbrains.jewel.intui.standalone.theme.IntUiTheme
+import org.jetbrains.jewel.intui.standalone.theme.darkThemeDefinition
+import org.jetbrains.jewel.intui.standalone.theme.default
+import org.jetbrains.jewel.intui.standalone.theme.lightThemeDefinition
+import org.jetbrains.jewel.intui.window.decoratedWindow
+import org.jetbrains.jewel.intui.window.styling.dark
+import org.jetbrains.jewel.intui.window.styling.lightWithLightHeader
+import org.jetbrains.jewel.ui.ComponentStyling
+import org.jetbrains.jewel.window.DecoratedWindow
+import org.jetbrains.jewel.window.styling.TitleBarStyle
+import java.awt.Dimension
+import java.awt.Window
+
+fun main() = application {
+    val windowState = remember { getCenteredWindowState(720, 470) }
+    var isWindowVisible by remember { mutableStateOf(true) }
+    val isDarkTheme = isSystemInDarkMode()
+
+    val isSingleInstance = SingleInstanceManager.isSingleInstance(onRestoreRequest = {
+        isWindowVisible = true
+        windowState.isMinimized = false
+        Window.getWindows().first().toFront()
+    })
+    if (!isSingleInstance) {
+        exitApplication()
+        return@application
+    }
+    IntUiTheme(
+        theme = if (isDarkTheme) JewelTheme.darkThemeDefinition() else JewelTheme.lightThemeDefinition(),
+        styling = ComponentStyling.default()
+            .decoratedWindow(titleBarStyle = if (isSystemInDarkMode()) TitleBarStyle.dark() else TitleBarStyle.lightWithLightHeader()),
+    ) {
+        DecoratedWindow(
+            onCloseRequest = { exitApplication() },
+//            title = stringResource(Res.string.app_name),
+//            icon = painterResource(Res.drawable.icon),
+            state = windowState,
+            visible = isWindowVisible,
+        ) {
+            window.minimumSize = Dimension(350, 600)
+            App()
+        }
+    }
+}
+</file>
+
+<file path="composeApp/build.gradle.kts">
+import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.compose.reload.ComposeHotRun
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
+
+plugins {
+    alias(libs.plugins.multiplatform)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.hotReload)
+    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.buildConfig)
+}
+
+kotlin {
+    androidTarget {
+        //https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html
+        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
+    }
+
+    jvm()
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
+            implementation(libs.kermit)
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.serialization)
+            implementation(libs.ktor.serialization.json)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.androidx.lifecycle.viewmodel)
+            implementation(libs.androidx.lifecycle.runtime)
+            implementation(libs.androidx.navigation.compose)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.multiplatformSettings)
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.materialKolor)
+            implementation(libs.platformtools.core)
+            implementation(libs.platformtools.darkmodedetector)
+        }
+
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            @OptIn(ExperimentalComposeLibrary::class)
+            implementation(compose.uiTest)
+        }
+
+        androidMain.dependencies {
+            implementation(compose.uiTooling)
+            implementation(libs.androidx.activityCompose)
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.kotlinx.coroutines.android)
+        }
+
+        jvmMain.dependencies {
+            implementation(compose.desktop.currentOs) {
+                exclude(group = "org.jetbrains.compose.material")
+            }
+
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.platformtools.rtlwindows)
+            implementation(libs.composenativetray)
+            implementation(libs.kotlinx.coroutines.swing)
+            api(project(":jewel"))
+        }
+
+    }
+}
+
+android {
+    namespace = "io.github.kdroidfilter.seforimapp"
+    compileSdk = 35
+
+    defaultConfig {
+        minSdk = 21
+        targetSdk = 35
+
+        applicationId = "io.github.kdroidfilter.seforimapp.androidApp"
+        versionCode = 1
+        versionName = "1.0.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+}
+
+//https://developer.android.com/develop/ui/compose/testing#setup
+dependencies {
+    androidTestImplementation(libs.androidx.uitest.junit4)
+    debugImplementation(libs.androidx.uitest.testManifest)
+}
+
+compose.desktop {
+    application {
+        mainClass = "MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "SeforimApp"
+            packageVersion = "1.0.0"
+
+            linux {
+                iconFile.set(project.file("desktopAppIcons/LinuxIcon.png"))
+            }
+            windows {
+                iconFile.set(project.file("desktopAppIcons/WindowsIcon.ico"))
+            }
+            macOS {
+                iconFile.set(project.file("desktopAppIcons/MacosIcon.icns"))
+                bundleID = "io.github.kdroidfilter.seforimapp.desktopApp"
+            }
+        }
+    }
+}
+
+//https://github.com/JetBrains/compose-hot-reload
+composeCompiler {
+    featureFlags.add(ComposeFeatureFlag.OptimizeNonSkippingGroups)
+}
+tasks.withType<ComposeHotRun>().configureEach {
+    mainClass.set("MainKt")
+}
+
+buildConfig {
+    // BuildConfig configuration here.
+    // https://github.com/gmazzo/gradle-buildconfig-plugin#usage-in-kts
+}
+</file>
+
+<file path="gradle/wrapper/gradle-wrapper.properties">
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.14.2-bin.zip
+networkTimeout=10000
+validateDistributionUrl=true
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+</file>
+
+<file path="gradle/libs.versions.toml">
+[versions]
+
+kotlin = "2.2.0"
+compose = "1.8.2"
+agp = "8.10.0"
+androidx-activityCompose = "1.10.1"
+androidx-uiTest = "1.8.3"
+hotReload = "1.0.0-alpha11"
+kermit = "2.0.6"
+ktor = "3.2.1"
+androidx-lifecycle = "2.9.1"
+androidx-navigation = "2.9.0-beta03"
+kotlinx-serialization = "1.9.0"
+koin = "4.1.0"
+multiplatformSettings = "1.3.0"
+kotlinx-datetime = "0.7.0"
+buildConfig = "5.6.5"
+materialKolor = "2.1.1"
+jewel = "0.28.0-252.15920"
+jna = "5.17.0"
+platformtools = "0.4.0"
+composenativetray = "0.6.7"
+kotlinx-coroutines = "1.10.1"
+
+[libraries]
+
+androidx-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-uitest-testManifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "androidx-uiTest" }
+androidx-uitest-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "androidx-uiTest" }
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", version.ref = "ktor" }
+ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
+ktor-client-curl = { module = "io.ktor:ktor-client-curl", version.ref = "ktor" }
+ktor-client-winhttp = { module = "io.ktor:ktor-client-winhttp", version.ref = "ktor" }
+androidx-lifecycle-viewmodel = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtime = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
+multiplatformSettings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "multiplatformSettings" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+materialKolor = { module = "com.materialkolor:material-kolor", version.ref = "materialKolor" }
+foundation-desktop = { module = "org.jetbrains.compose.foundation:foundation-desktop", version.ref = "compose" }
+jetbrains-jewel-foundation = { module = "org.jetbrains.jewel:jewel-foundation", version.ref = "jewel" }
+jewel-decorated-window = { module = "org.jetbrains.jewel:jewel-decorated-window", version.ref = "jewel" }
+jewel-int-ui-decorated-window = { module = "org.jetbrains.jewel:jewel-int-ui-decorated-window", version.ref = "jewel" }
+jewel-int-ui-standalone = { module = "org.jetbrains.jewel:jewel-int-ui-standalone", version.ref = "jewel" }
+jewel-ui = { module = "org.jetbrains.jewel:jewel-ui", version.ref = "jewel" }
+jna = { module = "net.java.dev.jna:jna", version.ref = "jna" }
+platformtools-core = { module = "io.github.kdroidfilter:platformtools.core", version.ref = "platformtools" }
+platformtools-darkmodedetector = { module = "io.github.kdroidfilter:platformtools.darkmodedetector", version.ref = "platformtools" }
+platformtools-rtlwindows = { module = "io.github.kdroidfilter:platformtools.rtlwindows", version.ref = "platformtools" }
+composenativetray = { module = "io.github.kdroidfilter:composenativetray", version.ref = "composenativetray" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+[plugins]
+
+multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+hotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "hotReload" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
+</file>
+
+<file path="jewel/src/jvmMain/java/com/jetbrains/DesktopActions.java">
+/*
+ * Copyright 2000-2022 JetBrains s.r.o.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+ * or visit www.oracle.com if you need additional information or have any
+ * questions.
+ */
+
+package com.jetbrains;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+
+public interface DesktopActions {
+
+    void setHandler(Handler handler);
+
+    interface Handler {
+        default void open(File file) throws IOException { throw new UnsupportedOperationException(); }
+        default void edit(File file) throws IOException { throw new UnsupportedOperationException(); }
+        default void print(File file) throws IOException { throw new UnsupportedOperationException(); }
+        default void mail(URI mailtoURL) throws IOException { throw new UnsupportedOperationException(); }
+        default void browse(URI uri) throws IOException { throw new UnsupportedOperationException(); }
+    }
+
+}
+</file>
+
+<file path="jewel/src/jvmMain/java/com/jetbrains/JBR.java">
+// Copyright 2000-2024 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license.
+
+package com.jetbrains;
+
+import java.lang.invoke.MethodHandles;
+import java.lang.reflect.InvocationTargetException;
+
+/**
+ * This class is an entry point into JBR API.
+ * JBR API is a collection of services, classes, interfaces, etc.,
+ * which require tight interaction with JRE and therefore are implemented inside JBR.
+ * <div>JBR API consists of two parts:</div>
+ * <ul>
+ *     <li>Client side - {@code jetbrains.api} module, mostly containing interfaces</li>
+ *     <li>JBR side - actual implementation code inside JBR</li>
+ * </ul>
+ * Client and JBR side are linked dynamically at runtime and do not have to be of the same version.
+ * In some cases (e.g. running on different JRE or old JBR) system will not be able to find
+ * implementation for some services, so you'll need a fallback behavior for that case.
+ * <h2>Simple usage example:</h2>
+ * <blockquote><pre>{@code
+ * if (JBR.isSomeServiceSupported()) {
+ *     JBR.getSomeService().doSomething();
+ * } else {
+ *     planB();
+ * }
+ * }</pre></blockquote>
+ *
+ * @implNote JBR API is initialized on first access to this class (in static initializer).
+ * Actual implementation is linked on demand, when corresponding service is requested by client.
+ */
+public final class JBR {
+
+    private static final ServiceApi api;
+    private static final Exception bootstrapException;
+
+    static {
+        ServiceApi a = null;
+        Exception exception = null;
+        try {
+            a = (ServiceApi) Class.forName("com.jetbrains.bootstrap.JBRApiBootstrap")
+                    .getMethod("bootstrap", MethodHandles.Lookup.class)
+                    .invoke(null, MethodHandles.lookup());
+        } catch (InvocationTargetException e) {
+            Throwable t = e.getCause();
+            if (t instanceof Error error) throw error;
+            else throw new Error(t);
+        } catch (IllegalAccessException | NoSuchMethodException | ClassNotFoundException e) {
+            exception = e;
+        }
+        api = a;
+        bootstrapException = exception;
+    }
+
+    private JBR() {
+    }
+
+    private static <T> T getService(Class<T> interFace, FallbackSupplier<T> fallback) {
+        T service = getService(interFace);
+        try {
+            return service != null ? service : fallback != null ? fallback.get() : null;
+        } catch (Throwable ignore) {
+            return null;
+        }
+    }
+
+    static <T> T getService(Class<T> interFace) {
+        return api == null ? null : api.getService(interFace);
+    }
+
+    /**
+     * @return true when running on JBR which implements JBR API
+     */
+    public static boolean isAvailable() {
+        return api != null;
+    }
+
+    /**
+     * @return JBR API version in form {@code JBR.MAJOR.MINOR.PATCH}
+     * @implNote This is an API version, which comes with client application,
+     * it has nothing to do with JRE it runs on.
+     */
+    public static String getApiVersion() {
+        return "17.0.8.1b1070.2.1.9.0";
+    }
+
+    /**
+     * Internal API interface, contains most basic methods for communication between client and JBR.
+     */
+    private interface ServiceApi {
+
+        <T> T getService(Class<T> interFace);
+    }
+
+    @FunctionalInterface
+    private interface FallbackSupplier<T> {
+        T get() throws Throwable;
+    }
+
+    // ========================== Generated metadata ==========================
+
+    /**
+     * Generated client-side metadata, needed by JBR when linking the implementation.
+     */
+    private static final class Metadata {
+        private static final String[] KNOWN_SERVICES = {"com.jetbrains.ExtendedGlyphCache", "com.jetbrains.DesktopActions", "com.jetbrains.CustomWindowDecoration", "com.jetbrains.ProjectorUtils", "com.jetbrains.FontExtensions", "com.jetbrains.RoundedCornersManager", "com.jetbrains.GraphicsUtils", "com.jetbrains.WindowDecorations", "com.jetbrains.JBRFileDialogService", "com.jetbrains.AccessibleAnnouncer", "com.jetbrains.JBR$ServiceApi", "com.jetbrains.Jstack", "com.jetbrains.WindowMove"};
+        private static final String[] KNOWN_PROXIES = {"com.jetbrains.JBRFileDialog", "com.jetbrains.WindowDecorations$CustomTitleBar"};
+    }
+
+    // ======================= Generated static methods =======================
+
+    private static class DesktopActions__Holder {
+        private static final DesktopActions INSTANCE = getService(DesktopActions.class, null);
+    }
+
+    /**
+     * @return true if current runtime has implementation for all methods in {@link DesktopActions}
+     * and its dependencies (can fully implement given service).
+     * @see #getDesktopActions()
+     */
+    public static boolean isDesktopActionsSupported() {
+        return DesktopActions__Holder.INSTANCE != null;
+    }
+
+    /**
+     * @return full implementation of {@link DesktopActions} service if any, or {@code null} otherwise
+     */
+    public static DesktopActions getDesktopActions() {
+        return DesktopActions__Holder.INSTANCE;
+    }
+
+    private static class RoundedCornersManager__Holder {
+        private static final RoundedCornersManager INSTANCE = getService(RoundedCornersManager.class, null);
+    }
+
+    /**
+     * @return true if current runtime has implementation for all methods in {@link RoundedCornersManager}
+     * and its dependencies (can fully implement given service).
+     * @see #getRoundedCornersManager()
+     */
+    public static boolean isRoundedCornersManagerSupported() {
+        return RoundedCornersManager__Holder.INSTANCE != null;
+    }
+
+    /**
+     * This manager allows decorate awt Window with rounded corners.
+     * Appearance depends from operating system.
+     *
+     * @return full implementation of {@link RoundedCornersManager} service if any, or {@code null} otherwise
+     */
+    public static RoundedCornersManager getRoundedCornersManager() {
+        return RoundedCornersManager__Holder.INSTANCE;
+    }
+
+    private static class WindowDecorations__Holder {
+        private static final WindowDecorations INSTANCE = getService(WindowDecorations.class, null);
+    }
+
+    /**
+     * @return true if current runtime has implementation for all methods in {@link WindowDecorations}
+     * and its dependencies (can fully implement given service).
+     * @see #getWindowDecorations()
+     */
+    public static boolean isWindowDecorationsSupported() {
+        return WindowDecorations__Holder.INSTANCE != null;
+    }
+
+    /**
+     * Window decorations consist of title bar, window controls and border.
+     *
+     * @return full implementation of {@link WindowDecorations} service if any, or {@code null} otherwise
+     * @see WindowDecorations.CustomTitleBar
+     */
+    public static WindowDecorations getWindowDecorations() {
+        return WindowDecorations__Holder.INSTANCE;
+    }
+
+    private static class WindowMove__Holder {
+        private static final WindowMove INSTANCE = getService(WindowMove.class, null);
+    }
+
+    /**
+     * @return true if current runtime has implementation for all methods in {@link WindowMove}
+     * and its dependencies (can fully implement given service).
+     * @see #getWindowMove()
+     */
+    public static boolean isWindowMoveSupported() {
+        return WindowMove__Holder.INSTANCE != null;
+    }
+
+    /**
+     * @return full implementation of {@link WindowMove} service if any, or {@code null} otherwise
+     */
+    public static WindowMove getWindowMove() {
+        return WindowMove__Holder.INSTANCE;
+    }
+}
+</file>
+
+<file path="jewel/src/jvmMain/java/com/jetbrains/RoundedCornersManager.java">
+/*
+ * Copyright 2000-2023 JetBrains s.r.o.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Oracle designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+ * or visit www.oracle.com if you need additional information or have any
+ * questions.
+ */
+
+package com.jetbrains;
+
+import java.awt.*;
+
+/**
+ * This manager allows decorated AWT Window with rounded corners.
+ * The appearance depends on the operating system.
+ */
+public interface RoundedCornersManager {
+    /**
+     * Sets rounded corners on the target {@link Window}.
+     *
+     * @param params For macOS, it is a {@code Float} object with the radius or an Array containing:
+     *               <ul>
+     *               <li>A {@code Float} for the radius</li>
+     *               <li>An {@code Integer} for the border width</li>
+     *               <li>A {@code java.awt.Color} for the border color</li>
+     *               </ul>
+     *               <br/>
+     *               For Windows 11, it is a {@code String} with one of these values:
+     *               <ul>
+     *               <li>{@code "default"} — let the system decide whether to round window corners</li>
+     *               <li>{@code "none"} — never round window corners</li>
+     *               <li>{@code "full"} — round the corners if appropriate</li>
+     *               <li>{@code "small"} — round the corners if appropriate, with a small radius</li>
+     *               </ul>
+     *               <br/>
+     */
+    void setRoundedCorners(Window window, Object params);
+}
+</file>
+
+<file path="jewel/src/jvmMain/java/com/jetbrains/WindowDecorations.java">
+/*
+ * Copyright 2023 JetBrains s.r.o.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation. Oracle designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+ * or visit www.oracle.com if you need additional information or have any
+ * questions.
+ */
+
+package com.jetbrains;
+
+import java.awt.*;
+import java.util.Map;
+
+/**
+ * Window decorations consist of title bar, window controls and border.
+ * @see CustomTitleBar
+ */
+public interface WindowDecorations {
+
+    /**
+     * If {@code customTitleBar} is not null, system-provided title bar is removed and client area is extended to the
+     * top of the frame with window controls painted over the client area.
+     * {@code customTitleBar=null} resets to the default appearance with system-provided title bar.
+     * @see CustomTitleBar
+     * @see #createCustomTitleBar()
+     */
+    void setCustomTitleBar(Frame frame, CustomTitleBar customTitleBar);
+
+    /**
+     * If {@code customTitleBar} is not null, system-provided title bar is removed and client area is extended to the
+     * top of the dialog with window controls painted over the client area.
+     * {@code customTitleBar=null} resets to the default appearance with system-provided title bar.
+     * @see CustomTitleBar
+     * @see #createCustomTitleBar()
+     */
+    void setCustomTitleBar(Dialog dialog, CustomTitleBar customTitleBar);
+
+    /**
+     * You must {@linkplain CustomTitleBar#setHeight(float) set title bar height} before adding it to a window.
+     * @see CustomTitleBar
+     * @see #setCustomTitleBar(Frame, CustomTitleBar)
+     * @see #setCustomTitleBar(Dialog, CustomTitleBar)
+     */
+    CustomTitleBar createCustomTitleBar();
+
+    /**
+     * Custom title bar allows merging of window content with native title bar,
+     * which is done by treating title bar as part of client area, but with some
+     * special behavior like dragging or maximizing on double click.
+     * Custom title bar has {@linkplain CustomTitleBar#getHeight()  height} and controls.
+     * @implNote Behavior is platform-dependent, only macOS and Windows are supported.
+     * @see #setCustomTitleBar(Frame, CustomTitleBar)
+     */
+    interface CustomTitleBar {
+
+        /**
+         * @return title bar height, measured in pixels from the top of client area, i.e. excluding top frame border.
+         */
+        float getHeight();
+
+        /**
+         * @param height title bar height, measured in pixels from the top of client area,
+         *               i.e. excluding top frame border. Must be > 0.
+         */
+        void setHeight(float height);
+
+        /**
+         * @see #putProperty(String, Object)
+         */
+        Map<String, Object> getProperties();
+
+        /**
+         * @see #putProperty(String, Object)
+         */
+        void putProperties(Map<String, ?> m);
+
+        /**
+         * Windows & macOS properties:
+         * <ul>
+         *     <li>{@code controls.visible} : {@link Boolean} - whether title bar controls
+         *         (minimize/maximize/close buttons) are visible, default = true.</li>
+         * </ul>
+         * Windows properties:
+         * <ul>
+         *     <li>{@code controls.width} : {@link Number} - width of block of buttons (not individual buttons).
+         *         Note that dialogs have only one button, while frames usually have 3 of them.</li>
+         *     <li>{@code controls.dark} : {@link Boolean} - whether to use dark or light color theme
+         *         (light or dark icons respectively).</li>
+         *     <li>{@code controls.<layer>.<state>} : {@link Color} - precise control over button colors,
+         *         where {@code <layer>} is one of:
+         *         <ul><li>{@code foreground}</li><li>{@code background}</li></ul>
+         *         and {@code <state>} is one of:
+         *         <ul>
+         *             <li>{@code normal}</li>
+         *             <li>{@code hovered}</li>
+         *             <li>{@code pressed}</li>
+         *             <li>{@code disabled}</li>
+         *             <li>{@code inactive}</li>
+         *         </ul>
+         * </ul>
+         */
+        void putProperty(String key, Object value);
+
+        /**
+         * @return space occupied by title bar controls on the left (px)
+         */
+        float getLeftInset();
+        /**
+         * @return space occupied by title bar controls on the right (px)
+         */
+        float getRightInset();
+
+        /**
+         * By default, any component which has no cursor or mouse event listeners set is considered transparent for
+         * native title bar actions. That is, dragging simple JPanel in title bar area will drag the
+         * window, but dragging a JButton will not. Adding mouse listener to a component will prevent any native actions
+         * inside bounds of that component.
+         * <p>
+         * This method gives you precise control of whether to allow native title bar actions or not.
+         * <ul>
+         *     <li>{@code client=true} means that mouse is currently over a client area. Native title bar behavior is disabled.</li>
+         *     <li>{@code client=false} means that mouse is currently over a non-client area. Native title bar behavior is enabled.</li>
+         * </ul>
+         * <em>Intended usage:
+         * <ul>
+         *     <li>This method must be called in response to all {@linkplain java.awt.event.MouseEvent mouse events}
+         *         except {@link java.awt.event.MouseEvent#MOUSE_EXITED} and {@link java.awt.event.MouseEvent#MOUSE_WHEEL}.</li>
+         *     <li>This method is called per-event, i.e. when component has multiple listeners, you only need to call it once.</li>
+         *     <li>If this method hadn't been called, title bar behavior is reverted back to default upon processing the event.</li>
+         * </ul></em>
+         * Note that hit test value is relevant only for title bar area, e.g. calling
+         * {@code forceHitTest(false)} will not make window draggable via non-title bar area.
+         *
+         * <h2>Example:</h2>
+         * Suppose you have a {@code JPanel} in the title bar area. You want it to respond to right-click for
+         * some popup menu, but also retain native drag and double-click behavior.
+         * <pre>
+         *     CustomTitleBar titlebar = ...;
+         *     JPanel panel = ...;
+         *     MouseAdapter adapter = new MouseAdapter() {
+         *         private void hit() { titlebar.forceHitTest(false); }
+         *         public void mouseClicked(MouseEvent e) {
+         *             hit();
+         *             if (e.getButton() == MouseEvent.BUTTON3) ...;
+         *         }
+         *         public void mousePressed(MouseEvent e) { hit(); }
+         *         public void mouseReleased(MouseEvent e) { hit(); }
+         *         public void mouseEntered(MouseEvent e) { hit(); }
+         *         public void mouseDragged(MouseEvent e) { hit(); }
+         *         public void mouseMoved(MouseEvent e) { hit(); }
+         *     };
+         *     panel.addMouseListener(adapter);
+         *     panel.addMouseMotionListener(adapter);
+         * </pre>
+         */
+        void forceHitTest(boolean client);
+
+        Window getContainingWindow();
+    }
+}
+</file>
+
+<file path="jewel/src/jvmMain/java/com/jetbrains/WindowMove.java">
+/*
+ * Copyright 2000-2023 JetBrains s.r.o.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * This code is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License version 2 only, as
+ * published by the Free Software Foundation.  Oracle designates this
+ * particular file as subject to the "Classpath" exception as provided
+ * by Oracle in the LICENSE file that accompanied this code.
+ *
+ * This code is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * version 2 for more details (a copy is included in the LICENSE file that
+ * accompanied this code).
+ *
+ * You should have received a copy of the GNU General Public License version
+ * 2 along with this work; if not, write to the Free Software Foundation,
+ * Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+ * or visit www.oracle.com if you need additional information or have any
+ * questions.
+ */
+
+package com.jetbrains;
+
+import java.awt.*;
+
+public interface WindowMove {
+    /**
+     * Starts moving the top-level parent window of the given window together with the mouse pointer.
+     * The intended use is to facilitate the implementation of window management similar to the way
+     * it is done natively on the platform.
+     *
+     * Preconditions for calling this method:
+     * <ul>
+     * <li>WM supports _NET_WM_MOVE_RESIZE (this is checked automatically when an implementation
+     *     of this interface is obtained).</li>
+     * <li>Mouse pointer is within this window's bounds.</li>
+     * <li>The mouse button specified by {@code mouseButton} is pressed.</li>
+     * </ul>
+     *
+     * Calling this method will make the window start moving together with the mouse pointer until
+     * the specified mouse button is released or Esc is pressed. The conditions for cancelling
+     * the move may differ between WMs.
+     *
+     * @param mouseButton indicates the mouse button that was pressed to start moving the window;
+     *                   must be one of {@code MouseEvent.BUTTON1}, {@code MouseEvent.BUTTON2},
+     *                   or {@code MouseEvent.BUTTON3}.
+     */
+    void startMovingTogetherWithMouse(Window window, int mouseButton);
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/styling/DecoratedWindowStyling.kt">
+package org.jetbrains.jewel.window.styling
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.State
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
+import org.jetbrains.jewel.foundation.GenerateDataFunctions
+import org.jetbrains.jewel.window.DecoratedWindowState
+
+@Immutable
+@GenerateDataFunctions
+public class DecoratedWindowStyle(
+    public val colors: DecoratedWindowColors,
+    public val metrics: DecoratedWindowMetrics,
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as DecoratedWindowStyle
+
+        if (colors != other.colors) return false
+        if (metrics != other.metrics) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = colors.hashCode()
+        result = 31 * result + metrics.hashCode()
+        return result
+    }
+
+    override fun toString(): String = "DecoratedWindowStyle(colors=$colors, metrics=$metrics)"
+
+    public companion object
+}
+
+@Immutable
+@GenerateDataFunctions
+public class DecoratedWindowColors(public val border: Color, public val borderInactive: Color) {
+    @Composable
+    public fun borderFor(state: DecoratedWindowState): State<Color> =
+        rememberUpdatedState(
+            when {
+                !state.isActive -> borderInactive
+                else -> border
+            }
+        )
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as DecoratedWindowColors
+
+        if (border != other.border) return false
+        if (borderInactive != other.borderInactive) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = border.hashCode()
+        result = 31 * result + borderInactive.hashCode()
+        return result
+    }
+
+    override fun toString(): String = "DecoratedWindowColors(border=$border, borderInactive=$borderInactive)"
+
+    public companion object
+}
+
+@Immutable
+@GenerateDataFunctions
+public class DecoratedWindowMetrics(public val borderWidth: Dp) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as DecoratedWindowMetrics
+
+        return borderWidth == other.borderWidth
+    }
+
+    override fun hashCode(): Int = borderWidth.hashCode()
+
+    override fun toString(): String = "DecoratedWindowMetrics(borderWidth=$borderWidth)"
+
+    public companion object
+}
+
+public val LocalDecoratedWindowStyle: ProvidableCompositionLocal<DecoratedWindowStyle> = staticCompositionLocalOf {
+    error("No DecoratedWindowStyle provided. Have you forgotten the theme?")
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/styling/TitleBarStyling.kt">
+package org.jetbrains.jewel.window.styling
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
+import org.jetbrains.jewel.foundation.GenerateDataFunctions
+import org.jetbrains.jewel.ui.component.styling.DropdownStyle
+import org.jetbrains.jewel.ui.component.styling.IconButtonStyle
+import org.jetbrains.jewel.ui.icon.IconKey
+import org.jetbrains.jewel.window.DecoratedWindowState
+
+@Stable
+@GenerateDataFunctions
+public class TitleBarStyle(
+    public val colors: TitleBarColors,
+    public val metrics: TitleBarMetrics,
+    public val icons: TitleBarIcons,
+    public val dropdownStyle: DropdownStyle,
+    public val iconButtonStyle: IconButtonStyle,
+    public val paneButtonStyle: IconButtonStyle,
+    public val paneCloseButtonStyle: IconButtonStyle,
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as TitleBarStyle
+
+        if (colors != other.colors) return false
+        if (metrics != other.metrics) return false
+        if (icons != other.icons) return false
+        if (dropdownStyle != other.dropdownStyle) return false
+        if (iconButtonStyle != other.iconButtonStyle) return false
+        if (paneButtonStyle != other.paneButtonStyle) return false
+        if (paneCloseButtonStyle != other.paneCloseButtonStyle) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = colors.hashCode()
+        result = 31 * result + metrics.hashCode()
+        result = 31 * result + icons.hashCode()
+        result = 31 * result + dropdownStyle.hashCode()
+        result = 31 * result + iconButtonStyle.hashCode()
+        result = 31 * result + paneButtonStyle.hashCode()
+        result = 31 * result + paneCloseButtonStyle.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "TitleBarStyle(" +
+            "colors=$colors, " +
+            "metrics=$metrics, " +
+            "icons=$icons, " +
+            "dropdownStyle=$dropdownStyle, " +
+            "iconButtonStyle=$iconButtonStyle, " +
+            "paneButtonStyle=$paneButtonStyle, " +
+            "paneCloseButtonStyle=$paneCloseButtonStyle" +
+            ")"
+    }
+
+    public companion object
+}
+
+@Immutable
+@GenerateDataFunctions
+public class TitleBarColors(
+    public val background: Color,
+    public val inactiveBackground: Color,
+    public val content: Color,
+    public val border: Color,
+    // The background color for newControlButtons(three circles in left top corner) in MacOS
+    // fullscreen mode
+    public val fullscreenControlButtonsBackground: Color,
+    // The hover and press background color for window control buttons(minimize, maximize) in Linux
+    public val titlePaneButtonHoveredBackground: Color,
+    public val titlePaneButtonPressedBackground: Color,
+    // The hover and press background color for window close button in Linux
+    public val titlePaneCloseButtonHoveredBackground: Color,
+    public val titlePaneCloseButtonPressedBackground: Color,
+    // The hover and press background color for IconButtons in title bar content
+    public val iconButtonHoveredBackground: Color,
+    public val iconButtonPressedBackground: Color,
+    // The hover and press background color for Dropdown in title bar content
+    public val dropdownPressedBackground: Color,
+    public val dropdownHoveredBackground: Color,
+) {
+    @Composable
+    public fun backgroundFor(state: DecoratedWindowState): State<Color> =
+        rememberUpdatedState(
+            when {
+                !state.isActive -> inactiveBackground
+                else -> background
+            }
+        )
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as TitleBarColors
+
+        if (background != other.background) return false
+        if (inactiveBackground != other.inactiveBackground) return false
+        if (content != other.content) return false
+        if (border != other.border) return false
+        if (fullscreenControlButtonsBackground != other.fullscreenControlButtonsBackground) return false
+        if (titlePaneButtonHoveredBackground != other.titlePaneButtonHoveredBackground) return false
+        if (titlePaneButtonPressedBackground != other.titlePaneButtonPressedBackground) return false
+        if (titlePaneCloseButtonHoveredBackground != other.titlePaneCloseButtonHoveredBackground) return false
+        if (titlePaneCloseButtonPressedBackground != other.titlePaneCloseButtonPressedBackground) return false
+        if (iconButtonHoveredBackground != other.iconButtonHoveredBackground) return false
+        if (iconButtonPressedBackground != other.iconButtonPressedBackground) return false
+        if (dropdownPressedBackground != other.dropdownPressedBackground) return false
+        if (dropdownHoveredBackground != other.dropdownHoveredBackground) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = background.hashCode()
+        result = 31 * result + inactiveBackground.hashCode()
+        result = 31 * result + content.hashCode()
+        result = 31 * result + border.hashCode()
+        result = 31 * result + fullscreenControlButtonsBackground.hashCode()
+        result = 31 * result + titlePaneButtonHoveredBackground.hashCode()
+        result = 31 * result + titlePaneButtonPressedBackground.hashCode()
+        result = 31 * result + titlePaneCloseButtonHoveredBackground.hashCode()
+        result = 31 * result + titlePaneCloseButtonPressedBackground.hashCode()
+        result = 31 * result + iconButtonHoveredBackground.hashCode()
+        result = 31 * result + iconButtonPressedBackground.hashCode()
+        result = 31 * result + dropdownPressedBackground.hashCode()
+        result = 31 * result + dropdownHoveredBackground.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "TitleBarColors(" +
+            "background=$background, " +
+            "inactiveBackground=$inactiveBackground, " +
+            "content=$content, " +
+            "border=$border, " +
+            "fullscreenControlButtonsBackground=$fullscreenControlButtonsBackground, " +
+            "titlePaneButtonHoveredBackground=$titlePaneButtonHoveredBackground, " +
+            "titlePaneButtonPressedBackground=$titlePaneButtonPressedBackground, " +
+            "titlePaneCloseButtonHoveredBackground=$titlePaneCloseButtonHoveredBackground, " +
+            "titlePaneCloseButtonPressedBackground=$titlePaneCloseButtonPressedBackground, " +
+            "iconButtonHoveredBackground=$iconButtonHoveredBackground, " +
+            "iconButtonPressedBackground=$iconButtonPressedBackground, " +
+            "dropdownPressedBackground=$dropdownPressedBackground, " +
+            "dropdownHoveredBackground=$dropdownHoveredBackground" +
+            ")"
+    }
+
+    public companion object
+}
+
+@Immutable
+@GenerateDataFunctions
+public class TitleBarMetrics(
+    public val height: Dp,
+    public val gradientStartX: Dp,
+    public val gradientEndX: Dp,
+    public val titlePaneButtonSize: DpSize,
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as TitleBarMetrics
+
+        if (height != other.height) return false
+        if (gradientStartX != other.gradientStartX) return false
+        if (gradientEndX != other.gradientEndX) return false
+        if (titlePaneButtonSize != other.titlePaneButtonSize) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = height.hashCode()
+        result = 31 * result + gradientStartX.hashCode()
+        result = 31 * result + gradientEndX.hashCode()
+        result = 31 * result + titlePaneButtonSize.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "TitleBarMetrics(" +
+            "height=$height, " +
+            "gradientStartX=$gradientStartX, " +
+            "gradientEndX=$gradientEndX, " +
+            "titlePaneButtonSize=$titlePaneButtonSize" +
+            ")"
+    }
+
+    public companion object
+}
+
+@Immutable
+@GenerateDataFunctions
+public class TitleBarIcons(
+    public val minimizeButton: IconKey,
+    public val maximizeButton: IconKey,
+    public val restoreButton: IconKey,
+    public val closeButton: IconKey,
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as TitleBarIcons
+
+        if (minimizeButton != other.minimizeButton) return false
+        if (maximizeButton != other.maximizeButton) return false
+        if (restoreButton != other.restoreButton) return false
+        if (closeButton != other.closeButton) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = minimizeButton.hashCode()
+        result = 31 * result + maximizeButton.hashCode()
+        result = 31 * result + restoreButton.hashCode()
+        result = 31 * result + closeButton.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "TitleBarIcons(" +
+            "minimizeButton=$minimizeButton, " +
+            "maximizeButton=$maximizeButton, " +
+            "restoreButton=$restoreButton, " +
+            "closeButton=$closeButton" +
+            ")"
+    }
+
+    public companion object
+}
+
+public val LocalTitleBarStyle: ProvidableCompositionLocal<TitleBarStyle> = staticCompositionLocalOf {
+    error("No TitleBarStyle provided. Have you forgotten the theme?")
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/utils/macos/Foundation.kt">
+package org.jetbrains.jewel.window.utils.macos
+
+import com.sun.jna.Function
+import com.sun.jna.Library
+import com.sun.jna.Native
+import com.sun.jna.Pointer
+import java.lang.reflect.Proxy
+import java.util.Arrays
+import java.util.Collections
+import java.util.logging.Level
+import java.util.logging.Logger
+import org.jetbrains.jewel.window.utils.JnaLoader
+
+internal object Foundation {
+    private val logger = Logger.getLogger(Foundation::class.java.simpleName)
+
+    init {
+        if (!JnaLoader.isLoaded) {
+            logger.log(Level.WARNING, "JNA is not loaded")
+        }
+    }
+
+    private val myFoundationLibrary: FoundationLibrary? by lazy {
+        try {
+            Native.load("Foundation", FoundationLibrary::class.java, Collections.singletonMap("jna.encoding", "UTF8"))
+        } catch (_: Throwable) {
+            null
+        }
+    }
+
+    private val myObjcMsgSend: Function? by lazy {
+        try {
+            (Proxy.getInvocationHandler(myFoundationLibrary) as Library.Handler)
+                .nativeLibrary
+                .getFunction("objc_msgSend")
+        } catch (_: Throwable) {
+            null
+        }
+    }
+
+    /** Get the ID of the NSClass with className */
+    fun getObjcClass(className: String?): ID? = myFoundationLibrary?.objc_getClass(className)
+
+    fun getProtocol(name: String?): ID? = myFoundationLibrary?.objc_getProtocol(name)
+
+    fun createSelector(s: String?): Pointer? = myFoundationLibrary?.sel_registerName(s)
+
+    private fun prepInvoke(id: ID?, selector: Pointer?, args: Array<out Any?>): Array<Any?> {
+        val invokArgs = arrayOfNulls<Any>(args.size + 2)
+        invokArgs[0] = id
+        invokArgs[1] = selector
+        System.arraycopy(args, 0, invokArgs, 2, args.size)
+        return invokArgs
+    }
+
+    // objc_msgSend is called with the calling convention of the target method
+    // on x86_64 this does not make a difference, but arm64 uses a different calling convention for
+    // varargs
+    // it is therefore important to not call objc_msgSend as a vararg function
+    operator fun invoke(id: ID?, selector: Pointer?, vararg args: Any?): ID =
+        ID(myObjcMsgSend?.invokeLong(prepInvoke(id, selector, args)) ?: 0)
+
+    /**
+     * Invokes the given vararg selector. Expects `NSArray arrayWithObjects:(id), ...` like signature, i.e. exactly one
+     * fixed argument, followed by varargs.
+     */
+    fun invokeVarArg(id: ID?, selector: Pointer?, vararg args: Any?): ID {
+        // c functions and objc methods have at least 1 fixed argument, we therefore need to
+        // separate out the first argument
+        return myFoundationLibrary?.objc_msgSend(id, selector, args[0], *Arrays.copyOfRange(args, 1, args.size))
+            ?: ID.NIL
+    }
+
+    operator fun invoke(cls: String?, selector: String?, vararg args: Any?): ID =
+        invoke(getObjcClass(cls), createSelector(selector), *args)
+
+    fun invokeVarArg(cls: String?, selector: String?, vararg args: Any?): ID =
+        invokeVarArg(getObjcClass(cls), createSelector(selector), *args)
+
+    fun safeInvoke(stringCls: String?, stringSelector: String?, vararg args: Any?): ID {
+        val cls = getObjcClass(stringCls)
+        val selector = createSelector(stringSelector)
+        if (!invoke(cls, "respondsToSelector:", selector).booleanValue()) {
+            error("Missing selector $stringSelector for $stringCls")
+        }
+        return invoke(cls, selector, *args)
+    }
+
+    operator fun invoke(id: ID?, selector: String?, vararg args: Any?): ID = invoke(id, createSelector(selector), *args)
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/utils/macos/FoundationLibrary.kt">
+package org.jetbrains.jewel.window.utils.macos
+
+import com.sun.jna.Callback
+import com.sun.jna.Library
+import com.sun.jna.Pointer
+
+@Suppress(
+    "ktlint:standard:function-naming",
+    "ktlint:standard:property-naming",
+    "Unused",
+    "FunctionName",
+    "ConstPropertyName",
+) // Borrowed code
+internal interface FoundationLibrary : Library {
+    fun NSLog(pString: Pointer?, thing: Any?)
+
+    fun NSFullUserName(): ID?
+
+    fun objc_allocateClassPair(supercls: ID?, name: String?, extraBytes: Int): ID?
+
+    fun objc_registerClassPair(cls: ID?)
+
+    fun CFStringCreateWithBytes(
+        allocator: Pointer?,
+        bytes: ByteArray?,
+        byteCount: Int,
+        encoding: Int,
+        isExternalRepresentation: Byte,
+    ): ID?
+
+    fun CFStringGetCString(theString: ID?, buffer: ByteArray?, bufferSize: Int, encoding: Int): Byte
+
+    fun CFStringGetLength(theString: ID?): Int
+
+    fun CFStringConvertNSStringEncodingToEncoding(nsEncoding: Long): Long
+
+    fun CFStringConvertEncodingToIANACharSetName(cfEncoding: Long): ID?
+
+    fun CFStringConvertIANACharSetNameToEncoding(encodingName: ID?): Long
+
+    fun CFStringConvertEncodingToNSStringEncoding(cfEncoding: Long): Long
+
+    fun CFRetain(cfTypeRef: ID?)
+
+    fun CFRelease(cfTypeRef: ID?)
+
+    fun CFGetRetainCount(cfTypeRef: Pointer?): Int
+
+    fun objc_getClass(className: String?): ID?
+
+    fun objc_getProtocol(name: String?): ID?
+
+    fun class_createInstance(pClass: ID?, extraBytes: Int): ID?
+
+    fun sel_registerName(selectorName: String?): Pointer?
+
+    fun class_replaceMethod(cls: ID?, selName: Pointer?, impl: Callback?, types: String?): ID?
+
+    fun objc_getMetaClass(name: String?): ID?
+
+    /**
+     * Note: Vararg version. Should only be used only for selectors with a single fixed argument followed by varargs.
+     */
+    fun objc_msgSend(receiver: ID?, selector: Pointer?, firstArg: Any?, vararg args: Any?): ID?
+
+    fun class_respondsToSelector(cls: ID?, selName: Pointer?): Boolean
+
+    fun class_addMethod(cls: ID?, selName: Pointer?, imp: Callback?, types: String?): Boolean
+
+    fun class_addMethod(cls: ID?, selName: Pointer?, imp: ID?, types: String?): Boolean
+
+    fun class_addProtocol(aClass: ID?, protocol: ID?): Boolean
+
+    fun class_isMetaClass(cls: ID?): Boolean
+
+    fun NSStringFromSelector(selector: Pointer?): ID?
+
+    fun NSStringFromClass(aClass: ID?): ID?
+
+    fun objc_getClass(clazz: Pointer?): Pointer?
+
+    companion object {
+        const val kCFStringEncodingMacRoman = 0
+        const val kCFStringEncodingWindowsLatin1 = 0x0500
+        const val kCFStringEncodingISOLatin1 = 0x0201
+        const val kCFStringEncodingNextStepLatin = 0x0B01
+        const val kCFStringEncodingASCII = 0x0600
+        const val kCFStringEncodingUnicode = 0x0100
+        const val kCFStringEncodingUTF8 = 0x08000100
+        const val kCFStringEncodingNonLossyASCII = 0x0BFF
+        const val kCFStringEncodingUTF16 = 0x0100
+        const val kCFStringEncodingUTF16BE = 0x10000100
+        const val kCFStringEncodingUTF16LE = 0x14000100
+        const val kCFStringEncodingUTF32 = 0x0c000100
+        const val kCFStringEncodingUTF32BE = 0x18000100
+        const val kCFStringEncodingUTF32LE = 0x1c000100
+
+        // https://developer.apple.com/library/mac/documentation/Carbon/Reference/CGWindow_Reference/Constants/Constants.html#//apple_ref/doc/constant_group/Window_List_Option_Constants
+        const val kCGWindowListOptionAll = 0
+        const val kCGWindowListOptionOnScreenOnly = 1
+        const val kCGWindowListOptionOnScreenAboveWindow = 2
+        const val kCGWindowListOptionOnScreenBelowWindow = 4
+        const val kCGWindowListOptionIncludingWindow = 8
+        const val kCGWindowListExcludeDesktopElements = 16
+
+        // https://developer.apple.com/library/mac/documentation/Carbon/Reference/CGWindow_Reference/Constants/Constants.html#//apple_ref/doc/constant_group/Window_Image_Types
+        const val kCGWindowImageDefault = 0
+        const val kCGWindowImageBoundsIgnoreFraming = 1
+        const val kCGWindowImageShouldBeOpaque = 2
+        const val kCGWindowImageOnlyShadows = 4
+        const val kCGWindowImageBestResolution = 8
+        const val kCGWindowImageNominalResolution = 16
+
+        // see enum NSBitmapImageFileType
+        const val NSBitmapImageFileTypeTIFF = 0
+        const val NSBitmapImageFileTypeBMP = 1
+        const val NSBitmapImageFileTypeGIF = 2
+        const val NSBitmapImageFileTypeJPEG = 3
+        const val NSBitmapImageFileTypePNG = 4
+        const val NSBitmapImageFileTypeJPEG2000 = 5
+    }
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/utils/macos/ID.kt">
+package org.jetbrains.jewel.window.utils.macos
+
+import com.sun.jna.NativeLong
+
+/** Could be an address in memory (if pointer to a class or method) or a value (like 0 or 1) */
+@Suppress("OVERRIDE_DEPRECATION") // Copied code
+internal class ID : NativeLong {
+    constructor()
+
+    constructor(peer: Long) : super(peer)
+
+    fun booleanValue(): Boolean = toInt() != 0
+
+    override fun toByte(): Byte = toInt().toByte()
+
+    override fun toChar(): Char = toInt().toChar()
+
+    override fun toShort(): Short = toInt().toShort()
+
+    @Suppress("RedundantOverride") // Without this, we get a SOE
+    override fun toInt(): Int = super.toInt()
+
+    companion object {
+        @JvmField val NIL = ID(0L)
+    }
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/utils/macos/MacUtil.kt">
+package org.jetbrains.jewel.window.utils.macos
+
+import java.awt.Component
+import java.awt.Window
+import java.lang.reflect.InvocationTargetException
+import java.util.logging.Level
+import java.util.logging.Logger
+import javax.swing.SwingUtilities
+import org.jetbrains.jewel.window.utils.UnsafeAccessing
+import org.jetbrains.jewel.window.utils.accessible
+
+internal object MacUtil {
+    private val logger = Logger.getLogger(MacUtil::class.java.simpleName)
+
+    init {
+        try {
+            UnsafeAccessing.assignAccessibility(
+                UnsafeAccessing.desktopModule,
+                listOf("sun.awt", "sun.lwawt", "sun.lwawt.macosx"),
+            )
+        } catch (@Suppress("TooGenericExceptionCaught") e: Exception) {
+            logger.log(Level.WARNING, "Assign access for jdk.desktop failed.", e)
+        }
+    }
+
+    fun getWindowFromJavaWindow(w: Window?): ID {
+        if (w == null) {
+            return ID.NIL
+        }
+        try {
+            val cPlatformWindow = getPlatformWindow(w)
+            if (cPlatformWindow != null) {
+                val ptr = cPlatformWindow.javaClass.superclass.getDeclaredField("ptr")
+                ptr.setAccessible(true)
+                return ID(ptr.getLong(cPlatformWindow))
+            }
+        } catch (e: IllegalAccessException) {
+            logger.log(Level.WARNING, "Fail to get cPlatformWindow from awt window.", e)
+        } catch (e: NoSuchFieldException) {
+            logger.log(Level.WARNING, "Fail to get cPlatformWindow from awt window.", e)
+        }
+        return ID.NIL
+    }
+
+    fun getPlatformWindow(w: Window): Any? {
+        try {
+            val awtAccessor = Class.forName("sun.awt.AWTAccessor")
+            val componentAccessor = awtAccessor.getMethod("getComponentAccessor").invoke(null)
+            val getPeer = componentAccessor.javaClass.getMethod("getPeer", Component::class.java).accessible()
+            val peer = getPeer.invoke(componentAccessor, w)
+            if (peer != null) {
+                val cWindowPeerClass: Class<*> = peer.javaClass
+                val getPlatformWindowMethod = cWindowPeerClass.getDeclaredMethod("getPlatformWindow")
+                val cPlatformWindow = getPlatformWindowMethod.invoke(peer)
+                if (cPlatformWindow != null) {
+                    return cPlatformWindow
+                }
+            }
+        } catch (e: NoSuchMethodException) {
+            logger.log(Level.WARNING, "Fail to get cPlatformWindow from awt window.", e)
+        } catch (e: IllegalAccessException) {
+            logger.log(Level.WARNING, "Fail to get cPlatformWindow from awt window.", e)
+        } catch (e: InvocationTargetException) {
+            logger.log(Level.WARNING, "Fail to get cPlatformWindow from awt window.", e)
+        } catch (e: ClassNotFoundException) {
+            logger.log(Level.WARNING, "Fail to get cPlatformWindow from awt window.", e)
+        }
+        return null
+    }
+
+    fun updateColors(w: Window) {
+        SwingUtilities.invokeLater {
+            val window = getWindowFromJavaWindow(w)
+            val delegate = Foundation.invoke(window, "delegate")
+            if (
+                Foundation.invoke(delegate, "respondsToSelector:", Foundation.createSelector("updateColors"))
+                    .booleanValue()
+            ) {
+                Foundation.invoke(delegate, "updateColors")
+            }
+        }
+    }
+
+    fun updateFullScreenButtons(w: Window) {
+        SwingUtilities.invokeLater {
+            val selector = Foundation.createSelector("updateFullScreenButtons")
+            val window = getWindowFromJavaWindow(w)
+            val delegate = Foundation.invoke(window, "delegate")
+
+            if (Foundation.invoke(delegate, "respondsToSelector:", selector).booleanValue()) {
+                Foundation.invoke(delegate, "updateFullScreenButtons")
+            }
+        }
+    }
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/utils/DesktopPlatform.kt">
+package org.jetbrains.jewel.window.utils
+
+public enum class DesktopPlatform {
+    Linux,
+    Windows,
+    MacOS,
+    Unknown;
+
+    public companion object {
+        public val Current: DesktopPlatform by lazy {
+            val name = System.getProperty("os.name")
+            when {
+                name?.startsWith("Linux") == true -> Linux
+                name?.startsWith("Win") == true -> Windows
+                name == "Mac OS X" -> MacOS
+                else -> Unknown
+            }
+        }
+    }
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/utils/JnaLoader.kt">
+package org.jetbrains.jewel.window.utils
+
+import com.sun.jna.Native
+import java.util.logging.Level
+import java.util.logging.Logger
+import kotlin.system.measureTimeMillis
+
+internal object JnaLoader {
+    private var loaded: Boolean? = null
+    private val logger = Logger.getLogger(JnaLoader::class.java.simpleName)
+
+    @Synchronized
+    fun load() {
+        if (loaded == null) {
+            loaded = false
+            try {
+                val time = measureTimeMillis { Native.POINTER_SIZE }
+                logger.info("JNA library (${Native.POINTER_SIZE shl 3}-bit) loaded in $time ms")
+                loaded = true
+            } catch (@Suppress("TooGenericExceptionCaught") t: Throwable) {
+                logger.log(
+                    Level.WARNING,
+                    "Unable to load JNA library(os=${
+                        System.getProperty("os.name")
+                    } ${System.getProperty("os.version")}, jna.boot.library.path=${
+                        System.getProperty("jna.boot.library.path")
+                    })",
+                    t,
+                )
+            }
+        }
+    }
+
+    @get:Synchronized
+    val isLoaded: Boolean
+        get() {
+            if (loaded == null) {
+                load()
+            }
+            return loaded ?: false
+        }
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/utils/UnsafeAccessing.kt">
+package org.jetbrains.jewel.window.utils
+
+import java.lang.reflect.AccessibleObject
+import java.util.logging.Level
+import java.util.logging.Logger
+import sun.misc.Unsafe
+
+internal object UnsafeAccessing {
+    private val logger = Logger.getLogger(UnsafeAccessing::class.java.simpleName)
+
+    private val unsafe: Any? by lazy {
+        try {
+            val theUnsafe = Unsafe::class.java.getDeclaredField("theUnsafe")
+            theUnsafe.isAccessible = true
+            theUnsafe.get(null) as Unsafe
+        } catch (@Suppress("TooGenericExceptionCaught") error: Throwable) {
+            logger.log(Level.WARNING, "Unsafe accessing initializing failed.", error)
+            null
+        }
+    }
+
+    val desktopModule by lazy { ModuleLayer.boot().findModule("java.desktop").get() }
+
+    val ownerModule: Module by lazy { this.javaClass.module }
+
+    private val isAccessibleFieldOffset: Long? by lazy {
+        try {
+            (unsafe as? Unsafe)?.objectFieldOffset(Parent::class.java.getDeclaredField("first"))
+        } catch (_: Throwable) {
+            null
+        }
+    }
+
+    private val implAddOpens by lazy {
+        try {
+            Module::class.java.getDeclaredMethod("implAddOpens", String::class.java, Module::class.java).accessible()
+        } catch (_: Throwable) {
+            null
+        }
+    }
+
+    fun assignAccessibility(obj: AccessibleObject) {
+        try {
+            val theUnsafe = unsafe as? Unsafe ?: return
+            val offset = isAccessibleFieldOffset ?: return
+            theUnsafe.putBooleanVolatile(obj, offset, true)
+        } catch (_: Throwable) {
+            // ignore
+        }
+    }
+
+    fun assignAccessibility(module: Module, packages: List<String>) {
+        try {
+            packages.forEach { implAddOpens?.invoke(module, it, ownerModule) }
+        } catch (_: Throwable) {
+            // ignore
+        }
+    }
+
+    private class Parent {
+        var first = false
+
+        @Volatile var second: Any? = null
+    }
+}
+
+internal fun <T : AccessibleObject> T.accessible(): T = apply { UnsafeAccessing.assignAccessibility(this) }
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/utils/WindowControlArea.kt">
+package org.jetbrains.jewel.window.utils
+
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.awt.ComposeWindow
+import org.jetbrains.jewel.foundation.theme.JewelTheme
+import org.jetbrains.jewel.ui.component.Icon
+import org.jetbrains.jewel.ui.component.IconButton
+import org.jetbrains.jewel.ui.component.styling.IconButtonStyle
+import org.jetbrains.jewel.ui.icon.IconKey
+import org.jetbrains.jewel.ui.painter.PainterHint
+import org.jetbrains.jewel.ui.painter.PainterProviderScope
+import org.jetbrains.jewel.ui.painter.PainterSuffixHint
+import org.jetbrains.jewel.window.DecoratedWindowState
+import org.jetbrains.jewel.window.TitleBarScope
+import org.jetbrains.jewel.window.defaultTitleBarStyle
+import org.jetbrains.jewel.window.styling.TitleBarStyle
+import java.awt.Frame
+import java.awt.event.WindowEvent
+
+@Composable
+private fun TitleBarScope.CloseButton(
+    onClick: () -> Unit,
+    state: DecoratedWindowState,
+    style: TitleBarStyle = JewelTheme.defaultTitleBarStyle,
+) {
+    ControlButton(onClick, state, style.icons.closeButton, "Close", style, style.paneCloseButtonStyle)
+}
+
+@Composable
+private fun TitleBarScope.ControlButton(
+    onClick: () -> Unit,
+    state: DecoratedWindowState,
+    iconKey: IconKey,
+    description: String,
+    style: TitleBarStyle = JewelTheme.defaultTitleBarStyle,
+    iconButtonStyle: IconButtonStyle = style.paneButtonStyle,
+) {
+    IconButton(
+        onClick,
+        Modifier.align(Alignment.End).focusable(false).size(style.metrics.titlePaneButtonSize),
+        style = iconButtonStyle,
+    ) {
+        Icon(iconKey, description, hint = if (state.isActive) PainterHint else Inactive)
+    }
+}
+
+private data object Inactive : PainterSuffixHint() {
+    override fun PainterProviderScope.suffix(): String = "Inactive"
+}
+
+@Composable
+internal fun TitleBarScope.WindowControlArea(
+    window: ComposeWindow,
+    state: DecoratedWindowState,
+    style: TitleBarStyle = JewelTheme.defaultTitleBarStyle,
+) {
+    CloseButton({ window.dispatchEvent(WindowEvent(window, WindowEvent.WINDOW_CLOSING)) }, state, style)
+
+    if (state.isMaximized) {
+        ControlButton({ window.extendedState = Frame.NORMAL }, state, style.icons.restoreButton, "Restore")
+    } else {
+        ControlButton(
+            { window.extendedState = Frame.MAXIMIZED_BOTH },
+            state,
+            style.icons.maximizeButton,
+            "Maximize",
+        )
+    }
+    ControlButton({ window.extendedState = Frame.ICONIFIED }, state, style.icons.minimizeButton, "Minimize")
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/DecoratedWindow.kt">
+package org.jetbrains.jewel.window
+
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.awt.ComposeWindow
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.input.key.KeyEvent
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.MeasurePolicy
+import androidx.compose.ui.layout.MeasureResult
+import androidx.compose.ui.layout.MeasureScope
+import androidx.compose.ui.layout.Placeable
+import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.offset
+import androidx.compose.ui.window.FrameWindowScope
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPlacement
+import androidx.compose.ui.window.WindowState
+import androidx.compose.ui.window.rememberWindowState
+import com.jetbrains.JBR
+import java.awt.event.ComponentEvent
+import java.awt.event.ComponentListener
+import java.awt.event.WindowAdapter
+import java.awt.event.WindowEvent
+import org.jetbrains.jewel.foundation.Stroke
+import org.jetbrains.jewel.foundation.modifier.border
+import org.jetbrains.jewel.foundation.modifier.trackWindowActivation
+import org.jetbrains.jewel.foundation.theme.JewelTheme
+import org.jetbrains.jewel.window.styling.DecoratedWindowStyle
+import org.jetbrains.jewel.window.utils.DesktopPlatform
+
+@Composable
+public fun DecoratedWindow(
+    onCloseRequest: () -> Unit,
+    state: WindowState = rememberWindowState(),
+    visible: Boolean = true,
+    title: String = "",
+    icon: Painter? = null,
+    resizable: Boolean = true,
+    enabled: Boolean = true,
+    focusable: Boolean = true,
+    alwaysOnTop: Boolean = false,
+    onPreviewKeyEvent: (KeyEvent) -> Boolean = { false },
+    onKeyEvent: (KeyEvent) -> Boolean = { false },
+    style: DecoratedWindowStyle = JewelTheme.defaultDecoratedWindowStyle,
+    content: @Composable DecoratedWindowScope.() -> Unit,
+) {
+    remember {
+        if (!JBR.isAvailable()) {
+            error(
+                "DecoratedWindow can only be used on JetBrainsRuntime(JBR) platform, " +
+                    "please check the document https://github.com/JetBrains/jewel#int-ui-standalone-theme"
+            )
+        }
+    }
+
+    // Using undecorated window for linux
+    val undecorated = DesktopPlatform.Linux == DesktopPlatform.Current
+
+    Window(
+        onCloseRequest,
+        state,
+        visible,
+        title,
+        icon,
+        undecorated,
+        transparent = false,
+        resizable,
+        enabled,
+        focusable,
+        alwaysOnTop,
+        onPreviewKeyEvent,
+        onKeyEvent,
+    ) {
+        var decoratedWindowState by remember { mutableStateOf(DecoratedWindowState.of(window)) }
+
+        DisposableEffect(window) {
+            val adapter =
+                object : WindowAdapter(), ComponentListener {
+                    override fun windowActivated(e: WindowEvent?) {
+                        decoratedWindowState = DecoratedWindowState.of(window)
+                    }
+
+                    override fun windowDeactivated(e: WindowEvent?) {
+                        decoratedWindowState = DecoratedWindowState.of(window)
+                    }
+
+                    override fun windowIconified(e: WindowEvent?) {
+                        decoratedWindowState = DecoratedWindowState.of(window)
+                    }
+
+                    override fun windowDeiconified(e: WindowEvent?) {
+                        decoratedWindowState = DecoratedWindowState.of(window)
+                    }
+
+                    override fun windowStateChanged(e: WindowEvent) {
+                        decoratedWindowState = DecoratedWindowState.of(window)
+                    }
+
+                    override fun componentResized(e: ComponentEvent?) {
+                        decoratedWindowState = DecoratedWindowState.of(window)
+                    }
+
+                    override fun componentMoved(e: ComponentEvent?) {
+                        // Empty
+                    }
+
+                    override fun componentShown(e: ComponentEvent?) {
+                        // Empty
+                    }
+
+                    override fun componentHidden(e: ComponentEvent?) {
+                        // Empty
+                    }
+                }
+
+            window.addWindowListener(adapter)
+            window.addWindowStateListener(adapter)
+            window.addComponentListener(adapter)
+
+            onDispose {
+                window.removeWindowListener(adapter)
+                window.removeWindowStateListener(adapter)
+                window.removeComponentListener(adapter)
+            }
+        }
+
+        val undecoratedWindowBorder =
+            if (undecorated && !decoratedWindowState.isMaximized) {
+                Modifier.border(
+                        Stroke.Alignment.Inside,
+                        style.metrics.borderWidth,
+                        style.colors.borderFor(decoratedWindowState).value,
+                        RectangleShape,
+                    )
+                    .padding(style.metrics.borderWidth)
+            } else {
+                Modifier
+            }
+
+        CompositionLocalProvider(LocalTitleBarInfo provides TitleBarInfo(title, icon)) {
+            Layout(
+                content = {
+                    val scope =
+                        object : DecoratedWindowScope {
+                            override val state: DecoratedWindowState
+                                get() = decoratedWindowState
+
+                            override val window: ComposeWindow
+                                get() = this@Window.window
+                        }
+                    scope.content()
+                },
+                modifier = undecoratedWindowBorder.trackWindowActivation(window),
+                measurePolicy = DecoratedWindowMeasurePolicy,
+            )
+        }
+    }
+}
+
+@Stable
+public interface DecoratedWindowScope : FrameWindowScope {
+    override val window: ComposeWindow
+
+    public val state: DecoratedWindowState
+}
+
+private object DecoratedWindowMeasurePolicy : MeasurePolicy {
+    override fun MeasureScope.measure(measurables: List<Measurable>, constraints: Constraints): MeasureResult {
+        if (measurables.isEmpty()) {
+            return layout(width = constraints.minWidth, height = constraints.minHeight) {}
+        }
+
+        val titleBars = measurables.filter { it.layoutId == TITLE_BAR_LAYOUT_ID }
+        if (titleBars.size > 1) {
+            error("Window just can have only one title bar")
+        }
+        val titleBar = titleBars.firstOrNull()
+        val titleBarBorder = measurables.firstOrNull { it.layoutId == TITLE_BAR_BORDER_LAYOUT_ID }
+
+        val contentConstraints = constraints.copy(minWidth = 0, minHeight = 0)
+
+        val titleBarPlaceable = titleBar?.measure(contentConstraints)
+        val titleBarHeight = titleBarPlaceable?.height ?: 0
+
+        val titleBarBorderPlaceable = titleBarBorder?.measure(contentConstraints)
+        val titleBarBorderHeight = titleBarBorderPlaceable?.height ?: 0
+
+        val measuredPlaceable = mutableListOf<Placeable>()
+
+        for (it in measurables) {
+            if (it.layoutId.toString().startsWith(TITLE_BAR_COMPONENT_LAYOUT_ID_PREFIX)) continue
+            val offsetConstraints = contentConstraints.offset(vertical = -titleBarHeight - titleBarBorderHeight)
+            val placeable = it.measure(offsetConstraints)
+            measuredPlaceable += placeable
+        }
+
+        return layout(constraints.maxWidth, constraints.maxHeight) {
+            titleBarPlaceable?.placeRelative(0, 0)
+            titleBarBorderPlaceable?.placeRelative(0, titleBarHeight)
+
+            measuredPlaceable.forEach { it.placeRelative(0, titleBarHeight + titleBarBorderHeight) }
+        }
+    }
+}
+
+@Immutable
+@JvmInline
+public value class DecoratedWindowState(public val state: ULong) {
+    public val isActive: Boolean
+        get() = state and Active != 0UL
+
+    public val isFullscreen: Boolean
+        get() = state and Fullscreen != 0UL
+
+    public val isMinimized: Boolean
+        get() = state and Minimize != 0UL
+
+    public val isMaximized: Boolean
+        get() = state and Maximize != 0UL
+
+    public fun copy(
+        fullscreen: Boolean = isFullscreen,
+        minimized: Boolean = isMinimized,
+        maximized: Boolean = isMaximized,
+        active: Boolean = isActive,
+    ): DecoratedWindowState = of(fullscreen = fullscreen, minimized = minimized, maximized = maximized, active = active)
+
+    override fun toString(): String = "${javaClass.simpleName}(isFullscreen=$isFullscreen, isActive=$isActive)"
+
+    public companion object {
+        public val Active: ULong = 1UL shl 0
+        public val Fullscreen: ULong = 1UL shl 1
+        public val Minimize: ULong = 1UL shl 2
+        public val Maximize: ULong = 1UL shl 3
+
+        public fun of(
+            fullscreen: Boolean = false,
+            minimized: Boolean = false,
+            maximized: Boolean = false,
+            active: Boolean = true,
+        ): DecoratedWindowState =
+            DecoratedWindowState(
+                (if (fullscreen) Fullscreen else 0UL) or
+                    (if (minimized) Minimize else 0UL) or
+                    (if (maximized) Maximize else 0UL) or
+                    (if (active) Active else 0UL)
+            )
+
+        public fun of(window: ComposeWindow): DecoratedWindowState =
+            of(
+                fullscreen = window.placement == WindowPlacement.Fullscreen,
+                minimized = window.isMinimized,
+                maximized = window.placement == WindowPlacement.Maximized,
+                active = window.isActive,
+            )
+    }
+}
+
+internal data class TitleBarInfo(val title: String, val icon: Painter?)
+
+internal val LocalTitleBarInfo: ProvidableCompositionLocal<TitleBarInfo> = compositionLocalOf {
+    error("LocalTitleBarInfo not provided, TitleBar must be used in DecoratedWindow")
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/Theme.kt">
+package org.jetbrains.jewel.window
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
+import org.jetbrains.jewel.foundation.theme.JewelTheme
+import org.jetbrains.jewel.window.styling.DecoratedWindowStyle
+import org.jetbrains.jewel.window.styling.LocalDecoratedWindowStyle
+import org.jetbrains.jewel.window.styling.LocalTitleBarStyle
+import org.jetbrains.jewel.window.styling.TitleBarStyle
+
+public val JewelTheme.Companion.defaultTitleBarStyle: TitleBarStyle
+    @Composable @ReadOnlyComposable get() = LocalTitleBarStyle.current
+
+public val JewelTheme.Companion.defaultDecoratedWindowStyle: DecoratedWindowStyle
+    @Composable @ReadOnlyComposable get() = LocalDecoratedWindowStyle.current
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/TitleBar.kt">
+package org.jetbrains.jewel.window
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.isUnspecified
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.MeasurePolicy
+import androidx.compose.ui.layout.MeasureResult
+import androidx.compose.ui.layout.MeasureScope
+import androidx.compose.ui.layout.Placeable
+import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.node.ParentDataModifierNode
+import androidx.compose.ui.platform.InspectableValue
+import androidx.compose.ui.platform.InspectorInfo
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.NoInspectorInfo
+import androidx.compose.ui.platform.debugInspectorInfo
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.offset
+import java.awt.Window
+import kotlin.math.max
+import org.jetbrains.jewel.foundation.theme.JewelTheme
+import org.jetbrains.jewel.foundation.theme.LocalContentColor
+import org.jetbrains.jewel.foundation.theme.OverrideDarkMode
+import org.jetbrains.jewel.ui.component.styling.LocalDefaultDropdownStyle
+import org.jetbrains.jewel.ui.component.styling.LocalIconButtonStyle
+import org.jetbrains.jewel.ui.util.isDark
+import org.jetbrains.jewel.window.styling.TitleBarStyle
+import org.jetbrains.jewel.window.utils.DesktopPlatform
+import org.jetbrains.jewel.window.utils.macos.MacUtil
+
+internal const val TITLE_BAR_COMPONENT_LAYOUT_ID_PREFIX = "__TITLE_BAR_"
+
+internal const val TITLE_BAR_LAYOUT_ID = "__TITLE_BAR_CONTENT__"
+
+internal const val TITLE_BAR_BORDER_LAYOUT_ID = "__TITLE_BAR_BORDER__"
+
+@Composable
+public fun DecoratedWindowScope.TitleBar(
+    modifier: Modifier = Modifier,
+    gradientStartColor: Color = Color.Unspecified,
+    style: TitleBarStyle = JewelTheme.defaultTitleBarStyle,
+    content: @Composable TitleBarScope.(DecoratedWindowState) -> Unit,
+) {
+    when (DesktopPlatform.Current) {
+        DesktopPlatform.Linux -> TitleBarOnLinux(modifier, gradientStartColor, style, content)
+        DesktopPlatform.Windows -> TitleBarOnWindows(modifier, gradientStartColor, style, content)
+        DesktopPlatform.MacOS -> TitleBarOnMacOs(modifier, gradientStartColor, style, content)
+        DesktopPlatform.Unknown -> error("TitleBar is not supported on this platform(${System.getProperty("os.name")})")
+    }
+}
+
+@Composable
+internal fun DecoratedWindowScope.TitleBarImpl(
+    modifier: Modifier = Modifier,
+    gradientStartColor: Color = Color.Unspecified,
+    style: TitleBarStyle = JewelTheme.defaultTitleBarStyle,
+    applyTitleBar: (Dp, DecoratedWindowState) -> PaddingValues,
+    backgroundContent: @Composable () -> Unit = {},
+    content: @Composable TitleBarScope.(DecoratedWindowState) -> Unit,
+) {
+    val titleBarInfo = LocalTitleBarInfo.current
+
+    val background by style.colors.backgroundFor(state)
+
+    val density = LocalDensity.current
+
+    val backgroundBrush =
+        remember(background, gradientStartColor) {
+            if (gradientStartColor.isUnspecified) {
+                SolidColor(background)
+            } else {
+                with(density) {
+                    Brush.horizontalGradient(
+                        0.0f to background,
+                        0.5f to gradientStartColor,
+                        1.0f to background,
+                        startX = style.metrics.gradientStartX.toPx(),
+                        endX = style.metrics.gradientEndX.toPx(),
+                    )
+                }
+            }
+        }
+
+    Box(
+        modifier =
+            modifier
+                .background(backgroundBrush)
+                .focusProperties { canFocus = false }
+                .layoutId(TITLE_BAR_LAYOUT_ID)
+                .height(style.metrics.height)
+                .onSizeChanged { with(density) { applyTitleBar(it.height.toDp(), state) } }
+                .fillMaxWidth()
+    ) {
+        backgroundContent()
+        Layout(
+            content = {
+                CompositionLocalProvider(
+                    LocalContentColor provides style.colors.content,
+                    LocalIconButtonStyle provides style.iconButtonStyle,
+                    LocalDefaultDropdownStyle provides style.dropdownStyle,
+                ) {
+                    OverrideDarkMode(background.isDark()) {
+                        val scope = TitleBarScopeImpl(titleBarInfo.title, titleBarInfo.icon)
+                        scope.content(state)
+                    }
+                }
+            },
+            modifier = modifier.fillMaxSize(),
+            measurePolicy = rememberTitleBarMeasurePolicy(window, state, applyTitleBar),
+        )
+    }
+
+    Spacer(Modifier.layoutId(TITLE_BAR_BORDER_LAYOUT_ID).height(1.dp).fillMaxWidth().background(style.colors.border))
+}
+
+internal class TitleBarMeasurePolicy(
+    private val window: Window,
+    private val state: DecoratedWindowState,
+    private val applyTitleBar: (Dp, DecoratedWindowState) -> PaddingValues,
+) : MeasurePolicy {
+    override fun MeasureScope.measure(measurables: List<Measurable>, constraints: Constraints): MeasureResult {
+        if (measurables.isEmpty()) {
+            return layout(width = constraints.minWidth, height = constraints.minHeight) {}
+        }
+
+        var occupiedSpaceHorizontally = 0
+
+        var maxSpaceVertically = constraints.minHeight
+        val contentConstraints = constraints.copy(minWidth = 0, minHeight = 0)
+        val measuredPlaceable = mutableListOf<Pair<Measurable, Placeable>>()
+
+        for (it in measurables) {
+            val placeable = it.measure(contentConstraints.offset(horizontal = -occupiedSpaceHorizontally))
+            if (constraints.maxWidth < occupiedSpaceHorizontally + placeable.width) {
+                break
+            }
+            occupiedSpaceHorizontally += placeable.width
+            maxSpaceVertically = max(maxSpaceVertically, placeable.height)
+            measuredPlaceable += it to placeable
+        }
+
+        val boxHeight = maxSpaceVertically
+
+        val contentPadding = applyTitleBar(boxHeight.toDp(), state)
+
+        val leftInset = contentPadding.calculateLeftPadding(layoutDirection).roundToPx()
+        val rightInset = contentPadding.calculateRightPadding(layoutDirection).roundToPx()
+
+        occupiedSpaceHorizontally += leftInset
+        occupiedSpaceHorizontally += rightInset
+
+        val boxWidth = maxOf(constraints.minWidth, occupiedSpaceHorizontally)
+
+        return layout(boxWidth, boxHeight) {
+            if (state.isFullscreen) {
+                MacUtil.updateFullScreenButtons(window)
+            }
+            val placeableGroups =
+                measuredPlaceable.groupBy { (measurable, _) ->
+                    (measurable.parentData as? TitleBarChildDataNode)?.horizontalAlignment
+                        ?: Alignment.CenterHorizontally
+                }
+
+            var headUsedSpace = leftInset
+            var trailerUsedSpace = rightInset
+
+            placeableGroups[Alignment.Start]?.forEach { (_, placeable) ->
+                val x = headUsedSpace
+                val y = Alignment.CenterVertically.align(placeable.height, boxHeight)
+                placeable.placeRelative(x, y)
+                headUsedSpace += placeable.width
+            }
+            placeableGroups[Alignment.End]?.forEach { (_, placeable) ->
+                val x = boxWidth - placeable.width - trailerUsedSpace
+                val y = Alignment.CenterVertically.align(placeable.height, boxHeight)
+                placeable.placeRelative(x, y)
+                trailerUsedSpace += placeable.width
+            }
+
+            val centerPlaceable = placeableGroups[Alignment.CenterHorizontally].orEmpty()
+
+            val requiredCenterSpace = centerPlaceable.sumOf { it.second.width }
+            val minX = headUsedSpace
+            val maxX = boxWidth - trailerUsedSpace - requiredCenterSpace
+            var centerX = (boxWidth - requiredCenterSpace) / 2
+
+            if (minX <= maxX) {
+                if (centerX > maxX) {
+                    centerX = maxX
+                }
+                if (centerX < minX) {
+                    centerX = minX
+                }
+
+                centerPlaceable.forEach { (_, placeable) ->
+                    val x = centerX
+                    val y = Alignment.CenterVertically.align(placeable.height, boxHeight)
+                    placeable.placeRelative(x, y)
+                    centerX += placeable.width
+                }
+            }
+        }
+    }
+}
+
+@Composable
+internal fun rememberTitleBarMeasurePolicy(
+    window: Window,
+    state: DecoratedWindowState,
+    applyTitleBar: (Dp, DecoratedWindowState) -> PaddingValues,
+): MeasurePolicy = remember(window, state, applyTitleBar) { TitleBarMeasurePolicy(window, state, applyTitleBar) }
+
+public interface TitleBarScope {
+    public val title: String
+
+    public val icon: Painter?
+
+    @Stable public fun Modifier.align(alignment: Alignment.Horizontal): Modifier
+}
+
+private class TitleBarScopeImpl(override val title: String, override val icon: Painter?) : TitleBarScope {
+    override fun Modifier.align(alignment: Alignment.Horizontal): Modifier =
+        this then
+            TitleBarChildDataElement(
+                alignment,
+                debugInspectorInfo {
+                    name = "align"
+                    value = alignment
+                },
+            )
+}
+
+private class TitleBarChildDataElement(
+    val horizontalAlignment: Alignment.Horizontal,
+    val inspectorInfo: InspectorInfo.() -> Unit = NoInspectorInfo,
+) : ModifierNodeElement<TitleBarChildDataNode>(), InspectableValue {
+    override fun create(): TitleBarChildDataNode = TitleBarChildDataNode(horizontalAlignment)
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        val otherModifier = other as? TitleBarChildDataElement ?: return false
+        return horizontalAlignment == otherModifier.horizontalAlignment
+    }
+
+    override fun hashCode(): Int = horizontalAlignment.hashCode()
+
+    override fun update(node: TitleBarChildDataNode) {
+        node.horizontalAlignment = horizontalAlignment
+    }
+
+    override fun InspectorInfo.inspectableProperties() {
+        inspectorInfo()
+    }
+}
+
+private class TitleBarChildDataNode(var horizontalAlignment: Alignment.Horizontal) :
+    ParentDataModifierNode, Modifier.Node() {
+    override fun Density.modifyParentData(parentData: Any?) = this@TitleBarChildDataNode
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/TitleBar.Linux.kt">
+package org.jetbrains.jewel.window
+
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerButton
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.onPointerEvent
+import androidx.compose.ui.platform.LocalViewConfiguration
+import androidx.compose.ui.unit.dp
+import com.jetbrains.JBR
+import org.jetbrains.jewel.foundation.theme.JewelTheme
+import org.jetbrains.jewel.window.styling.TitleBarStyle
+import org.jetbrains.jewel.window.utils.WindowControlArea
+import java.awt.Frame
+import java.awt.event.MouseEvent
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+internal fun DecoratedWindowScope.TitleBarOnLinux(
+    modifier: Modifier = Modifier,
+    gradientStartColor: Color = Color.Unspecified,
+    style: TitleBarStyle = JewelTheme.defaultTitleBarStyle,
+    content: @Composable TitleBarScope.(DecoratedWindowState) -> Unit,
+) {
+    var lastPress = 0L
+    val viewConfig = LocalViewConfiguration.current
+    TitleBarImpl(
+        modifier.onPointerEvent(PointerEventType.Press, PointerEventPass.Main) {
+            if (
+                this.currentEvent.button == PointerButton.Primary &&
+                    this.currentEvent.changes.any { changed -> !changed.isConsumed }
+            ) {
+                JBR.getWindowMove()?.startMovingTogetherWithMouse(window, MouseEvent.BUTTON1)
+                if (
+                    System.currentTimeMillis() - lastPress in
+                        viewConfig.doubleTapMinTimeMillis..viewConfig.doubleTapTimeoutMillis
+                ) {
+                    if (state.isMaximized) {
+                        window.extendedState = Frame.NORMAL
+                    } else {
+                        window.extendedState = Frame.MAXIMIZED_BOTH
+                    }
+                }
+                lastPress = System.currentTimeMillis()
+            }
+        },
+        gradientStartColor,
+        style,
+        { _, _ -> PaddingValues(0.dp) },
+    ) { state ->
+        WindowControlArea(window, state, style)
+        content(state)
+    }
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/TitleBar.MacOS.kt">
+package org.jetbrains.jewel.window
+
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.platform.InspectorInfo
+import androidx.compose.ui.platform.debugInspectorInfo
+import androidx.compose.ui.unit.dp
+import com.jetbrains.JBR
+import org.jetbrains.jewel.foundation.theme.JewelTheme
+import org.jetbrains.jewel.window.styling.TitleBarStyle
+import org.jetbrains.jewel.window.utils.macos.MacUtil
+
+public fun Modifier.newFullscreenControls(newControls: Boolean = true): Modifier =
+    this then
+        NewFullscreenControlsElement(
+            newControls,
+            debugInspectorInfo {
+                name = "newFullscreenControls"
+                value = newControls
+            },
+        )
+
+private class NewFullscreenControlsElement(val newControls: Boolean, val inspectorInfo: InspectorInfo.() -> Unit) :
+    ModifierNodeElement<NewFullscreenControlsNode>() {
+    override fun create(): NewFullscreenControlsNode = NewFullscreenControlsNode(newControls)
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        val otherModifier = other as? NewFullscreenControlsElement ?: return false
+        return newControls == otherModifier.newControls
+    }
+
+    override fun hashCode(): Int = newControls.hashCode()
+
+    override fun InspectorInfo.inspectableProperties() {
+        inspectorInfo()
+    }
+
+    override fun update(node: NewFullscreenControlsNode) {
+        node.newControls = newControls
+    }
+}
+
+private class NewFullscreenControlsNode(var newControls: Boolean) : Modifier.Node()
+
+@Composable
+internal fun DecoratedWindowScope.TitleBarOnMacOs(
+    modifier: Modifier = Modifier,
+    gradientStartColor: Color = Color.Unspecified,
+    style: TitleBarStyle = JewelTheme.defaultTitleBarStyle,
+    content: @Composable TitleBarScope.(DecoratedWindowState) -> Unit,
+) {
+    val newFullscreenControls =
+        modifier.foldOut(false) { e, r ->
+            if (e is NewFullscreenControlsElement) {
+                e.newControls
+            } else {
+                r
+            }
+        }
+
+    if (newFullscreenControls) {
+        System.setProperty("apple.awt.newFullScreenControls", true.toString())
+        System.setProperty(
+            "apple.awt.newFullScreenControls.background",
+            "${style.colors.fullscreenControlButtonsBackground.toArgb()}",
+        )
+        MacUtil.updateColors(window)
+    } else {
+        System.clearProperty("apple.awt.newFullScreenControls")
+        System.clearProperty("apple.awt.newFullScreenControls.background")
+    }
+
+    val titleBar = remember { JBR.getWindowDecorations().createCustomTitleBar() }
+
+    TitleBarImpl(
+        modifier = modifier.customTitleBarMouseEventHandler(titleBar),
+        gradientStartColor = gradientStartColor,
+        style = style,
+        applyTitleBar = { height, state ->
+            if (state.isFullscreen) {
+                MacUtil.updateFullScreenButtons(window)
+            }
+            titleBar.height = height.value
+            JBR.getWindowDecorations().setCustomTitleBar(window, titleBar)
+
+            if (state.isFullscreen && newFullscreenControls) {
+                PaddingValues(start = 80.dp)
+            } else {
+                PaddingValues(start = titleBar.leftInset.dp, end = titleBar.rightInset.dp)
+            }
+        },
+        content = content,
+    )
+}
+</file>
+
+<file path="jewel/src/jvmMain/kotlin/org/jetbrains/jewel/window/TitleBar.Windows.kt">
+package org.jetbrains.jewel.window
+
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
+import com.jetbrains.JBR
+import com.jetbrains.WindowDecorations.CustomTitleBar
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.isActive
+import org.jetbrains.jewel.foundation.theme.JewelTheme
+import org.jetbrains.jewel.ui.util.isDark
+import org.jetbrains.jewel.window.styling.TitleBarStyle
+import org.jetbrains.jewel.window.utils.WindowControlArea
+
+@Composable
+internal fun DecoratedWindowScope.TitleBarOnWindows(
+    modifier: Modifier = Modifier,
+    gradientStartColor: Color = Color.Unspecified,
+    style: TitleBarStyle = JewelTheme.defaultTitleBarStyle,
+    content: @Composable TitleBarScope.(DecoratedWindowState) -> Unit,
+) {
+    val titleBar = remember { JBR.getWindowDecorations().createCustomTitleBar() }
+    val layoutDirection = LocalLayoutDirection.current
+    val isRtl = layoutDirection == LayoutDirection.Rtl
+    TitleBarImpl(
+        modifier = modifier,
+        gradientStartColor = gradientStartColor,
+        style = style,
+        applyTitleBar = { height, _ ->
+            titleBar.height = height.value
+            titleBar.putProperty("controls.dark", style.colors.background.isDark())
+            if (isRtl) titleBar.putProperty("controls.visible", false)
+            JBR.getWindowDecorations().setCustomTitleBar(window, titleBar)
+            PaddingValues(start = titleBar.leftInset.dp, end = titleBar.rightInset.dp)
+        },
+        backgroundContent = { Spacer(modifier = modifier.fillMaxSize().customTitleBarMouseEventHandler(titleBar)) },
+    ) { state ->
+        if (isRtl) WindowControlArea(window, state, style)
+        content(state)
+    }
+}
+
+internal fun Modifier.customTitleBarMouseEventHandler(titleBar: CustomTitleBar): Modifier =
+    pointerInput(Unit) {
+        val currentContext = currentCoroutineContext()
+        awaitPointerEventScope {
+            var inUserControl = false
+            while (currentContext.isActive) {
+                val event = awaitPointerEvent(PointerEventPass.Main)
+                event.changes.forEach {
+                    if (!it.isConsumed && !inUserControl) {
+                        titleBar.forceHitTest(false)
+                    } else {
+                        if (event.type == PointerEventType.Press) {
+                            inUserControl = true
+                        }
+                        if (event.type == PointerEventType.Release) {
+                            inUserControl = false
+                        }
+                        titleBar.forceHitTest(true)
+                    }
+                }
+            }
+        }
+    }
+</file>
+
+<file path="jewel/build.gradle.kts">
+import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.compose.reload.ComposeHotRun
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
+plugins {
+    alias(libs.plugins.multiplatform)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.compose)
+}
+
+
+kotlin {
+    jvmToolchain(21)
+    jvm()
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+        }
+
+        jvmMain.dependencies {
+            implementation(libs.foundation.desktop)
+            implementation(libs.jna)
+            // Define the Jewel version once
+            val jewelVersion = libs.versions.jewel.get()
+
+            // Common exclusions for all Jewel libraries
+            val jewelExclusions = Action<ExternalModuleDependency> {
+                exclude(group = "org.jetbrains.compose.foundation", module = "foundation-desktop")
+                exclude(group = "org.jetbrains.jewel", module = "jewel-decorated-window")
+                exclude(group = "org.jetbrains.skiko", module = "skiko-awt")
+                exclude(group = "org.jetbrains.skiko", module = "skiko-awt-runtime-all")
+            }
+
+            // Apply the exclusions to all Jewel libraries
+            api("org.jetbrains.jewel:jewel-ui:$jewelVersion", jewelExclusions)
+            //api("org.jetbrains.jewel:jewel-decorated-window:$jewelVersion", jewelExclusions)
+            api("org.jetbrains.jewel:jewel-foundation:$jewelVersion", jewelExclusions)
+            api("org.jetbrains.jewel:jewel-int-ui-standalone:$jewelVersion", jewelExclusions)
+            api("org.jetbrains.jewel:jewel-int-ui-decorated-window:$jewelVersion", jewelExclusions)
+
+        }
+
+    }
+}
+</file>
+
+<file path=".gitignore">
+*.iml
+.gradle
+.idea
+.kotlin
+.DS_Store
+build
+*/build
+captures
+.externalNativeBuild
+.cxx
+local.properties
+xcuserdata/
+Pods/
+*.jks
+*.gpg
+*yarn.lock
+</file>
+
+<file path="build.gradle.kts">
+plugins {
+    alias(libs.plugins.multiplatform).apply(false)
+    alias(libs.plugins.compose.compiler).apply(false)
+    alias(libs.plugins.compose).apply(false)
+    alias(libs.plugins.android.application).apply(false)
+    alias(libs.plugins.hotReload).apply(false)
+    alias(libs.plugins.kotlinx.serialization).apply(false)
+    alias(libs.plugins.buildConfig).apply(false)
+}
+</file>
+
+<file path="gradle.properties">
+#Gradle
+org.gradle.jvmargs=-Xmx4G
+org.gradle.caching=true
+org.gradle.configuration-cache=true
+org.gradle.daemon=true
+org.gradle.parallel=true
+
+#Kotlin
+kotlin.code.style=official
+kotlin.daemon.jvmargs=-Xmx4G
+kotlin.native.binary.gc=cms
+kotlin.incremental.wasm=true
+
+#Android
+android.useAndroidX=true
+android.nonTransitiveRClass=true
+</file>
+
+<file path="gradlew">
+#!/bin/sh
+
+#
+# Copyright © 2015-2021 the original authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+##############################################################################
+#
+#   Gradle start up script for POSIX generated by Gradle.
+#
+#   Important for running:
+#
+#   (1) You need a POSIX-compliant shell to run this script. If your /bin/sh is
+#       noncompliant, but you have some other compliant shell such as ksh or
+#       bash, then to run this script, type that shell name before the whole
+#       command line, like:
+#
+#           ksh Gradle
+#
+#       Busybox and similar reduced shells will NOT work, because this script
+#       requires all of these POSIX shell features:
+#         * functions;
+#         * expansions «$var», «${var}», «${var:-default}», «${var+SET}»,
+#           «${var#prefix}», «${var%suffix}», and «$( cmd )»;
+#         * compound commands having a testable exit status, especially «case»;
+#         * various built-in commands including «command», «set», and «ulimit».
+#
+#   Important for patching:
+#
+#   (2) This script targets any POSIX shell, so it avoids extensions provided
+#       by Bash, Ksh, etc; in particular arrays are avoided.
+#
+#       The "traditional" practice of packing multiple parameters into a
+#       space-separated string is a well documented source of bugs and security
+#       problems, so this is (mostly) avoided, by progressively accumulating
+#       options in "$@", and eventually passing that to Java.
+#
+#       Where the inherited environment variables (DEFAULT_JVM_OPTS, JAVA_OPTS,
+#       and GRADLE_OPTS) rely on word-splitting, this is performed explicitly;
+#       see the in-line comments for details.
+#
+#       There are tweaks for specific operating systems such as AIX, CygWin,
+#       Darwin, MinGW, and NonStop.
+#
+#   (3) This script is generated from the Groovy template
+#       https://github.com/gradle/gradle/blob/HEAD/subprojects/plugins/src/main/resources/org/gradle/api/internal/plugins/unixStartScript.txt
+#       within the Gradle project.
+#
+#       You can find Gradle at https://github.com/gradle/gradle/.
+#
+##############################################################################
+
+# Attempt to set APP_HOME
+
+# Resolve links: $0 may be a link
+app_path=$0
+
+# Need this for daisy-chained symlinks.
+while
+    APP_HOME=${app_path%"${app_path##*/}"}  # leaves a trailing /; empty if no leading path
+    [ -h "$app_path" ]
+do
+    ls=$( ls -ld "$app_path" )
+    link=${ls#*' -> '}
+    case $link in             #(
+      /*)   app_path=$link ;; #(
+      *)    app_path=$APP_HOME$link ;;
+    esac
+done
+
+# This is normally unused
+# shellcheck disable=SC2034
+APP_BASE_NAME=${0##*/}
+# Discard cd standard output in case $CDPATH is set (https://github.com/gradle/gradle/issues/25036)
+APP_HOME=$( cd "${APP_HOME:-./}" > /dev/null && pwd -P ) || exit
+
+# Use the maximum available, or set MAX_FD != -1 to use that value.
+MAX_FD=maximum
+
+warn () {
+    echo "$*"
+} >&2
+
+die () {
+    echo
+    echo "$*"
+    echo
+    exit 1
+} >&2
+
+# OS specific support (must be 'true' or 'false').
+cygwin=false
+msys=false
+darwin=false
+nonstop=false
+case "$( uname )" in                #(
+  CYGWIN* )         cygwin=true  ;; #(
+  Darwin* )         darwin=true  ;; #(
+  MSYS* | MINGW* )  msys=true    ;; #(
+  NONSTOP* )        nonstop=true ;;
+esac
+
+CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+
+
+# Determine the Java command to use to start the JVM.
+if [ -n "$JAVA_HOME" ] ; then
+    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+        # IBM's JDK on AIX uses strange locations for the executables
+        JAVACMD=$JAVA_HOME/jre/sh/java
+    else
+        JAVACMD=$JAVA_HOME/bin/java
+    fi
+    if [ ! -x "$JAVACMD" ] ; then
+        die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
+
+Please set the JAVA_HOME variable in your environment to match the
+location of your Java installation."
+    fi
+else
+    JAVACMD=java
+    if ! command -v java >/dev/null 2>&1
+    then
+        die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+
+Please set the JAVA_HOME variable in your environment to match the
+location of your Java installation."
+    fi
+fi
+
+# Increase the maximum file descriptors if we can.
+if ! "$cygwin" && ! "$darwin" && ! "$nonstop" ; then
+    case $MAX_FD in #(
+      max*)
+        # In POSIX sh, ulimit -H is undefined. That's why the result is checked to see if it worked.
+        # shellcheck disable=SC2039,SC3045
+        MAX_FD=$( ulimit -H -n ) ||
+            warn "Could not query maximum file descriptor limit"
+    esac
+    case $MAX_FD in  #(
+      '' | soft) :;; #(
+      *)
+        # In POSIX sh, ulimit -n is undefined. That's why the result is checked to see if it worked.
+        # shellcheck disable=SC2039,SC3045
+        ulimit -n "$MAX_FD" ||
+            warn "Could not set maximum file descriptor limit to $MAX_FD"
+    esac
+fi
+
+# Collect all arguments for the java command, stacking in reverse order:
+#   * args from the command line
+#   * the main class name
+#   * -classpath
+#   * -D...appname settings
+#   * --module-path (only if needed)
+#   * DEFAULT_JVM_OPTS, JAVA_OPTS, and GRADLE_OPTS environment variables.
+
+# For Cygwin or MSYS, switch paths to Windows format before running java
+if "$cygwin" || "$msys" ; then
+    APP_HOME=$( cygpath --path --mixed "$APP_HOME" )
+    CLASSPATH=$( cygpath --path --mixed "$CLASSPATH" )
+
+    JAVACMD=$( cygpath --unix "$JAVACMD" )
+
+    # Now convert the arguments - kludge to limit ourselves to /bin/sh
+    for arg do
+        if
+            case $arg in                                #(
+              -*)   false ;;                            # don't mess with options #(
+              /?*)  t=${arg#/} t=/${t%%/*}              # looks like a POSIX filepath
+                    [ -e "$t" ] ;;                      #(
+              *)    false ;;
+            esac
+        then
+            arg=$( cygpath --path --ignore --mixed "$arg" )
+        fi
+        # Roll the args list around exactly as many times as the number of
+        # args, so each arg winds up back in the position where it started, but
+        # possibly modified.
+        #
+        # NB: a `for` loop captures its iteration list before it begins, so
+        # changing the positional parameters here affects neither the number of
+        # iterations, nor the values presented in `arg`.
+        shift                   # remove old arg
+        set -- "$@" "$arg"      # push replacement arg
+    done
+fi
+
+
+# Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
+
+# Collect all arguments for the java command:
+#   * DEFAULT_JVM_OPTS, JAVA_OPTS, JAVA_OPTS, and optsEnvironmentVar are not allowed to contain shell fragments,
+#     and any embedded shellness will be escaped.
+#   * For example: A user cannot expect ${Hostname} to be expanded, as it is an environment variable and will be
+#     treated as '${Hostname}' itself on the command line.
+
+set -- \
+        "-Dorg.gradle.appname=$APP_BASE_NAME" \
+        -classpath "$CLASSPATH" \
+        org.gradle.wrapper.GradleWrapperMain \
+        "$@"
+
+# Stop when "xargs" is not available.
+if ! command -v xargs >/dev/null 2>&1
+then
+    die "xargs is not available"
+fi
+
+# Use "xargs" to parse quoted args.
+#
+# With -n1 it outputs one arg per line, with the quotes and backslashes removed.
+#
+# In Bash we could simply go:
+#
+#   readarray ARGS < <( xargs -n1 <<<"$var" ) &&
+#   set -- "${ARGS[@]}" "$@"
+#
+# but POSIX shell has neither arrays nor command substitution, so instead we
+# post-process each arg (as a line of input to sed) to backslash-escape any
+# character that might be a shell metacharacter, then use eval to reverse
+# that process (while maintaining the separation between arguments), and wrap
+# the whole thing up as a single "set" statement.
+#
+# This will of course break if any of these variables contains a newline or
+# an unmatched quote.
+#
+
+eval "set -- $(
+        printf '%s\n' "$DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS" |
+        xargs -n1 |
+        sed ' s~[^-[:alnum:]+,./:=@_]~\\&~g; ' |
+        tr '\n' ' '
+    )" '"$@"'
+
+exec "$JAVACMD" "$@"
+</file>
+
+<file path="gradlew.bat">
+@rem
+@rem Copyright 2015 the original author or authors.
+@rem
+@rem Licensed under the Apache License, Version 2.0 (the "License");
+@rem you may not use this file except in compliance with the License.
+@rem You may obtain a copy of the License at
+@rem
+@rem      https://www.apache.org/licenses/LICENSE-2.0
+@rem
+@rem Unless required by applicable law or agreed to in writing, software
+@rem distributed under the License is distributed on an "AS IS" BASIS,
+@rem WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+@rem See the License for the specific language governing permissions and
+@rem limitations under the License.
+@rem
+
+@if "%DEBUG%"=="" @echo off
+@rem ##########################################################################
+@rem
+@rem  Gradle startup script for Windows
+@rem
+@rem ##########################################################################
+
+@rem Set local scope for the variables with windows NT shell
+if "%OS%"=="Windows_NT" setlocal
+
+set DIRNAME=%~dp0
+if "%DIRNAME%"=="" set DIRNAME=.
+@rem This is normally unused
+set APP_BASE_NAME=%~n0
+set APP_HOME=%DIRNAME%
+
+@rem Resolve any "." and ".." in APP_HOME to make it shorter.
+for %%i in ("%APP_HOME%") do set APP_HOME=%%~fi
+
+@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+set DEFAULT_JVM_OPTS="-Xmx64m" "-Xms64m"
+
+@rem Find java.exe
+if defined JAVA_HOME goto findJavaFromJavaHome
+
+set JAVA_EXE=java.exe
+%JAVA_EXE% -version >NUL 2>&1
+if %ERRORLEVEL% equ 0 goto execute
+
+echo. 1>&2
+echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH. 1>&2
+echo. 1>&2
+echo Please set the JAVA_HOME variable in your environment to match the 1>&2
+echo location of your Java installation. 1>&2
+
+goto fail
+
+:findJavaFromJavaHome
+set JAVA_HOME=%JAVA_HOME:"=%
+set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+
+if exist "%JAVA_EXE%" goto execute
+
+echo. 1>&2
+echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME% 1>&2
+echo. 1>&2
+echo Please set the JAVA_HOME variable in your environment to match the 1>&2
+echo location of your Java installation. 1>&2
+
+goto fail
+
+:execute
+@rem Setup the command line
+
+set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
+
+
+@rem Execute Gradle
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
+
+:end
+@rem End local scope for the variables with windows NT shell
+if %ERRORLEVEL% equ 0 goto mainEnd
+
+:fail
+rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
+rem the _cmd.exe /c_ return code!
+set EXIT_CODE=%ERRORLEVEL%
+if %EXIT_CODE% equ 0 set EXIT_CODE=1
+if not ""=="%GRADLE_EXIT_CONSOLE%" exit %EXIT_CODE%
+exit /b %EXIT_CODE%
+
+:mainEnd
+if "%OS%"=="Windows_NT" endlocal
+
+:omega
+</file>
+
+<file path="README.MD">
+# Compose Multiplatform Application
+
+## Before running!
+ - install JDK 17 or higher on your machine  
+ - add `local.properties` file to the project root and set a path to Android SDK there  
+
+### Android
+To run the application on android device/emulator:  
+ - open project in Android Studio and run imported android run configuration  
+
+To build the application bundle:  
+ - run `./gradlew :composeApp:assembleDebug`  
+ - find `.apk` file in `composeApp/build/outputs/apk/debug/composeApp-debug.apk`  
+
+Run android UI tests on the connected device: `./gradlew :composeApp:connectedDebugAndroidTest`
+
+### Desktop
+Run the desktop application: `./gradlew :composeApp:run`  
+Run the desktop **hot reload** application: `./gradlew :composeApp:jvmRunHot`  
+Run desktop UI tests: `./gradlew :composeApp:jvmTest`
+</file>
+
+<file path="settings.gradle.kts">
+rootProject.name = "SeforimApp"
+
+pluginManagement {
+    repositories {
+        google {
+            content { 
+              	includeGroupByRegex("com\\.android.*")
+              	includeGroupByRegex("com\\.google.*")
+              	includeGroupByRegex("androidx.*")
+              	includeGroupByRegex("android.*")
+            }
+        }
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google {
+            content { 
+              	includeGroupByRegex("com\\.android.*")
+              	includeGroupByRegex("com\\.google.*")
+              	includeGroupByRegex("androidx.*")
+              	includeGroupByRegex("android.*")
+            }
+        }
+        mavenCentral()
+    }
+}
+plugins {
+    //https://github.com/JetBrains/compose-hot-reload?tab=readme-ov-file#set-up-automatic-provisioning-of-the-jetbrains-runtime-jbr-via-gradle
+    id("org.gradle.toolchains.foojay-resolver-convention").version("0.10.0")
+}
+
+include(":composeApp")
+include(":jewel")
+</file>
+
+</files>
