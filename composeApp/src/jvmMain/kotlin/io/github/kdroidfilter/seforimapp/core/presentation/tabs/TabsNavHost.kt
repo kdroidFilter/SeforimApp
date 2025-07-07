@@ -48,7 +48,7 @@ fun TabsNavHost(){
     ) {
         composable<TabsDestination.Home> {
             val currentTab =  tabs[selectedTabIndex]
-            Text("Tab ID: ${currentTab.id }")
+            Text("Tab ID: ${currentTab.title }")
         }
 
     }
