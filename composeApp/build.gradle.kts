@@ -75,7 +75,7 @@ kotlin {
             implementation(libs.composenativetray)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.slf4j.simple)
-
+            implementation("org.jetbrains.compose.components:components-splitpane-desktop:1.8.2")
             api(project(":jewel"))
         }
 

@@ -43,7 +43,7 @@ kotlin {
             api("org.jetbrains.jewel:jewel-foundation:$jewelVersion", jewelExclusions)
             api("org.jetbrains.jewel:jewel-int-ui-standalone:$jewelVersion", jewelExclusions)
             api("org.jetbrains.jewel:jewel-int-ui-decorated-window:$jewelVersion", jewelExclusions)
-
+            api("com.jetbrains.intellij.platform:icons:251.26927.53")
         }
 
     }
