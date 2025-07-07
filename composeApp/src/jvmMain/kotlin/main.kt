@@ -22,7 +22,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.application
 import com.kdroid.composetray.utils.SingleInstanceManager
+import io.github.kdroidfilter.platformtools.OperatingSystem
 import io.github.kdroidfilter.platformtools.darkmodedetector.isSystemInDarkMode
+import io.github.kdroidfilter.platformtools.getOperatingSystem
 import io.github.kdroidfilter.seforimapp.App
 import io.github.kdroidfilter.seforimapp.core.presentation.utils.getCenteredWindowState
 import io.github.kdroidfilter.seforimapp.core.presentation.utils.processKeyShortcuts
@@ -76,6 +78,8 @@ fun main() {
             exitApplication()
             return@application
         }
+        val os = getOperatingSystem()
+        val isMacOs = getOperatingSystem() == OperatingSystem.MACOS
         KoinApplication(application = {
             modules(desktopModule)
         }) {
@@ -102,7 +106,11 @@ fun main() {
 
                         BoxWithConstraints {
                             val windowWidth = maxWidth
-                            Row(modifier = Modifier.align(Alignment.Start).width(windowWidth - 40.dp)) {
+                            Row(modifier = Modifier
+                                .padding(
+                                    start = if (isMacOs) 40.dp else 0.dp )
+                                .align(Alignment.Start)
+                                .width(windowWidth - if (isMacOs) 80.dp else 40.dp)) {
                                 DefaultTabShowcase()
                             }
                             Row(
