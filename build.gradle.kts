@@ -6,4 +6,6 @@ plugins {
     alias(libs.plugins.hotReload).apply(false)
     alias(libs.plugins.kotlinx.serialization).apply(false)
     alias(libs.plugins.buildConfig).apply(false)
+    alias(libs.plugins.maven.publish).apply(false)
+    alias(libs.plugins.sqlDelight).apply(false)
 }

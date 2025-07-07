@@ -22,6 +22,8 @@ platformtools = "0.4.0"
 composenativetray = "0.6.7"
 kotlinx-coroutines = "1.10.2"
 slf4j = "2.0.17"
+maven-publish = "0.33.0"
+sqlDelight = "2.1.0"
 
 [libraries]
 
@@ -73,3 +75,5 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 hotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "hotReload" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
+sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
