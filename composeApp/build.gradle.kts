@@ -47,6 +47,9 @@ kotlin {
             implementation(libs.materialKolor)
             implementation(libs.platformtools.core)
             implementation(libs.platformtools.darkmodedetector)
+            implementation("io.github.kdroidfilter.seforimlibrary:core")
+            implementation("io.github.kdroidfilter.seforimlibrary:dao")
+
         }
 
         commonTest.dependencies {
@@ -72,6 +75,7 @@ kotlin {
             implementation(libs.composenativetray)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.slf4j.simple)
+
             api(project(":jewel"))
         }
 

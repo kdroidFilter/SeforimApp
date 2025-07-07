@@ -1,0 +1,3 @@
+[submodule "SeforimLibrary"]
+	path = SeforimLibrary
+	url = https://github.com/kdroidFilter/SeforimLibrary.git

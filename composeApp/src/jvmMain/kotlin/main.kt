@@ -1,8 +1,15 @@
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.application
 import com.kdroid.composetray.utils.SingleInstanceManager
 import io.github.kdroidfilter.platformtools.darkmodedetector.isSystemInDarkMode
@@ -11,6 +18,7 @@ import io.github.kdroidfilter.seforimapp.core.presentation.utils.getCenteredWind
 import io.github.kdroidfilter.seforimapp.core.presentation.utils.processKeyShortcuts
 import io.github.kdroidfilter.seforimapp.framework.di.desktopModule
 import org.jetbrains.compose.resources.stringResource
+import org.jetbrains.jewel.foundation.modifier.trackActivation
 import org.jetbrains.jewel.foundation.theme.JewelTheme
 import org.jetbrains.jewel.intui.standalone.theme.IntUiTheme
 import org.jetbrains.jewel.intui.standalone.theme.darkThemeDefinition
@@ -70,7 +78,12 @@ fun main() {
                     TitleBar(modifier = Modifier.newFullscreenControls()) {
 
                     }
-                    App()
+                    Column (
+                        modifier =
+                            Modifier.trackActivation().fillMaxSize().background(JewelTheme.globalColors.panelBackground),
+                    ) {
+
+                    }
                 }
             }
         }

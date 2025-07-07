@@ -40,4 +40,4 @@ plugins {
 
 include(":composeApp")
 include(":jewel")
-
+includeBuild("SeforimLibrary")
