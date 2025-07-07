@@ -1,0 +1,430 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+4. Repository files, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+<additional_info>
+
+</additional_info>
+
+</file_summary>
+
+<directory_structure>
+navigation/
+  NavigationAction.kt
+  Navigator.kt
+tabs/
+  TabsDestination.kt
+  TabsEvents.kt
+  TabsNavHost.kt
+  TabsState.kt
+  TabsView.kt
+  TabsViewModel.kt
+utils/
+  ObserveAsEvents.kt
+  WindowUtils.kt
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="navigation/NavigationAction.kt">
+package io.github.kdroidfilter.seforimapp.core.presentation.navigation
+
+import androidx.navigation.NavOptionsBuilder
+import io.github.kdroidfilter.seforimapp.core.presentation.tabs.TabsDestination
+
+sealed interface NavigationAction {
+
+    data class Navigate(
+        val destination: TabsDestination,
+        val navOptions: NavOptionsBuilder.() -> Unit = {}
+    ): NavigationAction
+
+    data object NavigateUp: NavigationAction
+}
+</file>
+
+<file path="navigation/Navigator.kt">
+package io.github.kdroidfilter.seforimapp.core.presentation.navigation
+
+import androidx.navigation.NavOptionsBuilder
+import io.github.kdroidfilter.seforimapp.core.presentation.tabs.TabsDestination
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+
+interface Navigator {
+    val startDestination: TabsDestination
+    val navigationActions: Flow<NavigationAction>
+
+    suspend fun navigate(
+        destination: TabsDestination,
+        navOptions: NavOptionsBuilder.() -> Unit = {}
+    )
+
+    suspend fun navigateUp()
+
+    val canGoBack: StateFlow<Boolean>
+
+    fun setCanGoBack(value: Boolean)
+
+}
+
+class DefaultNavigator(
+    override val startDestination: TabsDestination
+): Navigator {
+    private val _navigationActions =
+        MutableSharedFlow<NavigationAction>(extraBufferCapacity = 1)
+    override val navigationActions = _navigationActions.asSharedFlow()
+
+    override suspend fun navigate(
+        destination: TabsDestination,
+        navOptions: NavOptionsBuilder.() -> Unit
+    ) = _navigationActions.emit(
+        NavigationAction.Navigate(destination, navOptions)
+    )
+
+    override suspend fun navigateUp() =
+        _navigationActions.emit(NavigationAction.NavigateUp)
+
+    private val _canGoBack = MutableStateFlow(false)
+    override val canGoBack: StateFlow<Boolean> = _canGoBack.asStateFlow()
+
+     override fun setCanGoBack(value: Boolean) { _canGoBack.value = value }
+}
+</file>
+
+<file path="tabs/TabsDestination.kt">
+package io.github.kdroidfilter.seforimapp.core.presentation.tabs
+
+import kotlinx.serialization.Serializable
+
+sealed interface TabsDestination {
+    @Serializable
+    data object Home : TabsDestination
+
+    @Serializable
+    data class Search(val searchQuery: String) : TabsDestination
+
+    @Serializable
+    data class BookContent(val bookId: Long) : TabsDestination
+}
+</file>
+
+<file path="tabs/TabsEvents.kt">
+package io.github.kdroidfilter.seforimapp.core.presentation.tabs
+
+sealed class TabsEvents {
+    data class onClose(val id: Int): TabsEvents()
+    data class onSelected(val id: Int): TabsEvents()
+    data object onAdd: TabsEvents()
+}
+</file>
+
+<file path="tabs/TabsNavHost.kt">
+package io.github.kdroidfilter.seforimapp.core.presentation.tabs
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import io.github.kdroidfilter.seforimapp.core.presentation.navigation.NavigationAction
+import io.github.kdroidfilter.seforimapp.core.presentation.navigation.Navigator
+import io.github.kdroidfilter.seforimapp.core.presentation.utils.ObserveAsEvents
+import org.jetbrains.jewel.ui.component.Text
+import org.koin.compose.koinInject
+
+@Composable
+fun TabsNavHost(){
+    val navigator = koinInject<Navigator>()
+    val navController = rememberNavController()
+
+    ObserveAsEvents(flow = navigator.navigationActions) { action ->
+        when(action) {
+            is NavigationAction.Navigate -> navController.navigate(
+                action.destination
+            ) {
+                action.navOptions(this)
+            }
+            NavigationAction.NavigateUp -> navController.navigateUp()
+        }
+    }
+
+    LaunchedEffect(navController) {
+        navController.currentBackStackEntryFlow.collect {
+            navigator.setCanGoBack(navController.previousBackStackEntry != null)
+        }
+    }
+
+    NavHost(
+        navController = navController,
+        startDestination = navigator.startDestination,
+        modifier = Modifier
+    ) {
+        composable<TabsDestination.Home> {
+            Text("Home")
+        }
+
+    }
+
+}
+</file>
+
+<file path="tabs/TabsState.kt">
+package io.github.kdroidfilter.seforimapp.core.presentation.tabs
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+
+data class TabsState(
+    val tabsId: List<Int>,
+    val selectedTabIndex: Int,
+)
+
+
+@Composable
+fun rememberTabsState(viewModel: TabsViewModel) : TabsState {
+    return TabsState(
+        tabsId = viewModel.tabsId.collectAsState().value,
+        selectedTabIndex = viewModel.selectedTabIndex.collectAsState().value,
+    )
+}
+</file>
+
+<file path="tabs/TabsView.kt">
+package io.github.kdroidfilter.seforimapp.core.presentation.tabs
+
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import org.jetbrains.jewel.foundation.theme.JewelTheme
+import org.jetbrains.jewel.ui.component.Icon
+import org.jetbrains.jewel.ui.component.IconButton
+import org.jetbrains.jewel.ui.component.SimpleTabContent
+import org.jetbrains.jewel.ui.component.TabData
+import org.jetbrains.jewel.ui.component.TabStrip
+import org.jetbrains.jewel.ui.component.styling.TabStyle
+import org.jetbrains.jewel.ui.icons.AllIconsKeys
+import org.jetbrains.jewel.ui.painter.hints.Stateful
+import org.jetbrains.jewel.ui.painter.rememberResourcePainterProvider
+import org.jetbrains.jewel.ui.theme.defaultTabStyle
+import org.koin.compose.viewmodel.koinViewModel
+import kotlin.math.max
+
+
+@Composable
+fun TabsView() {
+    val viewModel: TabsViewModel = koinViewModel()
+    val state = rememberTabsState(viewModel)
+
+    DefaultTabShowcase(state = state, onEvents = viewModel::onEvent)
+}
+
+@Composable
+private fun DefaultTabShowcase(onEvents: (TabsEvents) -> Unit, state: TabsState) {
+    var selectedTabIndex = state.selectedTabIndex
+
+    var tabIds = state.tabsId
+
+    val tabs =
+        remember(tabIds, selectedTabIndex) {
+            tabIds.mapIndexed { index, id ->
+                TabData.Default(
+                    selected = index == selectedTabIndex,
+                    content = { tabState ->
+                        val iconProvider = rememberResourcePainterProvider(AllIconsKeys.Actions.Find)
+                        val icon by iconProvider.getPainter(Stateful(tabState))
+                        SimpleTabContent(label = "Default Tab $id", state = tabState, icon = icon)
+                    },
+                    onClose = {
+//                        tabIds = tabIds.toMutableList().apply { removeAt(index) }
+//                        if (selectedTabIndex >= index) {
+//                            val maxPossibleIndex = max(0, tabIds.lastIndex)
+//                            selectedTabIndex = (selectedTabIndex - 1).coerceIn(0..maxPossibleIndex)
+//                        }
+                        onEvents(TabsEvents.onClose(selectedTabIndex))
+                    },
+                    onClick = {
+                        onEvents(TabsEvents.onSelected(index))
+                    },
+                )
+            }
+        }
+
+    TabStripWithAddButton(tabs = tabs, style = JewelTheme.defaultTabStyle) {
+        onEvents(TabsEvents.onAdd)
+    }
+}
+
+@Composable
+private fun TabStripWithAddButton(tabs: List<TabData>, style: TabStyle, onAddClick: () -> Unit) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        TabStrip(tabs = tabs, style = style, modifier = Modifier.weight(1f))
+
+        IconButton(onClick = onAddClick, modifier = Modifier.size(JewelTheme.defaultTabStyle.metrics.tabHeight)) {
+            Icon(key = AllIconsKeys.General.Add, contentDescription = "Add a tab")
+        }
+    }
+}
+</file>
+
+<file path="tabs/TabsViewModel.kt">
+package io.github.kdroidfilter.seforimapp.core.presentation.tabs
+
+import androidx.lifecycle.ViewModel
+import io.github.kdroidfilter.seforimapp.core.presentation.navigation.Navigator
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+
+class TabsViewModel(
+    private val navigator: Navigator,
+    ) : ViewModel() {
+    private val _tabsId = MutableStateFlow(listOf(1))
+    val tabsId = _tabsId.asStateFlow()
+
+    private val _selectedTabId = MutableStateFlow(0)
+    val selectedTabIndex = _selectedTabId.asStateFlow()
+
+    fun onEvent(event: TabsEvents) {
+        when (event) {
+            is TabsEvents.onClose -> {
+                _tabsId.value = _tabsId.value.filter { it != event.id }
+            }
+            is TabsEvents.onSelected -> {
+                _selectedTabId.value = event.id
+            }
+
+            TabsEvents.onAdd -> {
+                _tabsId.value = _tabsId.value + 1
+                _selectedTabId.value = _tabsId.value.last()
+            }
+        }
+    }
+
+}
+</file>
+
+<file path="utils/ObserveAsEvents.kt">
+package io.github.kdroidfilter.seforimapp.core.presentation.utils
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
+
+@Composable
+fun <T> ObserveAsEvents(
+    flow: Flow<T>,
+    key1: Any? = null,
+    key2: Any? = null,
+    onEvent: (T) -> Unit
+) {
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(key1 = lifecycleOwner.lifecycle, key1, key2) {
+        lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            withContext(Dispatchers.Main.immediate) {
+                flow.collect(onEvent)
+            }
+        }
+    }
+}
+</file>
+
+<file path="utils/WindowUtils.kt">
+package io.github.kdroidfilter.seforimapp.core.presentation.utils
+
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEvent
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.isAltPressed
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.type
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.WindowPosition
+import androidx.compose.ui.window.WindowState
+import java.awt.Toolkit
+
+fun getCenteredWindowState(width: Int, height: Int): WindowState {
+    val screenSize = Toolkit.getDefaultToolkit().screenSize
+    val windowX = (screenSize.width - width) / 2
+    val windowY = (screenSize.height - height) / 2
+
+    return WindowState(
+        size = DpSize(width.dp, height.dp),
+        position = WindowPosition(windowX.dp, windowY.dp)
+    )
+}
+
+fun processKeyShortcuts(keyEvent: KeyEvent, onNavigateTo: (String) -> Unit): Boolean {
+    if (!keyEvent.isAltPressed || keyEvent.type != KeyEventType.KeyDown) return false
+    return when (keyEvent.key) {
+        Key.W -> {
+            onNavigateTo("Welcome")
+            true
+        }
+
+        Key.M -> {
+            onNavigateTo("Markdown")
+            true
+        }
+
+        Key.C -> {
+            onNavigateTo("Components")
+            true
+        }
+
+        else -> false
+    }
+}
+</file>
+
+</files>

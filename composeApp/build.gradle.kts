@@ -29,6 +29,8 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(compose.material3AdaptiveNavigationSuite)
+            implementation(libs.navigation.compose)
             implementation(libs.kermit)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
@@ -42,6 +44,8 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+
             implementation(libs.multiplatformSettings)
             implementation(libs.kotlinx.datetime)
             implementation(libs.materialKolor)
@@ -49,6 +53,8 @@ kotlin {
             implementation(libs.platformtools.darkmodedetector)
             implementation("io.github.kdroidfilter.seforimlibrary:core")
             implementation("io.github.kdroidfilter.seforimlibrary:dao")
+            implementation("com.github.luben:zstd-jni:1.5.7-4")
+
 
         }
 
@@ -63,6 +69,8 @@ kotlin {
             implementation(libs.androidx.activityCompose)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
+            implementation("com.github.luben:zstd-jni:1.5.7-4@aar")
+
         }
 
         jvmMain.dependencies {
