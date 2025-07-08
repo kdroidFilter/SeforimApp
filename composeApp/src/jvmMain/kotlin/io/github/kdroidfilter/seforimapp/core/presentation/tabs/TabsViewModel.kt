@@ -7,12 +7,13 @@ import io.github.kdroidfilter.seforimapp.core.presentation.navigation.Navigator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.util.UUID
 import kotlin.math.max
 
 data class TabItem(
     val id: Int,
     val title: String = "Default Tab",
-    val destination: TabsDestination = TabsDestination.Home
+    val destination: TabsDestination = TabsDestination.Home(UUID.randomUUID().toString())
 )
 
 class TabsViewModel(
@@ -92,17 +93,23 @@ class TabsViewModel(
         val newTab = TabItem(
             id = _nextTabId++,
             title = "New Tab",
-            destination = TabsDestination.Home
+            destination = TabsDestination.Home(UUID.randomUUID().toString())
         )
         _tabs.value = _tabs.value + newTab
         _selectedTabIndex.value = _tabs.value.lastIndex
     }
 
     private fun addTabWithDestination(destination: TabsDestination) {
+        val newDestination = when (destination) {
+            is TabsDestination.Home -> TabsDestination.Home(UUID.randomUUID().toString())
+            is TabsDestination.Search -> TabsDestination.Search(destination.searchQuery, UUID.randomUUID().toString())
+            is TabsDestination.BookContent -> TabsDestination.BookContent(destination.bookId, UUID.randomUUID().toString())
+        }
+
         val newTab = TabItem(
             id = _nextTabId++,
-            title = getTabTitle(destination),
-            destination = destination
+            title = getTabTitle(newDestination),
+            destination = newDestination
         )
         _tabs.value = _tabs.value + newTab
         _selectedTabIndex.value = _tabs.value.lastIndex

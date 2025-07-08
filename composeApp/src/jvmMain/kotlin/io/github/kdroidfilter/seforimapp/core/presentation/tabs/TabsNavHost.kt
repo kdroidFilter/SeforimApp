@@ -21,10 +21,12 @@ import io.github.kdroidfilter.seforimapp.core.presentation.navigation.Navigation
 import io.github.kdroidfilter.seforimapp.core.presentation.navigation.Navigator
 import io.github.kdroidfilter.seforimapp.core.presentation.navigation.animatedComposable
 import io.github.kdroidfilter.seforimapp.core.presentation.utils.ObserveAsEvents
+import io.github.kdroidfilter.seforimapp.features.screens.bookcontent.BookContentScreen
 import kotlinx.coroutines.launch
 import org.jetbrains.jewel.ui.component.Text
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
+import java.util.UUID
 
 @Composable
 fun TabsNavHost() {
@@ -70,7 +72,7 @@ fun TabsNavHost() {
             Box(Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.Center) {
                 Button({
                     scope.launch {
-                        navigator.navigate(TabsDestination.Search("Search Page"))
+                        navigator.navigate(TabsDestination.Search("Search Page", UUID.randomUUID().toString()))
                     }
                 }) {
                     Text("Click me")
@@ -86,7 +88,7 @@ fun TabsNavHost() {
                     Text(selectedTabIndex.toString())
                     Button({
                         scope.launch {
-                            navigator.navigate(TabsDestination.BookContent(123))
+                            navigator.navigate(TabsDestination.BookContent(123, UUID.randomUUID().toString()))
                         }
                     }) {
                         Text("Open Book Content")
@@ -97,12 +99,8 @@ fun TabsNavHost() {
 
         animatedComposable<TabsDestination.BookContent> { backStackEntry ->
             val destination = backStackEntry.toRoute<TabsDestination.BookContent>()
-            Box(Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.Center) {
+            BookContentScreen()
 
-                Column {
-                    Text("Book Content: ${destination.bookId}")
-                }
-            }
         }
     }
 }
