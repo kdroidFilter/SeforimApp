@@ -35,10 +35,17 @@ class BookContentViewModel(
     val searchText = _searchText.asStateFlow()
 
     // Scroll position state
-    private val _scrollPosition = MutableStateFlow(
-        getState<Int>("scrollPosition") ?: 0
+    private val _paragraphScrollPosition = MutableStateFlow(
+        getState<Int>("paragraphScrollPosition") ?: 0
     )
-    val scrollPosition = _scrollPosition.asStateFlow()
+    val paragraphScrollPosition = _paragraphScrollPosition.asStateFlow()
+
+    private val _chapterScrollPosition = MutableStateFlow(
+        getState<Int>("chapterScrollPosition") ?: 0
+    )
+
+    val chapterScrollPosition = _chapterScrollPosition.asStateFlow()
+
 
     // Selected chapter state
     private val _selectedChapter = MutableStateFlow(
@@ -51,9 +58,14 @@ class BookContentViewModel(
         saveState("searchText", text)
     }
 
-    fun updateScrollPosition(position: Int) {
-        _scrollPosition.value = position
-        saveState("scrollPosition", position)
+    fun updateParagraphScrollPosition(position: Int) {
+        _paragraphScrollPosition.value = position
+        saveState("paragraphScrollPosition", position)
+    }
+
+    fun updateChapterScrollPosition(position: Int) {
+        _chapterScrollPosition.value = position
+        saveState("chapterScrollPosition", position)
     }
 
     fun selectChapter(chapter: Int) {
@@ -63,10 +75,11 @@ class BookContentViewModel(
 
     fun onEvent(events: BookContentEvents) {
         when (events) {
-            is BookContentEvents.UpdateScrollPosition -> updateScrollPosition(events.position)
+            is BookContentEvents.OnUpdateParagraphScrollPosition -> updateParagraphScrollPosition(events.position)
             is BookContentEvents.OnChapterSelected -> selectChapter(events.index)
             is BookContentEvents.OnSearchTextChange -> updateSearchText(events.text)
             BookContentEvents.SaveAllStates -> saveAllStates()
+            is BookContentEvents.OnUpdateChapterScrollPosition -> updateChapterScrollPosition(events.position)
         }
     }
 
@@ -75,7 +88,7 @@ class BookContentViewModel(
         saveState("splitPaneState", splitPaneState.value)
         saveState("splitPanePosition", splitPaneState.value.positionPercentage)
         saveState("searchText", searchText.value)
-        saveState("scrollPosition", scrollPosition.value)
+        saveState("scrollPosition", paragraphScrollPosition.value)
         saveState("selectedChapter", selectedChapter.value)
     }
 

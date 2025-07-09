@@ -1,5 +1,6 @@
 package io.github.kdroidfilter.seforimapp.features.screens.bookcontent
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -12,7 +13,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavBackStackEntry
 import org.jetbrains.compose.splitpane.ExperimentalSplitPaneApi
 import org.jetbrains.compose.splitpane.HorizontalSplitPane
 import org.jetbrains.compose.splitpane.SplitPaneState
@@ -33,13 +33,22 @@ fun BookContentScreen() {
 @Composable
 fun BookContentView(state: BookContentState, onEvents: (BookContentEvents) -> Unit) {
     // Local scroll state
-    val scrollState = rememberScrollState(state.scrollPosition)
+    val paragraphScrollState = rememberScrollState(state.paragraphScrollPosition)
+
+    val chapterScrollState = rememberScrollState(state.chapterScrollPosition)
 
     // Save scroll position when it changes
-    LaunchedEffect(scrollState) {
-        snapshotFlow { scrollState.value }
+    LaunchedEffect(paragraphScrollState) {
+        snapshotFlow { paragraphScrollState.value }
             .collect { position ->
-                onEvents(BookContentEvents.UpdateScrollPosition(position))
+                onEvents(BookContentEvents.OnUpdateParagraphScrollPosition(position))
+            }
+    }
+
+    LaunchedEffect(chapterScrollState) {
+        snapshotFlow { chapterScrollState.value }
+            .collect { position ->
+                onEvents(BookContentEvents.OnUpdateChapterScrollPosition(position))
             }
     }
 
@@ -64,7 +73,8 @@ fun BookContentView(state: BookContentState, onEvents: (BookContentEvents) -> Un
         onSearchTextChange = { onEvents(BookContentEvents.OnSearchTextChange(it)) },
         selectedChapter = state.selectedChapter,
         onChapterSelected = { onEvents(BookContentEvents.OnChapterSelected(it)) },
-        scrollState = scrollState
+        paragraphScrollState = paragraphScrollState,
+        chapterScrollState = chapterScrollState
     )
 }
 
@@ -79,7 +89,8 @@ fun EnhancedSplitLayouts(
     onSearchTextChange: (String) -> Unit,
     selectedChapter: Int,
     onChapterSelected: (Int) -> Unit,
-    scrollState: androidx.compose.foundation.ScrollState
+    paragraphScrollState: ScrollState,
+    chapterScrollState: ScrollState
 ) {
     Column(Modifier.fillMaxSize()) {
         HorizontalSplitPane(
@@ -106,7 +117,7 @@ fun EnhancedSplitLayouts(
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .verticalScroll(rememberScrollState())
+                            .verticalScroll(chapterScrollState)
                     ) {
                         repeat(20) { index ->
                             ChapterItem(
@@ -124,7 +135,7 @@ fun EnhancedSplitLayouts(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp)
-                        .verticalScroll(scrollState)
+                        .verticalScroll(paragraphScrollState)
                 ) {
                     Text("Chapitre $selectedChapter")
                     Spacer(modifier = Modifier.height(16.dp))
