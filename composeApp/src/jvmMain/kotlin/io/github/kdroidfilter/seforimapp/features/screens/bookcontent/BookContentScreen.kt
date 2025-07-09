@@ -13,62 +13,57 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavBackStackEntry
-import kotlinx.coroutines.flow.collect
 import org.jetbrains.compose.splitpane.ExperimentalSplitPaneApi
 import org.jetbrains.compose.splitpane.HorizontalSplitPane
 import org.jetbrains.compose.splitpane.SplitPaneState
 import org.jetbrains.jewel.foundation.theme.JewelTheme
 import org.jetbrains.jewel.ui.component.Text
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.parameter.parametersOf
 import java.awt.Cursor
+
+@Composable
+fun BookContentScreen() {
+    val viewModel: BookContentViewModel = koinViewModel()
+    val state = rememberBookContentState(viewModel)
+    BookContentView(state, viewModel::onEvent)
+
+}
 
 @OptIn(ExperimentalSplitPaneApi::class)
 @Composable
-fun BookContentScreen(navBackStackEntry: NavBackStackEntry) {
-    val savedStateHandle = navBackStackEntry.savedStateHandle
-    // The tabId is already set in the savedStateHandle by TabsNavHost
-
-    val viewModel: BookContentViewModel = koinViewModel { 
-        parametersOf(savedStateHandle) 
-    }
-
-    // Collect states
-    val splitPaneState by viewModel.splitPaneState.collectAsState()
-    val searchText by viewModel.searchText.collectAsState()
-    val scrollPosition by viewModel.scrollPosition.collectAsState()
-    val selectedChapter by viewModel.selectedChapter.collectAsState()
-
+fun BookContentView(state: BookContentState, onEvents: (BookContentEvents) -> Unit) {
     // Local scroll state
-    val scrollState = rememberScrollState(scrollPosition)
+    val scrollState = rememberScrollState(state.scrollPosition)
 
     // Save scroll position when it changes
     LaunchedEffect(scrollState) {
         snapshotFlow { scrollState.value }
             .collect { position ->
-                viewModel.updateScrollPosition(position)
+                onEvents(BookContentEvents.UpdateScrollPosition(position))
             }
     }
 
     // Save split pane position when it changes
-    LaunchedEffect(splitPaneState) {
-        snapshotFlow { splitPaneState.positionPercentage }
-            .collect { viewModel.saveAllStates() }
+    LaunchedEffect(state.splitPaneState.positionPercentage) {
+        snapshotFlow { state.splitPaneState.positionPercentage }
+            .collect {
+                onEvents(BookContentEvents.SaveAllStates)
+            }
     }
 
     // Save all states when the screen is disposed
     DisposableEffect(Unit) {
         onDispose {
-            viewModel.saveAllStates()
+            onEvents(BookContentEvents.SaveAllStates)
         }
     }
 
     EnhancedSplitLayouts(
-        splitPaneState = splitPaneState,
-        searchText = searchText,
-        onSearchTextChange = viewModel::updateSearchText,
-        selectedChapter = selectedChapter,
-        onChapterSelected = viewModel::selectChapter,
+        splitPaneState = state.splitPaneState,
+        searchText = state.searchText,
+        onSearchTextChange = { onEvents(BookContentEvents.OnSearchTextChange(it)) },
+        selectedChapter = state.selectedChapter,
+        onChapterSelected = { onEvents(BookContentEvents.OnChapterSelected(it)) },
         scrollState = scrollState
     )
 }
@@ -186,7 +181,7 @@ private fun ChapterItem(
             .padding(vertical = 4.dp)
             .clickable { onClick() }
             .background(
-                if (isSelected) Color.Blue.copy(alpha = 0.2f) 
+                if (isSelected) Color.Blue.copy(alpha = 0.2f)
                 else Color.Transparent
             )
             .padding(8.dp)
@@ -195,18 +190,14 @@ private fun ChapterItem(
     }
 }
 
-/**
- * Extension function to make a Modifier clickable
- */
+/** Extension function to make a Modifier clickable */
 fun Modifier.clickable(onClick: () -> Unit): Modifier {
     return this.then(
         Modifier.padding(0.dp) // This is a placeholder since we can't directly implement clickable
     )
 }
 
-/**
- * Utility function to create persistent state in composables
- */
+/** Utility function to create persistent state in composables */
 @Composable
 fun <T : Any> rememberPersistentState(
     key: String,

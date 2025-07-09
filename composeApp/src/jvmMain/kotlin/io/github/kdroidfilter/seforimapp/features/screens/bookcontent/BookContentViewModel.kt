@@ -61,6 +61,15 @@ class BookContentViewModel(
         saveState("selectedChapter", chapter)
     }
 
+    fun onEvent(events: BookContentEvents) {
+        when (events) {
+            is BookContentEvents.UpdateScrollPosition -> updateScrollPosition(events.position)
+            is BookContentEvents.OnChapterSelected -> selectChapter(events.index)
+            is BookContentEvents.OnSearchTextChange -> updateSearchText(events.text)
+            BookContentEvents.SaveAllStates -> saveAllStates()
+        }
+    }
+
     @OptIn(ExperimentalSplitPaneApi::class)
     fun saveAllStates() {
         saveState("splitPaneState", splitPaneState.value)

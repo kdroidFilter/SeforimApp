@@ -1,11 +1,9 @@
 // tabs/TabsNavHost.kt
 package io.github.kdroidfilter.seforimapp.core.presentation.tabs
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -14,7 +12,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import io.github.kdroidfilter.seforimapp.core.presentation.navigation.NavigationAction
@@ -22,6 +19,7 @@ import io.github.kdroidfilter.seforimapp.core.presentation.navigation.Navigator
 import io.github.kdroidfilter.seforimapp.core.presentation.navigation.animatedComposable
 import io.github.kdroidfilter.seforimapp.core.presentation.utils.ObserveAsEvents
 import io.github.kdroidfilter.seforimapp.features.screens.bookcontent.BookContentScreen
+import io.github.kdroidfilter.seforimapp.features.screens.bookcontent.BookContentView
 import kotlinx.coroutines.launch
 import org.jetbrains.jewel.ui.component.Text
 import org.koin.compose.koinInject
@@ -108,7 +106,8 @@ fun TabsNavHost() {
             val destination = backStackEntry.toRoute<TabsDestination.BookContent>()
             // Pass the tabId to the savedStateHandle
             backStackEntry.savedStateHandle["tabId"] = destination.tabId
-            BookContentScreen(backStackEntry)
+            BookContentScreen()
         }
     }
 }
+
