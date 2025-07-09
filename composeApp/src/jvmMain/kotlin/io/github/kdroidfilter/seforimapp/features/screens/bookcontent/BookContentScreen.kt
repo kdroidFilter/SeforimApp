@@ -2,6 +2,7 @@ package io.github.kdroidfilter.seforimapp.features.screens.bookcontent
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -199,32 +200,4 @@ private fun ChapterItem(
     ) {
         Text("Chapitre ${chapter + 1}")
     }
-}
-
-/** Extension function to make a Modifier clickable */
-fun Modifier.clickable(onClick: () -> Unit): Modifier {
-    return this.then(
-        Modifier.padding(0.dp) // This is a placeholder since we can't directly implement clickable
-    )
-}
-
-/** Utility function to create persistent state in composables */
-@Composable
-fun <T : Any> rememberPersistentState(
-    key: String,
-    defaultValue: T,
-    viewModel: BookContentViewModel
-): MutableState<T> {
-    val state = remember {
-        mutableStateOf(
-            viewModel.getStateValue<T>(key) ?: defaultValue
-        )
-    }
-
-    // Save state when it changes
-    LaunchedEffect(state.value) {
-        viewModel.saveStateValue(key, state.value)
-    }
-
-    return state
 }
