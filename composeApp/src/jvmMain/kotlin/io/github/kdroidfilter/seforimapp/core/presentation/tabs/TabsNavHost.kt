@@ -16,10 +16,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import io.github.kdroidfilter.seforimapp.core.presentation.navigation.NavigationAction
 import io.github.kdroidfilter.seforimapp.core.presentation.navigation.Navigator
-import io.github.kdroidfilter.seforimapp.core.presentation.navigation.animatedComposable
+import io.github.kdroidfilter.seforimapp.core.presentation.navigation.nonAnimatedComposable
 import io.github.kdroidfilter.seforimapp.core.presentation.utils.ObserveAsEvents
 import io.github.kdroidfilter.seforimapp.features.screens.bookcontent.BookContentScreen
-import io.github.kdroidfilter.seforimapp.features.screens.bookcontent.BookContentView
 import kotlinx.coroutines.launch
 import org.jetbrains.jewel.ui.component.Text
 import org.koin.compose.koinInject
@@ -66,7 +65,7 @@ fun TabsNavHost() {
         startDestination = navigator.startDestination,
         modifier = Modifier
     ) {
-        animatedComposable<TabsDestination.Home> { backStackEntry ->
+        nonAnimatedComposable<TabsDestination.Home> { backStackEntry ->
             val destination = backStackEntry.toRoute<TabsDestination.Home>()
             // Pass the tabId to the savedStateHandle
             backStackEntry.savedStateHandle["tabId"] = destination.tabId
@@ -82,7 +81,7 @@ fun TabsNavHost() {
             }
         }
 
-        animatedComposable<TabsDestination.Search> { backStackEntry ->
+        nonAnimatedComposable<TabsDestination.Search> { backStackEntry ->
             val destination = backStackEntry.toRoute<TabsDestination.Search>()
             // Pass the tabId to the savedStateHandle
             backStackEntry.savedStateHandle["tabId"] = destination.tabId
@@ -102,7 +101,7 @@ fun TabsNavHost() {
             }
         }
 
-        animatedComposable<TabsDestination.BookContent> { backStackEntry ->
+        nonAnimatedComposable<TabsDestination.BookContent> { backStackEntry ->
             val destination = backStackEntry.toRoute<TabsDestination.BookContent>()
             // Pass the tabId to the savedStateHandle
             backStackEntry.savedStateHandle["tabId"] = destination.tabId
