@@ -68,7 +68,11 @@ fun TabsNavHost() {
         startDestination = navigator.startDestination,
         modifier = Modifier
     ) {
-        animatedComposable<TabsDestination.Home> {
+        animatedComposable<TabsDestination.Home> { backStackEntry ->
+            val destination = backStackEntry.toRoute<TabsDestination.Home>()
+            // Pass the tabId to the savedStateHandle
+            backStackEntry.savedStateHandle["tabId"] = destination.tabId
+
             Box(Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.Center) {
                 Button({
                     scope.launch {
@@ -81,8 +85,11 @@ fun TabsNavHost() {
         }
 
         animatedComposable<TabsDestination.Search> { backStackEntry ->
+            val destination = backStackEntry.toRoute<TabsDestination.Search>()
+            // Pass the tabId to the savedStateHandle
+            backStackEntry.savedStateHandle["tabId"] = destination.tabId
+
             Box(Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.Center) {
-                val destination = backStackEntry.toRoute<TabsDestination.Search>()
                 Column {
                     Text("Search Page: ${destination.searchQuery}")
                     Text(selectedTabIndex.toString())
@@ -99,8 +106,9 @@ fun TabsNavHost() {
 
         animatedComposable<TabsDestination.BookContent> { backStackEntry ->
             val destination = backStackEntry.toRoute<TabsDestination.BookContent>()
-            BookContentScreen()
-
+            // Pass the tabId to the savedStateHandle
+            backStackEntry.savedStateHandle["tabId"] = destination.tabId
+            BookContentScreen(backStackEntry)
         }
     }
 }
