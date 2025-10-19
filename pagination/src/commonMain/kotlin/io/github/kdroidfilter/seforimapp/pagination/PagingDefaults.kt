@@ -36,4 +36,19 @@ object PagingDefaults {
                 enablePlaceholders = placeholders
             )
     }
+
+    // Search results paging: show 20 at a time, start loading more when 5 from the end
+    object SEARCH {
+        const val PAGE_SIZE: Int = 20
+        const val PREFETCH_DISTANCE: Int = 15
+        const val INITIAL_LOAD_SIZE: Int = 20
+
+        fun config(placeholders: Boolean = false): PagingConfig =
+            PagingConfig(
+                pageSize = PAGE_SIZE,
+                prefetchDistance = PREFETCH_DISTANCE,
+                initialLoadSize = INITIAL_LOAD_SIZE,
+                enablePlaceholders = placeholders
+            )
+    }
 }

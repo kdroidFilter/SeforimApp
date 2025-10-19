@@ -63,7 +63,29 @@ class TabsViewModel(
 
     private fun closeTab(index: Int) {
         val currentTabs = _tabs.value
-        if (currentTabs.size <= 1) return // Ne pas fermer le dernier onglet
+        // If it's the last tab, replace it with a fresh empty tab (same as app startup)
+        if (currentTabs.size == 1) {
+            if (index != 0) return // invalid index for single-tab state
+
+            // Clear state of the last remaining tab
+            val tabIdToClose = currentTabs[0].destination.tabId
+            stateManager.clearTabState(tabIdToClose)
+
+            // Create a new blank BookContent destination (empty split pane)
+            val newDestination = TabsDestination.BookContent(
+                bookId = -1,
+                tabId = java.util.UUID.randomUUID().toString()
+            )
+            val newTab = TabItem(
+                id = _nextTabId++,
+                title = getTabTitle(newDestination),
+                destination = newDestination
+            )
+            _tabs.value = listOf(newTab)
+            _selectedTabIndex.value = 0
+            System.gc()
+            return
+        }
 
         if (index < 0 || index >= currentTabs.size) return // Index invalide
 
@@ -127,18 +149,33 @@ class TabsViewModel(
         // Preserve the provided tabId to allow callers to pre-initialize tab state (e.g., via TabStateManager).
         val newDestination = when (destination) {
             is TabsDestination.Home -> TabsDestination.Home(destination.tabId)
-            is TabsDestination.Search -> TabsDestination.Search(destination.searchQuery, destination.tabId)
+            is TabsDestination.Search -> TabsDestination.Search(destination.searchQuery, destination.precision, destination.tabId)
             is TabsDestination.BookContent -> TabsDestination.BookContent(destination.bookId, destination.tabId, destination.lineId)
         }
 
-        val newTab = TabItem(
-            id = _nextTabId++,
-            title = getTabTitle(newDestination),
-            destination = newDestination
-        )
-        _tabs.value = _tabs.value + newTab
-        _selectedTabIndex.value = _tabs.value.lastIndex
-        // Trigger GC when a new tab is opened via navigation
+        val currentTabs = _tabs.value
+        val existingIndex = currentTabs.indexOfFirst { it.destination.tabId == newDestination.tabId }
+        if (existingIndex >= 0) {
+            // Replace destination within the same tab (do not open a new tab)
+            val updated = currentTabs.toMutableList()
+            val old = updated[existingIndex]
+            updated[existingIndex] = old.copy(
+                title = getTabTitle(newDestination),
+                destination = newDestination
+            )
+            _tabs.value = updated
+            _selectedTabIndex.value = existingIndex
+        } else {
+            // Create a new tab if the tabId doesn't exist
+            val newTab = TabItem(
+                id = _nextTabId++,
+                title = getTabTitle(newDestination),
+                destination = newDestination
+            )
+            _tabs.value = currentTabs + newTab
+            _selectedTabIndex.value = _tabs.value.lastIndex
+        }
+        // Encourage GC after tab change
         System.gc()
     }
 

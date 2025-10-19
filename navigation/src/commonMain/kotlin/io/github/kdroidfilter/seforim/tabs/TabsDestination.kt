@@ -13,6 +13,7 @@ sealed interface TabsDestination {
     @Serializable
     data class Search(
         val searchQuery: String,
+        val precision: Int = 2,
         override val tabId: String
     ) : TabsDestination
 

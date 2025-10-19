@@ -37,8 +37,8 @@ fun TabsNavHost() {
     val tabs by tabsViewModel.tabs.collectAsState()
     val selectedTabIndex by tabsViewModel.selectedTabIndex.collectAsState()
 
-    // Observer les changements d'onglets et naviguer vers la destination
-    LaunchedEffect(selectedTabIndex) {
+    // Observer les changements d'onglets et aussi les changements de destination du même onglet
+    LaunchedEffect(selectedTabIndex, tabs) {
         if (tabs.isNotEmpty() && selectedTabIndex < tabs.size) {
             val currentTab = tabs[selectedTabIndex]
             navController.navigate(currentTab.destination)
@@ -76,7 +76,7 @@ fun TabsNavHost() {
             Box(Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.Center) {
                 Button({
                     scope.launch {
-                        navigator.navigate(TabsDestination.Search("Search Page", UUID.randomUUID().toString()))
+                        navigator.navigate(TabsDestination.Search("Search Page", tabId = UUID.randomUUID().toString()))
                     }
                 }) {
                     Text("Click me")
@@ -89,20 +89,12 @@ fun TabsNavHost() {
             val destination = backStackEntry.toRoute<TabsDestination.Search>()
             // Pass the tabId to the savedStateHandle
             backStackEntry.savedStateHandle["tabId"] = destination.tabId
-
-            Box(Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.Center) {
-                Column {
-                    Text("Search Page: ${destination.searchQuery}")
-                    Text(selectedTabIndex.toString())
-                    Button({
-                        scope.launch {
-                            navigator.navigate(TabsDestination.BookContent(123, UUID.randomUUID().toString()))
-                        }
-                    }) {
-                        Text("Open Book Content")
-                    }
-                }
+            backStackEntry.savedStateHandle["searchQuery"] = destination.searchQuery
+            backStackEntry.savedStateHandle["precision"] = destination.precision
+            val viewModel = remember(appGraph, destination) {
+                appGraph.searchViewModel(backStackEntry.savedStateHandle)
             }
+            io.github.kdroidfilter.seforimapp.features.screens.search.SearchScreen(viewModel)
         }
 
         nonAnimatedComposable<TabsDestination.BookContent> { backStackEntry ->

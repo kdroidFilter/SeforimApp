@@ -339,8 +339,10 @@ class BookContentViewModel(
             stateManager.setLoading(true)
             try {
                 val state = stateManager.state.value
-                val shouldUseAnchor = state.content.anchorId != -1L &&
-                        state.content.scrollIndex > 50 // INITIAL_LOAD_SIZE
+                // Use the saved anchor whenever available to restore around the
+                // previous viewport. The pager will center the initial window
+                // on this anchor, then the UI will apply the precise offset.
+                val shouldUseAnchor = state.content.anchorId != -1L
 
                 val initialLineId = when {
                     forceAnchorId != null -> forceAnchorId

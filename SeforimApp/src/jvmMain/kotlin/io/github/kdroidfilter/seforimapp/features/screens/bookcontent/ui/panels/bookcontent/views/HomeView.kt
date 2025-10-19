@@ -18,6 +18,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.key
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -39,6 +42,11 @@ import org.jetbrains.jewel.ui.component.*
 import org.jetbrains.jewel.ui.icons.AllIconsKeys
 import org.jetbrains.skiko.Cursor
 import seforimapp.seforimapp.generated.resources.*
+import io.github.kdroidfilter.seforimapp.framework.di.LocalAppGraph
+import io.github.kdroidfilter.seforim.tabs.TabsDestination
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.rememberCoroutineScope
+import java.util.UUID
 
 // Enum pour les filtres
 enum class SearchFilter() {
@@ -70,6 +78,11 @@ fun HomeView(
             // Keep state outside LazyColumn so it persists across item recompositions
             val searchState = remember { TextFieldState() }
             var selectedFilter by remember { mutableStateOf(SearchFilter.TEXT) }
+            val appGraph = LocalAppGraph.current
+            val navigator = appGraph.navigator
+            val tabsViewModel = appGraph.tabsViewModel
+            val scope = rememberCoroutineScope()
+            var searchPrecision by remember { mutableIntStateOf(3) }
 
             LazyColumn(
                 state = listState,
@@ -91,7 +104,27 @@ fun HomeView(
                         SearchBar(
                             state = searchState,
                             selectedFilter = selectedFilter,
-                            onFilterChange = { selectedFilter = it }
+                            onFilterChange = { selectedFilter = it },
+                            modifier = Modifier.onPreviewKeyEvent { keyEvent ->
+                                if (keyEvent.key == Key.Enter) {
+                                    val q = searchState.text.toString()
+                                    if (q.isNotBlank() && selectedFilter == SearchFilter.TEXT) {
+                                        scope.launch {
+                                            val currentTabId = tabsViewModel.tabs.value.getOrNull(
+                                                tabsViewModel.selectedTabIndex.value
+                                            )?.destination?.tabId ?: UUID.randomUUID().toString()
+                                            navigator.navigate(
+                                                TabsDestination.Search(
+                                                    q,
+                                                    searchPrecision,
+                                                    currentTabId
+                                                )
+                                            )
+                                        }
+                                    }
+                                    true
+                                } else false
+                            }
                         )
                     }
                 }
@@ -103,7 +136,7 @@ fun HomeView(
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ) {
                             if (selectedFilter == SearchFilter.TEXT) {
-                                SearchLevelsPanel()
+                                SearchLevelsPanel(onPrecisionChange = { searchPrecision = it })
                                 ReferenceByCategorySection(modifier)
                             }
                         }
@@ -136,7 +169,7 @@ private fun LogoImage(modifier: Modifier = Modifier) {
  * Encapsulates its own local selection state.
  */
 @Composable
-private fun SearchLevelsPanel(modifier: Modifier = Modifier) {
+private fun SearchLevelsPanel(modifier: Modifier = Modifier, onPrecisionChange: (Int) -> Unit) {
     val filterCards: List<SearchFilterCard> = listOf(
         SearchFilterCard(
             Target,
@@ -183,14 +216,21 @@ private fun SearchLevelsPanel(modifier: Modifier = Modifier) {
             SearchLevelCard(
                 data = filterCard,
                 selected = index == selectedIndex,
-                onClick = { sliderPosition = index.toFloat() }
+                onClick = {
+                    sliderPosition = index.toFloat()
+                    onPrecisionChange(index + 1)
+                }
             )
         }
     }
 
     Slider(
         value = sliderPosition,
-        onValueChange = { newValue -> sliderPosition = newValue },
+        onValueChange = { newValue ->
+            sliderPosition = newValue
+            val newSelected = newValue.coerceIn(0f, maxIndex.toFloat()).toInt()
+            onPrecisionChange(newSelected + 1)
+        },
         valueRange = 0f..maxIndex.toFloat(),
         steps = (filterCards.size - 2).coerceAtLeast(0),
         modifier = Modifier.pointerHoverIcon(PointerIcon.Hand)

@@ -16,6 +16,7 @@ import io.github.kdroidfilter.seforimlibrary.dao.repository.SeforimRepository
 import io.github.kdroidfilter.seforimapp.core.settings.AppSettingsImpl
 import io.github.kdroidfilter.seforimapp.core.settings.IAppSettings
 import io.github.kdroidfilter.seforimapp.features.screens.bookcontent.BookContentViewModel
+import io.github.kdroidfilter.seforimapp.features.screens.search.SearchViewModel
 import io.github.kdroidfilter.seforimapp.features.windows.settings.SettingsViewModel
 import io.github.kdroidfilter.seforimapp.framework.database.getDatabasePath
 import java.util.UUID
@@ -109,5 +110,29 @@ abstract class AppGraph {
             titleUpdateManager = tabTitleUpdateManager,
             navigator = navigator,
             appSettings = appSettings
+        )
+
+    @Provides
+    fun provideSearchViewModel(
+        savedStateHandle: SavedStateHandle,
+        tabStateManager: TabStateManager,
+        repository: SeforimRepository,
+        titleUpdateManager: TabTitleUpdateManager,
+        navigator: Navigator
+    ): SearchViewModel = SearchViewModel(
+        savedStateHandle = savedStateHandle,
+        tabStateManager = tabStateManager,
+        repository = repository,
+        titleUpdateManager = titleUpdateManager,
+        navigator = navigator
+    )
+
+    fun searchViewModel(savedStateHandle: SavedStateHandle): SearchViewModel =
+        provideSearchViewModel(
+            savedStateHandle = savedStateHandle,
+            tabStateManager = tabStateManager,
+            repository = repository,
+            titleUpdateManager = tabTitleUpdateManager,
+            navigator = navigator
         )
 }
