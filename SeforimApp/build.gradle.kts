@@ -182,14 +182,14 @@ compose.desktop {
             vendor = "KDroidFilter"
 
             linux {
-                packageName = "zayit"
+                packageName = "זית"
                 iconFile.set(project.file("desktopAppIcons/LinuxIcon.png"))
                 packageVersion = version
             }
             windows {
                 iconFile.set(project.file("desktopAppIcons/WindowsIcon.ico"))
                 packageVersion = version
-                packageName = "Zayit"
+                packageName = "זית"
                 dirChooser = true
                 menuGroup = "start-menu-group"
                 shortcut = true
