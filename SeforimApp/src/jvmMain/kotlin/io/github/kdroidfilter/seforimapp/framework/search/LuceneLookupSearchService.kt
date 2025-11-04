@@ -1,6 +1,8 @@
 package io.github.kdroidfilter.seforimapp.framework.search
 
 import org.apache.lucene.analysis.Analyzer
+import org.apache.lucene.analysis.TokenStream
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute
 import org.apache.lucene.analysis.standard.StandardAnalyzer
 import org.apache.lucene.index.DirectoryReader
 import org.apache.lucene.index.Term
@@ -30,7 +32,7 @@ class LuceneLookupSearchService(indexDir: Path, private val analyzer: Analyzer =
     fun searchBooksPrefix(raw: String, limit: Int = 20): List<Long> {
         val q = normalizeHebrew(raw)
         if (q.isBlank()) return emptyList()
-        val tokens = q.split("\\s+".toRegex()).map { it.trim() }.filter { it.isNotEmpty() }
+        val tokens = (analyzeToTerms(q) ?: emptyList()).map { it.trimEnd('$') }.filter { it.isNotEmpty() }
         if (tokens.isEmpty()) return emptyList()
         return withSearcher { searcher ->
             val b = BooleanQuery.Builder()
@@ -51,7 +53,7 @@ class LuceneLookupSearchService(indexDir: Path, private val analyzer: Analyzer =
     fun searchTocPrefix(raw: String, limit: Int = 20): List<TocHit> {
         val q = normalizeHebrew(raw)
         if (q.isBlank()) return emptyList()
-        val tokens = q.split("\\s+".toRegex()).map { it.trim() }.filter { it.isNotEmpty() }
+        val tokens = (analyzeToTerms(q) ?: emptyList()).map { it.trimEnd('$') }.filter { it.isNotEmpty() }
         if (tokens.isEmpty()) return emptyList()
         return withSearcher { searcher ->
             val b = BooleanQuery.Builder()
@@ -72,6 +74,19 @@ class LuceneLookupSearchService(indexDir: Path, private val analyzer: Analyzer =
             }
         }
     }
+
+    private fun analyzeToTerms(text: String): List<String>? = try {
+        val out = mutableListOf<String>()
+        val ts: TokenStream = analyzer.tokenStream("q", text)
+        val termAtt = ts.addAttribute(CharTermAttribute::class.java)
+        ts.reset()
+        while (ts.incrementToken()) {
+            val t = termAtt.toString()
+            if (t.isNotBlank()) out += t
+        }
+        ts.end(); ts.close()
+        out
+    } catch (_: Exception) { null }
 
     private fun normalizeHebrew(input: String): String {
         if (input.isBlank()) return ""

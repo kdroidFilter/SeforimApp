@@ -26,7 +26,8 @@ class LuceneSearchService(indexDir: Path, private val analyzer: Analyzer = Stand
     private val log = LoggerFactory.getLogger(LuceneSearchService::class.java)
 
 
-    private val stdAnalyzer: Analyzer by lazy { StandardAnalyzer() }
+    private val hebAnalyzer: Analyzer by lazy { io.github.kdroidfilter.seforimlibrary.analysis.hebrew.SefariaHebrewAnalyzer() }
+    private val strictAnalyzer: Analyzer by lazy { io.github.kdroidfilter.seforimlibrary.analysis.hebrew.SefariaStrictHebrewAnalyzer() }
 
     private inline fun <T> withSearcher(block: (IndexSearcher) -> T): T {
         DirectoryReader.open(dir).use { reader ->
@@ -108,7 +109,8 @@ class LuceneSearchService(indexDir: Path, private val analyzer: Analyzer = Stand
         val norm = normalizeHebrew(rawQuery)
         if (norm.isBlank()) return Jsoup.clean(raw, Safelist.none())
         val rawClean = Jsoup.clean(raw, Safelist.none())
-        val analyzedStd = (analyzeToTerms(stdAnalyzer, norm) ?: emptyList())
+        val analyzer = if (near == 0) strictAnalyzer else hebAnalyzer
+        val analyzedStd = (analyzeToTerms(analyzer, norm) ?: emptyList())
         val highlightTerms = filterTermsForHighlight(analyzedStd)
         val anchorTerms = buildAnchorTerms(norm, highlightTerms)
         return buildSnippet(rawClean, anchorTerms, highlightTerms)
@@ -125,7 +127,8 @@ class LuceneSearchService(indexDir: Path, private val analyzer: Analyzer = Stand
         val norm = normalizeHebrew(rawQuery)
         if (norm.isBlank()) return emptyList()
 
-        val analyzedStd = (analyzeToTerms(stdAnalyzer, norm) ?: emptyList())
+        val analyzer = if (near == 0) strictAnalyzer else hebAnalyzer
+        val analyzedStd = (analyzeToTerms(analyzer, norm) ?: emptyList())
         val highlightTerms = analyzedStd
         val anchorTerms = buildAnchorTerms(norm, highlightTerms)
 
@@ -134,7 +137,7 @@ class LuceneSearchService(indexDir: Path, private val analyzer: Analyzer = Stand
         // (AND semantics). Use as FILTER so it restricts recall without affecting score.
         val mustAllTokensQuery: Query? = buildPresenceFilterForTokens(analyzedStd, near)
         // Build a phrase query with slop=near so the NEAR level meaningfully controls proximity.
-        val phraseQuery: Query? = QueryBuilder(stdAnalyzer).createPhraseQuery("text", norm, near)
+        val phraseQuery: Query? = QueryBuilder(if (near == 0) strictAnalyzer else hebAnalyzer).createPhraseQuery("text", norm, near)
 
         return withSearcher { searcher ->
             val b = BooleanQuery.Builder()
@@ -188,12 +191,13 @@ class LuceneSearchService(indexDir: Path, private val analyzer: Analyzer = Stand
         val norm = normalizeHebrew(rawQuery)
         if (norm.isBlank()) return emptyList()
 
-        val analyzedStd = (analyzeToTerms(stdAnalyzer, norm) ?: emptyList())
+        val analyzer = if (near == 0) strictAnalyzer else hebAnalyzer
+        val analyzedStd = (analyzeToTerms(analyzer, norm) ?: emptyList())
         val highlightTerms = analyzedStd
         val anchorTerms = buildAnchorTerms(norm, highlightTerms)
         val rankedQuery = buildExpandedQuery(norm, near)
         val mustAllTokensQuery: Query? = buildPresenceFilterForTokens(analyzedStd, near)
-        val phraseQuery: Query? = QueryBuilder(stdAnalyzer).createPhraseQuery("text", norm, near)
+        val phraseQuery: Query? = QueryBuilder(if (near == 0) strictAnalyzer else hebAnalyzer).createPhraseQuery("text", norm, near)
 
         val bookIdInts = bookIds.asSequence().map { it.toInt() }.toList().toIntArray()
         if (bookIdInts.isEmpty()) return emptyList()
@@ -269,31 +273,52 @@ class LuceneSearchService(indexDir: Path, private val analyzer: Analyzer = Stand
     }
 
     /**
-     * Presence filter (AND across tokens). For NEAR>0, each token may be satisfied by
-     * either exact term in 'text' OR by its 4-gram presence in 'text_ng4'.
+     * Presence filter (AND across tokens).
+     * - NEAR=0: require tokens as produced (strict analyzer).
+     * - NEAR>0: for each analyzed token, require ANY of a small set of candidates:
+     *   original, original without '$', and optionally a single-letter prefix-stripped form.
+     *   This preserves Sefaria-style expansions without over-constraining recall.
      */
     private fun buildPresenceFilterForTokens(tokens: List<String>, near: Int): Query? {
         if (tokens.isEmpty()) return null
+        // NEAR=0: simple AND
+        if (near == 0) {
+            val b = BooleanQuery.Builder()
+            for (t in tokens) b.add(TermQuery(Term("text", t)), BooleanClause.Occur.MUST)
+            return b.build()
+        }
+
+        val prefixes = setOf('ו','ב','כ','ל','מ','ש','ה')
+        fun candidatesFor(t0: String): List<String> {
+            val t = t0.trim()
+            if (t.isEmpty()) return emptyList()
+            val out = LinkedHashSet<String>()
+            // As-is
+            out.add(t)
+            // Without '$'
+            val noDollar = t.trimEnd('$')
+            out.add(noDollar)
+            // Prefix-stripped (no '$') when applicable
+            if (noDollar.length >= 4 && prefixes.contains(noDollar[0])) {
+                val rest = noDollar.substring(1)
+                if (rest.length >= 3) out.add(rest)
+            }
+            return out.toList()
+        }
+
         val outer = BooleanQuery.Builder()
-        for (t in tokens) {
-            val exact = TermQuery(Term("text", t))
-            val clause = if (near > 0) {
-                val ngram = buildNgramPresenceForToken(t)
-                if (ngram != null) {
-                    BooleanQuery.Builder().apply {
-                        add(exact, BooleanClause.Occur.SHOULD)
-                        add(ngram, BooleanClause.Occur.SHOULD)
-                    }.build()
-                } else exact
-            } else exact
-            outer.add(clause, BooleanClause.Occur.MUST)
+        for (tok in tokens) {
+            val cands = candidatesFor(tok)
+            if (cands.isEmpty()) continue
+            val group = BooleanQuery.Builder()
+            for (c in cands.distinct()) group.add(TermQuery(Term("text", c)), BooleanClause.Occur.SHOULD)
+            outer.add(group.build(), BooleanClause.Occur.MUST)
         }
         return outer.build()
     }
 
     private fun buildHebrewStdQuery(norm: String, near: Int): Query {
-        // Use standard Hebrew tokenizer at query time against field 'text'
-        val qb = QueryBuilder(stdAnalyzer)
+        val qb = QueryBuilder(if (near == 0) strictAnalyzer else hebAnalyzer)
         val phrase = qb.createPhraseQuery("text", norm, near)
         if (phrase != null) return phrase
         val bool = qb.createBooleanQuery("text", norm, BooleanClause.Occur.MUST)
@@ -325,26 +350,15 @@ class LuceneSearchService(indexDir: Path, private val analyzer: Analyzer = Stand
 
     private fun buildExpandedQuery(norm: String, near: Int): Query {
         val base = buildHebrewStdQuery(norm, near)
-        // In precise mode (near == 0), enforce strict contiguous phrase matching
-        // with exact term order and no fallbacks. This prevents partial, fuzzy,
-        // or out-of-order matches from leaking into results.
-        if (near == 0) return base
-
-        // For relaxed modes (near > 0), include n-gram + fuzzy as scoring signals (SHOULD).
-        val ngram = buildNgram4Query(norm)
-        val fuzzy = buildFuzzyQuery(norm, near)
-        val builder = BooleanQuery.Builder()
-        builder.add(base, BooleanClause.Occur.SHOULD)
-        if (ngram != null) builder.add(ngram, BooleanClause.Occur.SHOULD)
-        if (fuzzy != null) builder.add(fuzzy, BooleanClause.Occur.SHOULD)
-        return builder.build()
+        // NEAR=0 strict; NEAR>0 Sefaria-mode: rely on analyzer expansions only (no fuzzy/extra n-gram signals)
+        return base
     }
 
     private fun buildFuzzyQuery(norm: String, near: Int): Query? {
         // Allow fuzzy (edit distance 1) only when overall query length >= 4 and near != 0
         if (near == 0) return null
         if (norm.length < 4) return null
-        val tokens = analyzeToTerms(stdAnalyzer, norm)?.filter { it.length >= 4 } ?: emptyList()
+        val tokens = analyzeToTerms(hebAnalyzer, norm)?.filter { it.length >= 4 } ?: emptyList()
         if (tokens.isEmpty()) return null
         val b = BooleanQuery.Builder()
         for (t in tokens.distinct()) {

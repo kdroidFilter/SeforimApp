@@ -146,6 +146,8 @@ kotlin {
             implementation("org.apache.lucene:lucene-analysis-common:10.3.1")
             implementation("org.apache.lucene:lucene-queryparser:10.3.1")
             implementation("org.apache.lucene:lucene-highlighter:10.3.1")
+            // Hebrew analyzer shared module via composite build substitution
+            implementation("io.github.kdroidfilter.seforimlibrary:analysis:1.0.0")
             implementation("org.apache.commons:commons-compress:1.26.2")
 
             // HTML sanitization for search snippets

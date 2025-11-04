@@ -53,7 +53,10 @@ object AppCoreBindings {
     fun provideLuceneSearchService(): LuceneSearchService {
         val dbPath = getDatabasePath()
         val indexPath = if (dbPath.endsWith(".db")) "$dbPath.lucene" else "$dbPath.luceneindex"
-        return LuceneSearchService(Paths.get(indexPath))
+        return LuceneSearchService(
+            Paths.get(indexPath),
+            io.github.kdroidfilter.seforimlibrary.analysis.hebrew.SefariaHebrewAnalyzer()
+        )
     }
 
     @Provides
@@ -61,6 +64,7 @@ object AppCoreBindings {
     fun provideLuceneLookupSearchService(): LuceneLookupSearchService {
         val dbPath = getDatabasePath()
         val indexPath = if (dbPath.endsWith(".db")) "$dbPath.lookup.lucene" else "$dbPath.lookupindex"
+        // Use StandardAnalyzer for book-name lookup: no Sefaria tokenizer here
         return LuceneLookupSearchService(Paths.get(indexPath))
     }
 
