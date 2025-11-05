@@ -197,7 +197,7 @@ compose.desktop {
             windows {
                 iconFile.set(project.file("desktopAppIcons/WindowsIcon.ico"))
                 packageVersion = version
-                packageName = "Zayit"
+                packageName = "זית"
                 dirChooser = true
                 menuGroup = "start-menu-group"
                 shortcut = true
