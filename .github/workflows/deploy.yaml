@@ -84,6 +84,31 @@ jobs:
         shell: pwsh
         run: .\gradlew.bat :SeforimApp:createReleaseDistributable :SeforimApp:packageReleaseMsi
 
+      # Print jpackage error log to console if build failed
+      - name: Print jpackage error log
+        if: failure() && matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          Write-Host "===== jpackage error log ====="
+          $logPath = "SeforimApp/build/compose/logs/packageReleaseMsi"
+          if (Test-Path $logPath) {
+              Get-ChildItem $logPath -Filter "*.err.txt" | ForEach-Object {
+                  Write-Host "---- $($_.Name) ----"
+                  Get-Content $_.FullName
+              }
+          } else {
+              Write-Host "No jpackage error log found."
+          }
+
+      # Upload jpackage logs as artifact for later download
+      - name: Upload jpackage logs
+        if: failure() && matrix.os == 'windows-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: jpackage-logs
+          path: SeforimApp/build/compose/logs/packageReleaseMsi/
+          if-no-files-found: ignore
+
       - name: Build macOS .pkg
         if: startsWith(matrix.os, 'macos')
         shell: bash
