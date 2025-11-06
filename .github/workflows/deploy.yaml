@@ -103,46 +103,37 @@ jobs:
           path: SeforimApp/build/compose/binaries/main-release/exe/*.exe
           if-no-files-found: error
 
-      # Print jpackage error log to console if build failed
-      - name: Print jpackage error log
+      # Print jpackage error logs for MSI and EXE if build failed
+      - name: Print jpackage error logs
         if: failure() && matrix.os == 'windows-latest'
         shell: pwsh
         run: |
-          Write-Host "===== jpackage error log ====="
-          $logPath = "SeforimApp/build/compose/logs/packageReleaseMsi"
-          if (Test-Path $logPath) {
+          $logDirs = @(
+            "SeforimApp/build/compose/logs/packageReleaseMsi",
+            "SeforimApp/build/compose/logs/packageReleaseExe"
+          )
+          foreach ($logPath in $logDirs) {
+            Write-Host "===== jpackage logs from $logPath ====="
+            if (Test-Path $logPath) {
               Get-ChildItem $logPath -Filter "*.err.txt" | ForEach-Object {
-                  Write-Host "---- $($_.Name) ----"
-                  Get-Content $_.FullName
+                Write-Host "---- $($_.Name) ----"
+                Get-Content $_.FullName
               }
-          } else {
-              Write-Host "No jpackage error log found."
+            } else {
+              Write-Host "No logs found in $logPath."
+            }
           }
-
+      
       # Upload jpackage logs as artifact for later download
       - name: Upload jpackage logs
         if: failure() && matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
           name: jpackage-logs
-          path: SeforimApp/build/compose/logs/packageReleaseMsi/
+          path: |
+            SeforimApp/build/compose/logs/packageReleaseMsi/
+            SeforimApp/build/compose/logs/packageReleaseExe/
           if-no-files-found: ignore
-
-      # Print jpackage error log to console if EXE build failed
-      - name: Print jpackage EXE error log
-        if: failure() && matrix.os == 'windows-latest'
-        shell: pwsh
-        run: |
-          Write-Host "===== jpackage EXE error log ====="
-          $logPath = "SeforimApp/build/compose/logs/packageReleaseExe"
-          if (Test-Path $logPath) {
-              Get-ChildItem $logPath -Filter "*.err.txt" | ForEach-Object {
-                  Write-Host "---- $($_.Name) ----"
-                  Get-Content $_.FullName
-              }
-          } else {
-              Write-Host "No jpackage error log found."
-          }
 
       - name: Build macOS .pkg
         if: startsWith(matrix.os, 'macos')
