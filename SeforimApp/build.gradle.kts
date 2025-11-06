@@ -197,11 +197,12 @@ compose.desktop {
             windows {
                 iconFile.set(project.file("desktopAppIcons/WindowsIcon.ico"))
                 packageVersion = version
-                packageName = "zayit" // השם הפנימי, באנגלית בלבד
-                description = "זית - מאגר הספרים שלי" // כאן אפשר עברית חופשי
-                menuGroup = "זית" // גם זה יכול להיות בעברית
-                dirChooser = true                
+                packageName = "zayit"
+                description = "זית - מאגר הספרים שלי"
+                menuGroup = "Zayit"
                 shortcut = true
+                shortcutName = "זית"
+                dirChooser = true                
                 upgradeUuid = "d9f21975-4359-4818-a623-6e9a3f0a07ca"
                 perUserInstall = true
             }
