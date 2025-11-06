@@ -82,13 +82,17 @@ jobs:
       - name: Build Windows .msi
         if: matrix.os == 'windows-latest'
         shell: pwsh
-        run: .\gradlew.bat :SeforimApp:createReleaseDistributable :SeforimApp:packageReleaseMsi
+        env:
+          APP_NAME: zayit
+        run: .\gradlew.bat :SeforimApp:createReleaseDistributable :SeforimApp:packageReleaseMsi -PappName="${{ env.APP_NAME }}"
 
       # Build Windows .exe (שמו בעברית - עובד ללא WiX)
       - name: Build Windows .exe
         if: matrix.os == 'windows-latest'
         shell: pwsh
-        run: .\gradlew.bat :SeforimApp:createReleaseDistributable :SeforimApp:packageReleaseExe
+        env:
+          APP_NAME: זית
+        run: .\gradlew.bat :SeforimApp:createReleaseDistributable :SeforimApp:packageReleaseExe -PappName="${{ env.APP_NAME }}"
 
       # Upload Windows .exe
       - name: Upload Windows .exe
