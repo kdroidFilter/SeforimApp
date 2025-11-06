@@ -201,7 +201,7 @@ compose.desktop {
                 description = "זית - מאגר הספרים שלי"
                 menuGroup = "Zayit"
                 shortcut = true
-                shortcutName = "זית"
+                // shortcutName = "זית"
                 dirChooser = true                
                 upgradeUuid = "d9f21975-4359-4818-a623-6e9a3f0a07ca"
                 perUserInstall = true
