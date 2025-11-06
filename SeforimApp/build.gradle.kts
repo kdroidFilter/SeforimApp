@@ -186,8 +186,11 @@ compose.desktop {
             )
 
             modules("java.sql", "jdk.unsupported", "jdk.security.auth", "jdk.accessibility", "jdk.incubator.vector")
-            targetFormats(TargetFormat.Pkg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(TargetFormat.Pkg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
             vendor = "KDroidFilter"
+            packageName = "zayit"
+            packageVersion = version
+
 
             linux {
                 packageName = "zayit"
@@ -196,15 +199,14 @@ compose.desktop {
             }
             windows {
                 iconFile.set(project.file("desktopAppIcons/WindowsIcon.ico"))
-                packageVersion = version
-                packageName = "zayit"
-                description = "זית - מאגר הספרים שלי"
-                menuGroup = "Zayit"
+                menuGroup = "זית"
                 shortcut = true
-                // shortcutName = "זית"
-                dirChooser = true                
-                upgradeUuid = "d9f21975-4359-4818-a623-6e9a3f0a07ca"
                 perUserInstall = true
+                dirChooser = true
+                // shortcutName = "זית"
+                upgradeUuid = "d9f21975-4359-4818-a623-6e9a3f0a07ca"
+                description = "זית - מאגר הספרים שלי"
+                
             }
             macOS {
                 iconFile.set(project.file("desktopAppIcons/MacosIcon.icns"))
