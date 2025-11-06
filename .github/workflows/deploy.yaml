@@ -94,6 +94,18 @@ jobs:
           APP_NAME: זית
         run: .\gradlew.bat :SeforimApp:createReleaseDistributable :SeforimApp:packageReleaseExe -PappName="${{ env.APP_NAME }}"
 
+      - name: Print createReleaseDistributable args
+        if: failure() && matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          $argsFile = "SeforimApp/build/compose/tmp/createReleaseDistributable.args.txt"
+          if (Test-Path $argsFile) {
+              Write-Host "===== Contents of createReleaseDistributable.args.txt ====="
+              Get-Content $argsFile
+          } else {
+              Write-Host "No args file found."
+          }
+        
       # Print jpackage error logs for MSI and EXE if build failed
       - name: Print jpackage error logs
         if: failure() && matrix.os == 'windows-latest'
@@ -158,7 +170,7 @@ jobs:
           name: windows-exe
           path: SeforimApp/build/compose/binaries/main-release/exe/*.exe
           if-no-files-found: error
-          
+
       - name: Upload macOS .pkg
         if: startsWith(matrix.os, 'macos')
         uses: actions/upload-artifact@v4
