@@ -2,6 +2,7 @@ package io.github.kdroidfilter.seforimapp.core.presentation.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.background
@@ -9,6 +10,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.stringResource
@@ -31,12 +34,15 @@ fun FindInPageBar(
     onEnterNext: () -> Unit = {},
     onEnterPrev: () -> Unit = {},
     onClose: () -> Unit = {},
-    // Focus is handled by callers if needed; no internal autofocus logic
 ) {
     val panelColor = JewelTheme.globalColors.panelBackground
     val borderColor = JewelTheme.globalColors.borders.focused
     val shape = RoundedCornerShape(8.dp)
-    // No internal focus management
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+    }
 
     Row(
         modifier = modifier
@@ -50,6 +56,7 @@ fun FindInPageBar(
             modifier = Modifier
                 .widthIn(min = 220.dp, max = 380.dp)
                 .height(36.dp)
+                .focusRequester(focusRequester)
                 .onPreviewKeyEvent { ev ->
                     if (ev.type == KeyEventType.KeyUp && (ev.key == Key.Enter || ev.key == Key.NumPadEnter)) {
                         if (ev.isShiftPressed) onEnterPrev() else onEnterNext()
