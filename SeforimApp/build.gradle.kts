@@ -15,6 +15,9 @@ plugins {
     alias(libs.plugins.linux.deps)
 }
 
+// שם האפליקציה מגיע מה־GitHub Actions (אם קיים), אחרת שם ברירת מחדל
+val appName: String = project.findProperty("appName") as String? ?: "zayit"
+
 val ref = System.getenv("GITHUB_REF") ?: ""
 val version = if (ref.startsWith("refs/tags/")) {
     val tag = ref.removePrefix("refs/tags/")
@@ -197,7 +200,7 @@ compose.desktop {
             windows {
                 iconFile.set(project.file("desktopAppIcons/WindowsIcon.ico"))
                 packageVersion = version
-                packageName = "Zayit"
+                packageName = appName
                 dirChooser = true
                 menuGroup = "start-menu-group"
                 shortcut = true
