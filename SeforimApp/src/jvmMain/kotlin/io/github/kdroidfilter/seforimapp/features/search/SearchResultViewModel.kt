@@ -47,6 +47,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 import java.util.UUID
 import java.util.PriorityQueue
 import java.util.Arrays
@@ -996,11 +997,15 @@ class SearchResultViewModel(
                 // Keep loading until the visible results emission reflects the final list
                 val initial = Pair(visibleResultsFlow.value.size, System.identityHashCode(visibleResultsFlow.value))
                 runCatching {
-                    visibleResultsFlow
-                        .map { Pair(it.size, System.identityHashCode(it)) }
-                        .distinctUntilChanged()
-                        .filter { it != initial }
-                        .first()
+                    withContext(Dispatchers.Default) {
+                        withTimeoutOrNull(500) {
+                            visibleResultsFlow
+                                .map { Pair(it.size, System.identityHashCode(it)) }
+                                .distinctUntilChanged()
+                                .filter { it != initial }
+                                .first()
+                        }
+                    }
                 }
                 _uiState.value = _uiState.value.copy(isLoading = false)
             }
