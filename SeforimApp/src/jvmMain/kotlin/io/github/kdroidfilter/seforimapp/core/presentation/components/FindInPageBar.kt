@@ -39,10 +39,7 @@ fun FindInPageBar(
     val borderColor = JewelTheme.globalColors.borders.focused
     val shape = RoundedCornerShape(8.dp)
     val focusRequester = remember { FocusRequester() }
-
-    LaunchedEffect(Unit) {
-        focusRequester.requestFocus()
-    }
+    LaunchedEffect(Unit) { focusRequester.requestFocus() }
 
     Row(
         modifier = modifier
