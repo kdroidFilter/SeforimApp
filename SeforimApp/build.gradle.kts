@@ -203,7 +203,6 @@ compose.desktop {
                 shortcut = true
                 perUserInstall = true
                 dirChooser = true
-                // shortcutName = "זית"
                 upgradeUuid = "d9f21975-4359-4818-a623-6e9a3f0a07ca"
                 description = "זית - מאגר הספרים שלי"
                 
