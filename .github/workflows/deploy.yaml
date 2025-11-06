@@ -94,15 +94,6 @@ jobs:
           APP_NAME: זית
         run: .\gradlew.bat :SeforimApp:createReleaseDistributable :SeforimApp:packageReleaseExe -PappName="${{ env.APP_NAME }}"
 
-      # Upload Windows .exe
-      - name: Upload Windows .exe
-        if: matrix.os == 'windows-latest'
-        uses: actions/upload-artifact@v4
-        with:
-          name: windows-exe
-          path: SeforimApp/build/compose/binaries/main-release/exe/*.exe
-          if-no-files-found: error
-
       # Print jpackage error logs for MSI and EXE if build failed
       - name: Print jpackage error logs
         if: failure() && matrix.os == 'windows-latest'
@@ -159,6 +150,15 @@ jobs:
           path: SeforimApp/build/compose/binaries/main-release/msi/*.msi
           if-no-files-found: error
 
+      # Upload Windows .exe
+      - name: Upload Windows .exe
+        if: matrix.os == 'windows-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-exe
+          path: SeforimApp/build/compose/binaries/main-release/exe/*.exe
+          if-no-files-found: error
+          
       - name: Upload macOS .pkg
         if: startsWith(matrix.os, 'macos')
         uses: actions/upload-artifact@v4
