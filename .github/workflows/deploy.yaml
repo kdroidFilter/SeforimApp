@@ -97,6 +97,50 @@ jobs:
           chmod +x ./gradlew
           ./gradlew :SeforimApp:createReleaseDistributable :SeforimApp:packageReleasePkg
 
+      - name: Print createReleaseDistributable args
+        if: failure() && matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          $argsFile = "SeforimApp/build/compose/tmp/createReleaseDistributable.args.txt"
+          if (Test-Path $argsFile) {
+              Write-Host "===== Contents of createReleaseDistributable.args.txt ====="
+              Get-Content $argsFile
+          } else {
+              Write-Host "No args file found."
+          }
+
+      # Print jpackage error logs for MSI and EXE if build failed
+      - name: Print jpackage error logs
+        if: failure() && matrix.os == 'windows-latest'
+        shell: pwsh
+        run: |
+          $logDirs = @(
+            "SeforimApp/build/compose/logs/packageReleaseMsi",
+            "SeforimApp/build/compose/logs/packageReleaseExe"
+          )
+          foreach ($logPath in $logDirs) {
+            Write-Host "===== jpackage logs from $logPath ====="
+            if (Test-Path $logPath) {
+              Get-ChildItem $logPath -Filter "*.err.txt" | ForEach-Object {
+                Write-Host "---- $($_.Name) ----"
+                Get-Content $_.FullName
+              }
+            } else {
+              Write-Host "No logs found in $logPath."
+            }
+          }
+
+      # Upload jpackage logs as artifact for later download
+      - name: Upload jpackage logs
+        if: failure() && matrix.os == 'windows-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: jpackage-logs
+          path: |
+            SeforimApp/build/compose/logs/packageReleaseMsi/
+            SeforimApp/build/compose/logs/packageReleaseExe/
+          if-no-files-found: ignore
+
       # 5) Upload artifacts
       - name: Upload Linux .deb
         if: matrix.os == 'ubuntu-latest'
