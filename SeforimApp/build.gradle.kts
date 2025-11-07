@@ -186,7 +186,7 @@ compose.desktop {
             )
 
             modules("java.sql", "jdk.unsupported", "jdk.security.auth", "jdk.accessibility", "jdk.incubator.vector")
-            targetFormats(TargetFormat.Pkg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(TargetFormat.Pkg, TargetFormat.Msi, TargetFormat.Exe, TargetFormat.Deb)
             vendor = "KDroidFilter"
 
             linux {

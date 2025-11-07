@@ -84,6 +84,12 @@ jobs:
         shell: pwsh
         run: .\gradlew.bat :SeforimApp:createReleaseDistributable :SeforimApp:packageReleaseMsi
 
+      # Build Windows .exe (שמו בעברית - עובד ללא WiX)
+      - name: Build Windows .exe
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: .\gradlew.bat :SeforimApp:createReleaseDistributable :SeforimApp:packageReleaseExe
+        
       - name: Build macOS .pkg
         if: startsWith(matrix.os, 'macos')
         shell: bash
@@ -106,6 +112,15 @@ jobs:
         with:
           name: windows-msi
           path: SeforimApp/build/compose/binaries/main-release/msi/*.msi
+          if-no-files-found: error
+
+      # Upload Windows .exe
+      - name: Upload Windows .exe
+        if: matrix.os == 'windows-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-exe
+          path: SeforimApp/build/compose/binaries/main-release/exe/*.exe
           if-no-files-found: error
 
       - name: Upload macOS .pkg
@@ -134,11 +149,16 @@ jobs:
         with:
           name: linux-deb
 
-      - name: Download Windows artifact
+      - name: Download Windows MSI artifact
         uses: actions/download-artifact@v4
         with:
           name: windows-msi
 
+      - name: Download Windows EXE artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: windows-exe
+          
       - name: Download macOS artifacts
         uses: actions/download-artifact@v4
         with:
@@ -154,8 +174,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            *.deb
-            *.msi
+            *.deb            
             *.pkg
+            *.msi
+            *.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
