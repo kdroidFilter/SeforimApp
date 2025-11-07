@@ -1,9 +1,9 @@
-name: Build and Release Compose Desktop App (Linux deb, Windows msi, macOS pkg with JBR)
+name: Build and Release Compose Desktop App (Linux deb, Windows msi, Windows exe, macOS pkg with JBR)
 on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:      
+  workflow_dispatch:
 
 jobs:
   build:
@@ -72,13 +72,6 @@ jobs:
         with:
           gradle-version: '8.14'
 
-      # 4) Build per-OS packages
-      - name: Build Linux .deb
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          chmod +x ./gradlew
-          ./gradlew :SeforimApp:createReleaseDistributable :SeforimApp:packageReleaseDeb
-
       - name: Build Windows .msi
         if: matrix.os == 'windows-latest'
         shell: pwsh
@@ -96,6 +89,13 @@ jobs:
         run: |
           chmod +x ./gradlew
           ./gradlew :SeforimApp:createReleaseDistributable :SeforimApp:packageReleasePkg
+
+      # 4) Build per-OS packages
+      - name: Build Linux .deb
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          chmod +x ./gradlew
+          ./gradlew :SeforimApp:createReleaseDistributable :SeforimApp:packageReleaseDeb
 
       - name: Print createReleaseDistributable args
         if: failure() && matrix.os == 'windows-latest'
@@ -141,15 +141,6 @@ jobs:
             SeforimApp/build/compose/logs/packageReleaseExe/
           if-no-files-found: ignore
 
-      # 5) Upload artifacts
-      - name: Upload Linux .deb
-        if: matrix.os == 'ubuntu-latest'
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux-deb
-          path: SeforimApp/build/compose/binaries/main-release/deb/*.deb
-          if-no-files-found: error
-
       - name: Upload Windows .msi
         if: matrix.os == 'windows-latest'
         uses: actions/upload-artifact@v4
@@ -175,6 +166,15 @@ jobs:
           path: SeforimApp/build/compose/binaries/main-release/pkg/*.pkg
           if-no-files-found: error
 
+      # 5) Upload artifacts
+      - name: Upload Linux .deb
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-deb
+          path: SeforimApp/build/compose/binaries/main-release/deb/*.deb
+          if-no-files-found: error
+
   release:
     needs: build
     runs-on: ubuntu-latest
@@ -186,12 +186,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      # 1) Download artifacts
-      - name: Download Linux artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: linux-deb
 
       - name: Download Windows MSI artifact
         uses: actions/download-artifact@v4
@@ -209,6 +203,12 @@ jobs:
           pattern: macos-pkg-* 
           merge-multiple: true
 
+      # 1) Download artifacts
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-deb
+
       # 2) Inspect
       - name: List downloaded files
         run: ls -R
@@ -218,9 +218,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            *.deb            
-            *.pkg
             *.msi
             *.exe
+            *.pkg
+            *.deb
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
