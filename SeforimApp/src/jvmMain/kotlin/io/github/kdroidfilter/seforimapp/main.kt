@@ -67,6 +67,7 @@ import org.jetbrains.compose.resources.Locales
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalTrayAppApi::class, ExperimentalResourceApi::class)
 fun main() {
+    configureRenderingBackend()
     setMacOsAdaptiveTitleBar()
     //    val enableLogs = System.getenv("ENABLE_LOGS")
     //    if (enableLogs == null) {
@@ -337,6 +338,28 @@ fun main() {
                 }
             }
         }
+    }
+}
+
+private fun configureRenderingBackend() {
+    val os = getOperatingSystem()
+    val preferredApi = when (os) {
+        OperatingSystem.MACOS -> "METAL"
+        OperatingSystem.WINDOWS -> "DIRECT3D"
+        OperatingSystem.LINUX -> "OPENGL"
+        else -> null
+    }
+
+    val renderApiProperty = "skiko.renderApi"
+    if (!preferredApi.isNullOrEmpty()) {
+        val current = System.getProperty(renderApiProperty)?.uppercase(Locale.ROOT)
+        if (current.isNullOrBlank() || current == "SOFTWARE") {
+            System.setProperty(renderApiProperty, preferredApi)
+        }
+    }
+
+    if (os == OperatingSystem.WINDOWS) {
+        System.setProperty("skiko.win.windowEdgePixelSnappingFix", "true")
     }
 }
 
