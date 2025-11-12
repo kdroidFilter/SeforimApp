@@ -10,6 +10,10 @@
     <string name="switch_to_dark_theme">עבור לערכת נושא כהה</string>
     <string name="switch_to_system_theme">עבור לערכת נושא מערכת</string>
     <string name="switch_to_light_theme">עבור לערכת נושא בהירה</string>
+    <string name="language_selection_prompt_english">Please select your language</string>
+    <string name="language_selection_prompt_hebrew">אנא בחרו את שפתכם</string>
+    <string name="language_option_hebrew">עברית</string>
+    <string name="language_option_english">English</string>
     <string name="find">חיפוש</string>
     <string name="find_tooltip">חפש בכל המאגר</string>
     <string name="find_disabled_tooltip">חיפוש זמין במסך תוצאות או כשספר נבחר</string>

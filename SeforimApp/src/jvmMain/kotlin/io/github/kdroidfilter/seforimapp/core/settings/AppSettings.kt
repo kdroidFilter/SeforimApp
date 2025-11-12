@@ -50,6 +50,9 @@ object AppSettings {
     // Onboarding state
     private const val KEY_ONBOARDING_FINISHED = "onboarding_finished"
 
+    // Language preference
+    private const val KEY_LANGUAGE = "language"
+
     // Region configuration keys
     private const val KEY_REGION_COUNTRY = "region_country"
     private const val KEY_REGION_CITY = "region_city"
@@ -76,6 +79,7 @@ object AppSettings {
         _commentaryFontCodeFlow.value = getCommentaryFontCode()
         _targumFontCodeFlow.value = getTargumFontCode()
         _ramSaverEnabledFlow.value = isRamSaverEnabled()
+        _languageFlow.value = getLanguage()
         // User profile reactive values
         _userFirstNameFlow.value = getUserFirstName() ?: ""
         _userLastNameFlow.value = getUserLastName() ?: ""
@@ -104,6 +108,9 @@ object AppSettings {
     // StateFlow for RAM saver (memory-optimized tabs). Disabled by default
     private val _ramSaverEnabledFlow = MutableStateFlow(isRamSaverEnabled())
     val ramSaverEnabledFlow: StateFlow<Boolean> = _ramSaverEnabledFlow.asStateFlow()
+
+    private val _languageFlow = MutableStateFlow(getLanguage())
+    val languageFlow: StateFlow<AppLanguage> = _languageFlow.asStateFlow()
 
     // Font preference flows
     private val _bookFontCodeFlow = MutableStateFlow(getBookFontCode())
@@ -195,6 +202,16 @@ object AppSettings {
     fun setTargumFontCode(code: String) {
         settings[KEY_FONT_TARGUM] = code
         _targumFontCodeFlow.value = code
+    }
+
+    fun getLanguage(): AppLanguage {
+        val code = settings[KEY_LANGUAGE, AppLanguage.HEBREW.languageCode]
+        return AppLanguage.fromCode(code)
+    }
+
+    fun setLanguage(language: AppLanguage) {
+        settings[KEY_LANGUAGE] = language.languageCode
+        _languageFlow.value = language
     }
 
     fun getCloseBookTreeOnNewBookSelected(): Boolean {
