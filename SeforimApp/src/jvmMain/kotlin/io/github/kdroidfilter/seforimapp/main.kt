@@ -33,6 +33,7 @@ import io.github.kdroidfilter.seforimapp.framework.di.LocalAppGraph
 import io.github.kdroidfilter.seforimapp.framework.session.SessionManager
 import io.github.vinceglb.filekit.FileKit
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectAsState
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.jewel.foundation.theme.JewelTheme
@@ -60,8 +61,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.Box
 import io.github.kdroidfilter.seforim.tabs.TabsEvents
 import io.github.kdroidfilter.seforim.tabs.TabsDestination
+import org.jetbrains.compose.resources.CompositionLocalProvider
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.Locales
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalTrayAppApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalTrayAppApi::class, ExperimentalResourceApi::class)
 fun main() {
     configureRenderingBackend()
     setMacOsAdaptiveTitleBar()
@@ -76,7 +80,6 @@ fun main() {
         lockIdentifier = appId
     )
 
-    Locale.setDefault(Locale.Builder().setLanguage("he").build())
     application {
         FileKit.init(appId)
 
@@ -112,14 +115,23 @@ fun main() {
         // Ensure AppSettings uses the DI-provided Settings immediately
         AppSettings.initialize(appGraph.settings)
 
+        // Ensure Locale starts from persisted preference
+        Locale.setDefault(Locale.Builder().setLanguage(AppSettings.getLanguage().languageCode).build())
+
         CompositionLocalProvider(LocalAppGraph provides appGraph) {
             val themeDefinition = ThemeUtils.buildThemeDefinition()
+            val language by AppSettings.languageFlow.collectAsState()
 
-            IntUiTheme(
-                theme = themeDefinition, styling = ComponentStyling.default().decoratedWindow(
-                    titleBarStyle = ThemeUtils.pickTitleBarStyle(),
-                )
-            ) {
+            LaunchedEffect(language) {
+                Locale.setDefault(Locale.Builder().setLanguage(language.languageCode).build())
+            }
+
+            CompositionLocalProvider(Locales(language.languageCode)) {
+                IntUiTheme(
+                    theme = themeDefinition, styling = ComponentStyling.default().decoratedWindow(
+                        titleBarStyle = ThemeUtils.pickTitleBarStyle(),
+                    )
+                ) {
                 // Decide whether to show onboarding, database update, or main app
                 LaunchedEffect(Unit) {
                     try {
@@ -323,6 +335,7 @@ fun main() {
                         }
                     }
                 } // else (null) -> render nothing until decision made
+                }
             }
         }
     }

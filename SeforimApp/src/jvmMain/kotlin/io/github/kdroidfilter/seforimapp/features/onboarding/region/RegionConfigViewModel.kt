@@ -42,8 +42,15 @@ class RegionConfigViewModel(
             selectedCountryIndex.value = countryIdx
             val cities = useCase.getCities(countryIdx)
             val savedCity = AppSettings.getRegionCity()
-            val cityIdx = savedCity?.let { cities.indexOf(it) } ?: -1
-            if (cityIdx >= 0) selectedCityIndex.value = cityIdx
+            val directMatch = savedCity?.let { cities.indexOf(it) } ?: -1
+            if (directMatch >= 0) {
+                selectedCityIndex.value = directMatch
+            } else if (savedCity != null) {
+                val aliasMatch = useCase.findCityIndexByLegacyName(countryIdx, savedCity)
+                if (aliasMatch >= 0) {
+                    selectedCityIndex.value = aliasMatch
+                }
+            }
         }
     }
 
